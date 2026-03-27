@@ -1,0 +1,428 @@
+:root {
+  --bg: #0f1114;
+  --fg: #e8e8ea;
+  --muted: #9aa0a6;
+  --accent: #ffd36b;
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter,
+    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --spark-size: 28px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at center, #1a1d22 0%, #0f1114 100%);
+  color: var(--fg);
+  font-family: var(--font);
+  padding-bottom: 500px;
+}
+
+
+
+.title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  color: rgba(254, 254, 254, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.blackdrop {
+  width: 80%;
+  color: #1a1d22;
+}
+.wrap1 {
+  height: 300px;
+  width: 200px;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-color: aliceblue;
+  box-shadow: 5px 5px 10px gray;
+}
+#myDIV {
+  margin: auto;
+  border: 1px solid black;
+  width: 200px;
+  height: 100px;
+  background-color: coral;
+  color: white;
+  animation: mymove 5s infinite;
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-30px);
+  }
+
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes rotate {
+  50% {
+    transform: rotate(180deg);
+  }
+}
+@keyframes updown {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 30px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+@keyframes scale {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 2;
+  }
+  100% {
+    scale: 1;
+  }
+}
+@keyframes transform {
+  0% {
+    border-radius: 50%;
+  }
+  50% {
+    border-radius: 0;
+  }
+  100% {
+    border-radius: 50%;
+  }
+}
+@keyframes fading {
+  0% {
+    opacity: 100;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+@keyframes colorchange {
+  0% {
+    background-color: rgb(255, 0, 0);
+  }
+  50% {
+    background-color: #0000ff;
+  }
+  100% {
+    background-color: rgb(255, 0, 0);
+  }
+}
+@keyframes flipping {
+  50% {
+    transform: rotatey(180deg);
+  }
+}
+.shape {
+  height: 50px;
+  width: 50px;
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  margin-top: 110px;
+}
+.shape1 {
+  animation: rotate 5s infinite;
+}
+.shape2 {
+  animation: updown 5s infinite;
+  transition: ease;
+}
+.blackdrop {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 5px;
+  row-gap: 50px;
+}
+.shape3 {
+  border-radius: 50%;
+  margin-top: 250px;
+  animation: bounce 2s infinite;
+}
+.shape5 {
+  animation: colorchange 3s infinite;
+}
+
+.shape4 {
+  animation: scale 5s infinite;
+}
+.shape6 {
+  animation: transform 2s infinite;
+}
+.shape7 {
+  animation: fading 2s infinite;
+}
+.shape8 {
+  animation: flipping 3s infinite;
+}
+.ani-head {
+  font-size: 60px;
+}
+.road {
+  margin-top: 70px;
+  width: 100%;
+  position: relative;
+}
+.car {
+  position: absolute;
+  bottom: -800px;
+  scale: 0.8;
+  animation: car_run 3s infinite;
+}
+
+@keyframes car_run {
+  0% {
+    transform: translateX(-1400px);
+  }
+  100% {
+    transform: translateX(650px);
+  }
+}
+
+.button1 {
+  background-color: transparent;
+  border: 0.125em solid #1a1a1a;
+  border-radius: 0.9375em;
+  color: #3b3b3b;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  padding: 1em 2.3em;
+  text-align: center;
+}
+
+.button1:hover {
+  color: #fff;
+  background-color: #1a1a1a;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+  transition: ease;
+  transition-duration: 0.3s;
+}
+
+.button1:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.button-wrap {
+  width: 200px;
+  height: 100px;
+  box-shadow: 2px 2px 8px white;
+  background-color: #e8e8ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button2 {
+  width: 150px;
+  height: 60px;
+  border: 3px solid #315cfd;
+  border-radius: 45px;
+  transition: all 0.3s;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  cursor: pointer;
+  background: white;
+  font-size: 1.2em;
+  font-weight: 550;
+}
+
+.button2:hover {
+  background: #315cfd;
+  color: white;
+  font-size: 1.5em;
+}
+
+.button3 {
+  padding: 0.6em 1em;
+  border: 4px solid #fa725a;
+  transition: ease-in-out 0.3s;
+  background-color: transparent;
+  color: #fa725a;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.button3:hover {
+  transform: scale(1.2) rotate(10deg);
+  background-color: #fa725a;
+  color: white;
+}
+
+/* From Uiverse.io by mobinkakei */
+.button4 {
+  width: 140px;
+  height: 50px;
+  background: linear-gradient(to top, #00154c, #12376e, #23487f);
+  color: #fff;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.button4 span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: top 0.5s;
+}
+
+.button4-text-one {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.button4-text-two {
+  position: absolute;
+  width: 100%;
+  top: 150%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.button4:hover .button4-text-one {
+  top: -100%;
+}
+
+.button4:hover .button4-text-two {
+  top: 50%;
+}
+
+.button5 {
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff80;
+  text-shadow: none;
+  background: transparent;
+  cursor: pointer;
+  box-shadow: transparent;
+  border: 1px solid #ffffff80;
+  transition: 0.5s ease;
+  user-select: none;
+}
+
+.button5:hover {
+  color: #ffffff;
+  background: #008cff;
+  border: 1px solid #008cff;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
+  0 0 100px #008cff;
+}
+
+
+.button6 {
+	border: 2px solid #24b4fb;
+	background-color: #24b4fb;
+	border-radius: 0.9em;
+	cursor: pointer;
+	padding: 0.8em 1.2em 0.8em 1em;
+	transition: all ease-in-out 0.2s;
+	font-size: 16px;
+	color: white;
+  }
+  
+
+  
+.button6:hover {
+	background-color: #0071e2;
+  }
+
+  .wrap2{
+	display: grid;
+	width: 80%;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	column-gap: 20px;
+	row-gap: 20px;
+  }
+
+
+.button7 {
+	color: #090909;
+	padding: 0.7em 1.7em;
+	font-size: 18px;
+	border-radius: 0.5em;
+	background: #e8e8e8;
+	cursor: pointer;
+	border: 1px solid #e8e8e8;
+	transition: all 0.3s;
+	box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  }
+  
+  .button7:hover {
+	border: 1px solid white;
+  }
+  
+  .button7:active {
+	box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+  }
+  
+
+.button8 {
+	background-color: white;
+	color: black;
+	border-radius: 10em;
+	font-size: 17px;
+	font-weight: 600;
+	padding: 1em 2em;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	border: 1px solid black;
+	box-shadow: 0 0 0 0 black;
+  }
+  
+  .button8:hover {
+	transform: translateY(-4px) translateX(-2px);
+	box-shadow: 2px 5px 0 0 black;
+  };
+  
+  .button8:active {
+	transform: translateY(2px) translateX(1px);
+	box-shadow: 0 0 0 0 black;
+  };

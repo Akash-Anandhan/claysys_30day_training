@@ -1,0 +1,36 @@
+.nav-el:hover{
+    text-decoration: underline;
+    transition: ease;
+    transition-duration: 2s;
+
+}
+.hero{
+    margin-top: -5%;
+}
+.image-container{
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    animation-name: myAnimation;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    transition: ease-in-out;
+}
+.iphone{
+    height: 90vh;
+    
+}
+
+@keyframes myAnimation {
+    0%   {top: 0px;}
+    50%  {top: 50px;}
+    100% {top: 0px;}
+  }
+
+body{
+    background-color: black;
+}
+
+.feat{
+    width: 100%;
+}
