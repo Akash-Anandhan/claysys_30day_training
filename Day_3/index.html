@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Register</h2>
+        </div>
+        <form id="form" class="form">
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Enter Username" id="username" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            
+            <div class="form-control">
+                <label for="username">Email</label>
+                <input type="text" placeholder="Enter Email" id="email" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <form id="form" class="form">
+                <div class="form-control">
+                    <label for="phno">Phone Number</label>
+                    <input type="text" placeholder="Enter Phone no" id="phno" />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label>Gender</label>
+                
+                    <div class="radio-group" id="gender">
+                        <label for="male">
+                            <input type="radio" id="male" name="gender" value="male"> Male
+                        </label>
+                
+                        <label for="female">
+                            <input type="radio" id="female" name="gender" value="female"> Female
+                        </label>
+                
+                        <label for="other">
+                            <input type="radio" id="other" name="gender" value="other"> Other
+                        </label>
+                    </div>
+                
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                </div>
+                <form id="form" class="form">
+                    <div class="form-control">
+                        <label for="age">Age</label>
+                        <input type="text" placeholder="Enter Age" id="age" />
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                    </div>
+            <div class="form-control">
+                <label for="username">Password</label>
+                <input type="password" placeholder=" Enter Password" id="password"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">Confirm Password</label>
+                <input type="password" placeholder="Confirm Password" id="password2"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <button>Submit</button>
+        </form>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
