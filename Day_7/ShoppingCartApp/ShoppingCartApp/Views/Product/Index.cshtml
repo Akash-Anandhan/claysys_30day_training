@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ShoppingCartApp.Models.Product>
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h2 class="mb-4">All Products</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var product in Model)
+    {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" />
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">@product.Category?.Name</span>
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text text-muted small">@product.Description</p>
+                        <p class="fw-bold text-success fs-5">$@product.Price.ToString("0.00")</p>
+                        <p class="text-muted small">
+                            <i class="bi bi-box"></i> @product.Stock in stock
+                        </p>
+                    </div>
+                        <div class="card-footer d-flex flex-column gap-2">
+        <div class="d-flex gap-2">
+            <a asp-action="Details" asp-route-id="@product.Id"
+               class="btn btn-outline-dark btn-sm flex-fill">
+                <i class="bi bi-eye"></i> Details
+            </a>
+            <form asp-controller="Cart" asp-action="AddToCart"
+                  method="post" class="flex-fill add-to-cart-form">
+                <input type="hidden" name="productId" value="@product.Id" />
+                <input type="hidden" name="quantity" value="1" />
+                <button type="submit" class="btn btn-dark btn-sm w-100">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                </button>
+            </form>
+        </div>
+        <form asp-controller="Wishlist" asp-action="Add" method="post">
+            <input type="hidden" name="productId" value="@product.Id" />
+            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                <i class="bi bi-heart"></i> Add to Wishlist
+            </button>
+        </form>
+    </div>
+                </div>
+            </div>
+    }
+</div>

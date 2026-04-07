@@ -1,0 +1,549 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\admin\\createproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\admin\\createproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\admin\\editproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\admin\\editproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\admin\\reviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\admin\\reviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\admin\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\admin\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\search\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\search\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\viewmodels\\searchviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\viewmodels\\searchviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\wishlist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\wishlist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\viewmodels\\reviewviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\viewmodels\\reviewviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\models\\shopdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\models\\shopdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\migrations\\20260406104731_addadminops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\migrations\\20260406104731_addadminops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\migrations\\20260406071052_addreviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\migrations\\20260406071052_addreviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|c:\\users\\akash\\desktop\\claysys training\\day_7\\shoppingcartapp\\shoppingcartapp\\migrations\\20260406050222_addwishlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83EC71F3-39E8-4615-B2C5-CA75A63EEFD5}|ShoppingCartApp\\ShoppingCartApp.csproj|solutionrelative:shoppingcartapp\\migrations\\20260406050222_addwishlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateProduct.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\CreateProduct.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Admin\\CreateProduct.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\CreateProduct.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Admin\\CreateProduct.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:44:07.983Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAANcAAAAAAAAAAAAUwK4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T10:40:43.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\ViewModels\\ProductViewModel.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\ViewModels\\ProductViewModel.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\ViewModels\\ProductViewModel.cs",
+              "RelativeToolTip": "ShoppingCartApp\\ViewModels\\ProductViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwCMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T10:39:57.676Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EditProduct.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\EditProduct.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Admin\\EditProduct.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\EditProduct.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Admin\\EditProduct.cshtml",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAAAJQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:44:40.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAHMAAAAAAAAAAAAqwI0AAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T06:53:24.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Cart\\Index.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Cart\\Index.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Cart\\Index.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Cart\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T12:22:35.459Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WishlistController.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\WishlistController.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Controllers\\WishlistController.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\WishlistController.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Controllers\\WishlistController.cs",
+              "ViewState": "AQIAAHIAAAAAAAAAAAAowIMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T05:04:17.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Program.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Program.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Program.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Program.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAABcAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T10:03:28.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\CartController.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Controllers\\CartController.cs",
+              "ViewState": "AQIAAFUAAAAAAAAAAAAowHIAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T11:09:11.584Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Controllers\\OrderController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAswDcAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T11:44:31.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\Product.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Models\\Product.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAA+wBsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T07:09:46.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "20260406104731_Addadminops.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Migrations\\20260406104731_Addadminops.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Migrations\\20260406104731_Addadminops.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Migrations\\20260406104731_Addadminops.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Migrations\\20260406104731_Addadminops.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T10:47:31.264Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Products.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\Products.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Admin\\Products.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\Products.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Admin\\Products.cshtml",
+              "ViewState": "AQIAACkAAAAAAAAAAAAAAFQAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:43:24.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Admin\\Index.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\Index.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Admin\\Index.cshtml",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAAAJoAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:42:46.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAxwCQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T07:15:15.29Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Reviews.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\Reviews.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Admin\\Reviews.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Admin\\Reviews.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Admin\\Reviews.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAAEkAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:45:13.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\_ViewImports.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:04:44.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "SearchController.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\SearchController.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Controllers\\SearchController.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\SearchController.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Controllers\\SearchController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAmwBEAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T10:12:05.282Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "ShoppingCartApp\\wwwroot\\js\\site.js",
+              "ViewState": "AQIAALMAAAAAAAAAAAAAAM4AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-04-05T17:50:11.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Search\\Index.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Search\\Index.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Search\\Index.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Search\\Index.cshtml",
+              "ViewState": "AQIAAKAAAAAAAAAAAAAAAMsAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:13:10.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "SearchViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\ViewModels\\SearchViewModel.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\ViewModels\\SearchViewModel.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\ViewModels\\SearchViewModel.cs",
+              "RelativeToolTip": "ShoppingCartApp\\ViewModels\\SearchViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T10:09:37.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\_ViewStart.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T10:04:42.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ReviewController.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\ReviewController.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Controllers\\ReviewController.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Controllers\\ReviewController.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Controllers\\ReviewController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAE0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T07:13:25.172Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ReviewViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\ViewModels\\ReviewViewModel.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\ViewModels\\ReviewViewModel.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\ViewModels\\ReviewViewModel.cs",
+              "RelativeToolTip": "ShoppingCartApp\\ViewModels\\ReviewViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T07:12:26.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Product\\Details.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Product\\Details.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Product\\Details.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Product\\Details.cshtml",
+              "ViewState": "AQIAAMMAAAAAAAAAAAAAAOcAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T06:52:43.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "20260406071052_AddReviews.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Migrations\\20260406071052_AddReviews.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Migrations\\20260406071052_AddReviews.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Migrations\\20260406071052_AddReviews.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Migrations\\20260406071052_AddReviews.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T07:10:53.04Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Wishlist\\Index.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Wishlist\\Index.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Wishlist\\Index.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Wishlist\\Index.cshtml",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAAE8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T06:51:13.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ShopDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\ShopDbContext.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Models\\ShopDbContext.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\ShopDbContext.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Models\\ShopDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T05:01:50.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "WishlistItem.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\WishlistItem.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Models\\WishlistItem.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\WishlistItem.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Models\\WishlistItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T05:01:00.282Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Review.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\Review.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Models\\Review.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Models\\Review.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Models\\Review.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T07:08:52.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T07:00:46.108Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Product\\Index.cshtml",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Views\\Product\\Index.cshtml",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Views\\Product\\Index.cshtml",
+              "RelativeToolTip": "ShoppingCartApp\\Views\\Product\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-06T06:51:59.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "20260406050222_AddWishlist.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Migrations\\20260406050222_AddWishlist.cs",
+              "RelativeDocumentMoniker": "ShoppingCartApp\\Migrations\\20260406050222_AddWishlist.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_7\\ShoppingCartApp\\ShoppingCartApp\\Migrations\\20260406050222_AddWishlist.cs",
+              "RelativeToolTip": "ShoppingCartApp\\Migrations\\20260406050222_AddWishlist.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T05:02:22.953Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+﻿@model ShoppingCartApp.ViewModels.ProductViewModel
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-plus-circle"></i> Create New Product</h2>
+    <a asp-action="Products" class="btn btn-outline-dark">
+        <i class="bi bi-arrow-left"></i> Back to Products
+    </a>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                @if (TempData["Error"] != null)
+                {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong><i class="bi bi-exclamation-circle"></i> Could not create product:</strong>
+            <br />
+                        @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+                }
+
+                @if (TempData["Success"] != null)
+                {
+        <div class="alert alert-success alert-dismissible fade show">
+            <i class="bi bi-check-circle"></i> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+                }
+                <form asp-action="CreateProduct" method="post"
+                      enctype="multipart/form-data" >
+
+                    <div asp-validation-summary="All"
+                         class="alert alert-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Name" class="form-label fw-bold"></label>
+                            <input asp-for="Name" class="form-control"
+                                   placeholder="e.g. Wireless Headphones" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CategoryId" class="form-label fw-bold"></label>
+                            <select asp-for="CategoryId" asp-items="ViewBag.Categories"
+                                    class="form-select">
+                                <option value="1">-- Select Category --</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label fw-bold"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"
+                                  placeholder="Describe the product..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Price" class="form-label fw-bold"></label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="Price" class="form-control"
+                                       placeholder="0.00" />
+                            </div>
+                            <span asp-validation-for="Price" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Stock" class="form-label fw-bold"></label>
+                            <input asp-for="Stock" class="form-control"
+                                   placeholder="0" />
+                            <span asp-validation-for="Stock" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <!-- Image Section -->
+                    <div class="card border-dashed mb-4 p-3 bg-light">
+                        <h6 class="fw-bold mb-3">
+                            <i class="bi bi-image"></i> Product Image
+                            <small class="text-muted fw-normal">
+                                — choose one option below
+                            </small>
+                        </h6>
+
+                        <!-- Option 1: Upload file -->
+                        <div class="mb-3">
+                            <label asp-for="ImageFile" class="form-label fw-bold">
+                                Option 1 — Upload an image file
+                            </label>
+                            <input asp-for="ImageFile" type="file"
+                                   class="form-control"
+                                   accept="image/*"
+                                   onchange="previewImage(this)" />
+                            <small class="text-muted">
+                                Supported: JPG, PNG, GIF, WEBP
+                            </small>
+                        </div>
+
+                        <div class="text-center text-muted my-2">— OR —</div>
+
+                        <!-- Option 2: Image URL -->
+                        <div class="mb-3">
+                            <label asp-for="ImageUrl" class="form-label fw-bold">
+                                Option 2 — Paste an image URL
+                            </label>
+                            <input asp-for="ImageUrl" class="form-control"
+                                   placeholder="https://example.com/image.jpg"
+                                   oninput="previewUrl(this.value)" />
+                        </div>
+
+                        <!-- Preview -->
+                        <div id="image-preview-container" style="display:none;">
+                            <label class="form-label fw-bold">Preview</label>
+                            <img id="image-preview"
+                                 src="" alt="Preview"
+                                 class="img-fluid rounded shadow-sm"
+                                 style="max-height:200px; object-fit:cover;" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 btn-lg">
+                        <i class="bi bi-plus-circle"></i> Create Product
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+     <partial name="_ValidationScriptsPartial" />
+        <script>
+            function previewImage(input) {
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        document.getElementById('image-preview').src = e.target.result;
+                        document.getElementById('image-preview-container').style.display = 'block';
+                        document.querySelector('[name="ImageUrl"]').value = '';
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            function previewUrl(url) {
+                if (url.length > 5) {
+                    document.getElementById('image-preview').src = url;
+                    document.getElementById('image-preview-container').style.display = 'block';
+                    document.querySelector('[name="ImageFile"]').value = null;
+                } else {
+                    document.getElementById('image-preview-container').style.display = 'none';
+                }
+            }
+        </script>
+}
