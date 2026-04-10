@@ -1,0 +1,267 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\data\\shopdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\data\\shopdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\shoppingcartapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\shoppingcartapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|c:\\users\\akash\\desktop\\claysys training\\day_9\\shoppingcartapi\\shoppingcartapi\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A00C013-26B0-412A-847D-A8CCD3F0112B}|ShoppingCartAPI\\ShoppingCartAPI.csproj|solutionrelative:shoppingcartapi\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Services\\Cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShoppingCartAPI\\Services\\Cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Services\\Authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShoppingCartAPI\\Services\\Authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\DTOs\\Cartdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShoppingCartAPI\\DTOs\\Cartdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\DTOs\\Authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShoppingCartAPI\\DTOs\\Authdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Data\\Applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ShoppingCartAPI\\Data\\Applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ShopDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Data\\ShopDbContext.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Data\\ShopDbContext.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Data\\ShopDbContext.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Data\\ShopDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T03:35:59.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\appsettings.json",
+              "RelativeToolTip": "ShoppingCartAPI\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-09T06:19:07.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cartcontroller.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Controllers\\Cartcontroller.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Controllers\\Cartcontroller.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Controllers\\Cartcontroller.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Controllers\\Cartcontroller.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAwF4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:18:47.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "ShoppingCartAPI\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABMAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-09T11:43:26.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Program.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Program.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAF4AAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:19:31.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Productscontroller.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Controllers\\Productscontroller.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Controllers\\Productscontroller.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Controllers\\Productscontroller.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Controllers\\Productscontroller.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:18:12.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ShoppingCartAPI.csproj",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\ShoppingCartAPI.csproj",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\ShoppingCartAPI.csproj",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\ShoppingCartAPI.csproj",
+              "RelativeToolTip": "ShoppingCartAPI\\ShoppingCartAPI.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-09T06:13:44.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Cartitem.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Models\\Cartitem.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Models\\Cartitem.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Models\\Cartitem.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Models\\Cartitem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:12:01.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Authcontroller.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Controllers\\Authcontroller.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Controllers\\Authcontroller.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Controllers\\Authcontroller.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Controllers\\Authcontroller.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAIAwwEcAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:17:39.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Cartservice.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Services\\Cartservice.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Services\\Cartservice.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Services\\Cartservice.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Services\\Cartservice.cs",
+              "ViewState": "AQIAAMoAAAAAAAAAAAA0wOIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:16:19.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Authservice.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Services\\Authservice.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Services\\Authservice.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Services\\Authservice.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Services\\Authservice.cs",
+              "ViewState": "AQIAAGEAAAAAAAAAAAAUwHkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:15:53.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Cartdtos.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\DTOs\\Cartdtos.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\DTOs\\Cartdtos.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\DTOs\\Cartdtos.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\DTOs\\Cartdtos.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC4AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:14:58.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Authdtos.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\DTOs\\Authdtos.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\DTOs\\Authdtos.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\DTOs\\Authdtos.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\DTOs\\Authdtos.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:14:24.057Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Applicationdbcontext.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Data\\Applicationdbcontext.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Data\\Applicationdbcontext.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Data\\Applicationdbcontext.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Data\\Applicationdbcontext.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAUwDIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:13:30.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "ShoppingCartAPI\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\Models\\Product.cs",
+              "RelativeToolTip": "ShoppingCartAPI\\Models\\Product.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T06:11:09.811Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
