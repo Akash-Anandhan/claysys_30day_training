@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ShoppingCartAPI.Data;
 using ShoppingCartAPI.DTOs;
-using ShoppingCartAPI.Models;
+using ShoppingCartAPI.Services;
 using System.Security.Claims;
 
 namespace ShoppingCartAPI.Controllers
@@ -13,11 +11,11 @@ namespace ShoppingCartAPI.Controllers
     [Authorize]
     public class OrdersController : ControllerBase
     {
-        private readonly ShopDbContext _context;
+        private readonly IOrdersService _ordersService;
 
-        public OrdersController(ShopDbContext context)
+        public OrdersController(IOrdersService ordersService)
         {
-            _context = context;
+            _ordersService = ordersService;
         }
 
         private string GetUserId()
@@ -29,29 +27,7 @@ namespace ShoppingCartAPI.Controllers
         public async Task<ActionResult<IEnumerable<OrderResponseDto>>> GetOrders()
         {
             string userId = GetUserId();
-            var orders = await _context.Orders
-                .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                .Where(o => o.UserId == userId)
-                .OrderByDescending(o => o.OrderDate)
-                .ToListAsync();
-
-            var dtos = orders.Select(o => new OrderResponseDto
-            {
-                Id = o.Id,
-                OrderDate = o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                Status = o.Status,
-                TotalAmount = o.TotalAmount,
-                ShippingAddress = o.ShippingAddress,
-                Items = o.OrderItems.Select(oi => new OrderItemResponseDto
-                {
-                    ProductId = oi.ProductId,
-                    ProductName = oi.Product?.Name,
-                    Quantity = oi.Quantity,
-                    UnitPrice = oi.UnitPrice
-                }).ToList()
-            });
-
+            var dtos = await _ordersService.GetOrdersAsync(userId);
             return Ok(dtos);
         }
 
@@ -59,52 +35,20 @@ namespace ShoppingCartAPI.Controllers
         public async Task<IActionResult> Checkout([FromBody] CheckoutDto dto)
         {
             string userId = GetUserId();
-            
-            var cartItems = await _context.CartItems
-                .Include(c => c.Product)
-                .Where(c => c.UserId == userId)
-                .ToListAsync();
 
-            if (!cartItems.Any())
-                return BadRequest(new { Message = "Cart is empty." });
-
-            var totalAmount = cartItems.Sum(c => c.Quantity * c.UnitPrice);
-
-            var order = new Order
+            try
             {
-                UserId = userId,
-                OrderDate = DateTime.Now,
-                TotalAmount = totalAmount,
-                Status = "Pending",
-                ShippingAddress = dto.ShippingAddress
-            };
-
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync(); // To get Order ID
-
-            foreach (var item in cartItems)
-            {
-                var orderItem = new OrderItem
-                {
-                    OrderId = order.Id,
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    UnitPrice = item.UnitPrice
-                };
-                
-                // Deduct stock
-                if (item.Product != null)
-                {
-                    item.Product.Stock -= item.Quantity;
-                }
-
-                _context.OrderItems.Add(orderItem);
+                var result = await _ordersService.CheckoutAsync(userId, dto);
+                return Ok(result);
             }
-
-            _context.CartItems.RemoveRange(cartItems);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { Message = "Checkout successful.", OrderId = order.Id });
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { Message = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
         }
     }
 }

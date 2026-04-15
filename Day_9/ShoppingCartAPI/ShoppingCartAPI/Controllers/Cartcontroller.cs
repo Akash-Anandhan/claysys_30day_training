@@ -1,23 +1,21 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ShoppingCartAPI.Data;
 using ShoppingCartAPI.DTOs;
-using ShoppingCartAPI.Models;
+using ShoppingCartAPI.Services;
 using System.Security.Claims;
 
 namespace ShoppingCartAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [AllowAnonymous]
     public class CartController : ControllerBase
     {
-        private readonly ShopDbContext _context;
+        private readonly ICartService _cartService;
 
-        public CartController(ShopDbContext context)
+        public CartController(ICartService cartService)
         {
-            _context = context;
+            _cartService = cartService;
         }
 
         private string GetUserId()
@@ -29,21 +27,7 @@ namespace ShoppingCartAPI.Controllers
         public async Task<ActionResult<IEnumerable<CartItemResponseDto>>> GetCart()
         {
             string userId = GetUserId();
-            var cartItems = await _context.CartItems
-                .Include(c => c.Product)
-                .Where(c => c.UserId == userId)
-                .ToListAsync();
-
-            var dtos = cartItems.Select(c => new CartItemResponseDto
-            {
-                Id = c.Id,
-                ProductId = c.ProductId,
-                ProductName = c.Product?.Name,
-                Quantity = c.Quantity,
-                UnitPrice = c.UnitPrice,
-                TotalPrice = c.Quantity * c.UnitPrice
-            });
-
+            var dtos = await _cartService.GetCartAsync(userId);
             return Ok(dtos);
         }
 
@@ -51,49 +35,67 @@ namespace ShoppingCartAPI.Controllers
         public async Task<IActionResult> AddToCart([FromBody] AddToCartDto dto)
         {
             string userId = GetUserId();
-            var product = await _context.Products.FindAsync(dto.ProductId);
-            
-            if (product == null)
-                return NotFound(new { Message = "Product not found." });
 
-            if (product.Stock < dto.Quantity)
-                return BadRequest(new { Message = "Not enough stock." });
-
-            var existingItem = await _context.CartItems.FirstOrDefaultAsync(c => c.UserId == userId && c.ProductId == dto.ProductId);
-            
-            if (existingItem != null)
+            try
             {
-                existingItem.Quantity += dto.Quantity;
+                var resultMessage = await _cartService.AddToCartAsync(userId, dto);
+                return Ok(new { Message = resultMessage });
             }
-            else
+            catch (KeyNotFoundException ex)
             {
-                var cartItem = new CartItem
-                {
-                    UserId = userId,
-                    ProductId = dto.ProductId,
-                    Quantity = dto.Quantity,
-                    UnitPrice = product.Price
-                };
-                _context.CartItems.Add(cartItem);
+                return NotFound(new { Message = ex.Message });
             }
-
-            await _context.SaveChangesAsync();
-            return Ok(new { Message = "Item added to cart successfully." });
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveFromCart(int id)
         {
             string userId = GetUserId();
-            var cartItem = await _context.CartItems.FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
-            
-            if (cartItem == null)
-                return NotFound(new { Message = "Item not found in cart." });
 
-            _context.CartItems.Remove(cartItem);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var resultMessage = await _cartService.RemoveFromCartAsync(userId, id);
+                return Ok(new { Message = resultMessage });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+        }
 
-            return Ok(new { Message = "Item removed from cart." });
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateCartItem(int id, [FromBody] UpdateCartDto dto)
+        {
+            string userId = GetUserId();
+
+            try
+            {
+                var result = await _cartService.UpdateCartItemAsync(userId, id, dto);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
+        [HttpGet("debug")]
+        public IActionResult Debug()
+        {
+            return Ok(new
+            {
+                IsAuth = User.Identity?.IsAuthenticated,
+                UserId = GetUserId(),
+                Claims = User.Claims.Select(c => new { c.Type, c.Value })
+            });
         }
     }
 }

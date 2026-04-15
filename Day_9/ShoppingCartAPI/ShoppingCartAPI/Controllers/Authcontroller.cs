@@ -1,11 +1,7 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using ShoppingCartAPI.DTOs;
-using ShoppingCartAPI.Models;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using ShoppingCartAPI.Services;
 
 namespace ShoppingCartAPI.Controllers
 {
@@ -13,78 +9,81 @@ namespace ShoppingCartAPI.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IConfiguration _configuration;
+        private readonly IAuthService _authService;
 
-        public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public AuthController(IAuthService authService)
         {
-            _userManager = userManager;
-            _configuration = configuration;
+            _authService = authService;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
-            var userExists = await _userManager.FindByEmailAsync(model.Email);
-            if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
-
-            ApplicationUser user = new ApplicationUser()
+            try
             {
-                Email = model.Email,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Email,
-                FullName = model.FullName,
-                Address = model.Address
-            };
-            
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User creation failed! Please check user details and try again.", Errors = result.Errors });
-
-            return Ok(new { Status = "Success", Message = "User created successfully!" });
+                var result = await _authService.RegisterAsync(model);
+                return Ok(result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return StatusCode(500, new { Message = ex.Message });
+            }
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            try
             {
-                var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
-
-                var token = GetToken(authClaims);
-
-                return Ok(new AuthResponseDto
-                {
-                    Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    Email = user.Email,
-                    FullName = user.FullName,
-                    Expiration = token.ValidTo.ToString("yyyy-MM-dd HH:mm:ss")
-                });
+                var result = await _authService.LoginAsync(model);
+                return Ok(result);
             }
-            return Unauthorized();
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { Message = ex.Message });
+            }
         }
 
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] TokenApiDto tokenApiDto)
         {
-            var jwtSettings = _configuration.GetSection("Jwt");
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
+            try
+            {
+                var result = await _authService.RefreshAsync(tokenApiDto);
+                return Ok(result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [Authorize]
+        [HttpGet("view")]
+        public async Task<IActionResult> ViewProfile()
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-            var token = new JwtSecurityToken(
-                issuer: jwtSettings["Issuer"],
-                audience: jwtSettings["Audience"],
-                expires: DateTime.Now.AddHours(3),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
+            if (userId == null)
+                return Unauthorized();
 
-            return token;
+            try
+            {
+                var result = await _authService.ViewProfileAsync(userId);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
         }
     }
 }

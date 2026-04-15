@@ -21,4 +21,10 @@ namespace ShoppingCartAPI.DTOs
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }
     }
+    public class UpdateCartDto
+    {
+        [Required]
+        [Range(1, 100, ErrorMessage = "Quantity must be between 1 and 100")]
+        public int Quantity { get; set; }
+    }
 }

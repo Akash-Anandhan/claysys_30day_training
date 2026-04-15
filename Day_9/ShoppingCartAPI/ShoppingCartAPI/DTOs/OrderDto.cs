@@ -2,7 +2,9 @@ namespace ShoppingCartAPI.DTOs
 {
     public class CheckoutDto
     {
-        public string ShippingAddress { get; set; }
+        public string? ShippingAddress { get; set; }
+        public string? PaymentType { get; set; }
+        public string? PaymentId { get; set; }
     }
 
     public class OrderResponseDto
@@ -12,6 +14,8 @@ namespace ShoppingCartAPI.DTOs
         public string Status { get; set; }
         public decimal TotalAmount { get; set; }
         public string ShippingAddress { get; set; }
+        public string? PaymentType { get; set; }
+        public string? PaymentId { get; set; }
         public List<OrderItemResponseDto> Items { get; set; }
     }
 

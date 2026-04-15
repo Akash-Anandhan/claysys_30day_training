@@ -207,6 +207,12 @@ namespace ShoppingCartAPI.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -277,20 +283,6 @@ namespace ShoppingCartAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Electronic items and gadgets",
-                            Name = "Electronics"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Apparel and accessories",
-                            Name = "Clothing"
-                        });
                 });
 
             modelBuilder.Entity("ShoppingCartAPI.Models.Order", b =>
@@ -303,6 +295,12 @@ namespace ShoppingCartAPI.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShippingAddress")
                         .IsRequired()
@@ -387,38 +385,28 @@ namespace ShoppingCartAPI.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "Latest model smartphone",
-                            ImageUrl = "https://via.placeholder.com/150",
-                            Name = "Smartphone",
-                            Price = 699.99m,
-                            Stock = 50
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            Description = "High performance laptop",
-                            ImageUrl = "https://via.placeholder.com/150",
-                            Name = "Laptop",
-                            Price = 1299.00m,
-                            Stock = 30
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            Description = "100% cotton t-shirt",
-                            ImageUrl = "https://via.placeholder.com/150",
-                            Name = "Cotton T-Shirt",
-                            Price = 19.99m,
-                            Stock = 100
-                        });
+            modelBuilder.Entity("ShoppingCartAPI.Models.WishlistItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("WishlistItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -511,6 +499,17 @@ namespace ShoppingCartAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ShoppingCartAPI.Models.WishlistItem", b =>
+                {
+                    b.HasOne("ShoppingCartAPI.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("ShoppingCartAPI.Models.Category", b =>

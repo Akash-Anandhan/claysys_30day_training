@@ -16,6 +16,9 @@ namespace ShoppingCartAPI.Models
         public string Status { get; set; } = "Pending";
 
         public string ShippingAddress { get; set; }
+        
+        public string? PaymentType { get; set; }
+        public string? PaymentId { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; }
     }

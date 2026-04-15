@@ -1,7 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ShoppingCartAPI.Data;
 using ShoppingCartAPI.DTOs;
+using ShoppingCartAPI.Services;
+using System.Security.Claims;
 
 namespace ShoppingCartAPI.Controllers
 {
@@ -9,53 +10,120 @@ namespace ShoppingCartAPI.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly ShopDbContext _context;
+        private readonly IProductsService _productsService;
 
-        public ProductsController(ShopDbContext context)
+        public ProductsController(IProductsService productsService)
         {
-            _context = context;
+            _productsService = productsService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
-            var products = await _context.Products.Include(p => p.Category).ToListAsync();
-            var dtos = products.Select(p => new ProductDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                ImageUrl = p.ImageUrl,
-                Stock = p.Stock,
-                CategoryName = p.Category?.Name
-            });
-
+            var dtos = await _productsService.GetProductsAsync();
             return Ok(dtos);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            var product = await _context.Products.Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
-            
-            if (product == null)
+            try
+            {
+                var dto = await _productsService.GetProductAsync(id);
+                return Ok(dto);
+            }
+            catch (KeyNotFoundException)
             {
                 return NotFound();
             }
+        }
 
-            var dto = new ProductDto
+        [HttpGet("Suggestions")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetYouMayLike()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var dtos = await _productsService.GetYouMayLikeAsync(userId);
+            return Ok(dtos);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ProductDto>> PostProduct(ProductDto productDto)
+        {
+            try
             {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                ImageUrl = product.ImageUrl,
-                Stock = product.Stock,
-                CategoryName = product.Category?.Name
-            };
+                var createdProduct = await _productsService.PostProductAsync(productDto);
 
-            return Ok(dto);
+                return CreatedAtAction(
+                    nameof(GetProduct),
+                    new { id = createdProduct.Id },
+                    createdProduct
+                );
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new
+                {
+                    message = "An unexpected error occurred."
+                });
+            }
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PutProduct(int id, ProductDto productDto)
+        {
+            try
+            {
+                var resultMessage = await _productsService.PutProductAsync(id, productDto);
+                return Ok(new { message = resultMessage });
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            try
+            {
+                var resultMessage = await _productsService.DeleteProductAsync(id);
+                return Ok(new { message = resultMessage });
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost("bulk")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddProductsBulk([FromBody] List<ProductDto> products)
+        {
+            try
+            {
+                var result = await _productsService.AddProductsBulkAsync(products);
+                return Ok(result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
         }
     }
 }
