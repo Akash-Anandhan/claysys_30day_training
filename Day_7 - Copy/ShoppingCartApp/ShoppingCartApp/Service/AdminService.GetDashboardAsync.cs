@@ -53,6 +53,7 @@ namespace ShoppingCartApp.Services
             var topProducts = await _context.Products.AsNoTracking().OrderByDescending(p => p.Stock).Take(4).ToListAsync();
             var recentOrders = await allOrdersQuery.OrderByDescending(o => o.OrderDate).Take(5).ToListAsync();
             var lowStock = await _context.Products.AsNoTracking().Where(p => p.Stock < 5).ToListAsync();
+            var lowStockCount = lowStock.Count;
 
             // 4. Derive Functional Groupings from Real Data
             
@@ -103,6 +104,9 @@ namespace ShoppingCartApp.Services
             var turnoverGrowth = prevStockTurnover == 0 ? 100 : ((stockTurnover - prevStockTurnover) / prevStockTurnover) * 100;
 
 
+            var monthlyExpense = currentOrders.Sum(o => o.TotalAmount * 0.7m);
+            var monthlyProfitLoss = totalIncome - monthlyExpense;
+
             return new AdminDashboardDto
             {
                 TotalProducts = productsCount,
@@ -110,7 +114,9 @@ namespace ShoppingCartApp.Services
                 TotalUsers = usersCount,
                 TotalReviews = reviewsCount,
                 TotalIncome = totalIncome,
-                TotalExpense = currentOrders.Sum(o => o.TotalAmount * 0.7m),
+                TotalExpense = monthlyExpense,
+                MonthlyProfitLoss = monthlyProfitLoss,
+                LowStockCount = lowStockCount,
                 
                 IncomeGrowth = Math.Round(incomeGrowth, 1),
                 ExpenseGrowth = Math.Round(incomeGrowth * 0.9, 1),

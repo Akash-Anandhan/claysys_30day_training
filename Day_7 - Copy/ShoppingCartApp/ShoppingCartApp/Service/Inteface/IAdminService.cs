@@ -1,4 +1,4 @@
-﻿// Services/Interface/IAdminService.cs
+// Services/Interface/IAdminService.cs
 using ShoppingCartApp.DTOs.Admin;
 
 namespace ShoppingCartApp.Services
@@ -10,7 +10,15 @@ namespace ShoppingCartApp.Services
         Task SeedDummyDataAsync();
 
         // Products
-        Task<ServiceResponse> GetProductsAsync();
+        Task<ServiceResponse> GetProductsAsync(
+            string searchQuery = null,
+            string category = null,
+            string stockFilter = null,
+            string sortBy = null,
+            decimal? minPrice = null,
+            decimal? maxPrice = null,
+            int page = 1,
+            int pageSize = 50);
         Task<ServiceResponse> GetCreateProductFormAsync();
         Task<ServiceResponse> CreateProductAsync(CreateProductDto dto);
         Task<ServiceResponse> GetEditProductFormAsync(int id);
@@ -19,13 +27,25 @@ namespace ShoppingCartApp.Services
         Task<ServiceResponse> DeleteAllProductsAsync();
 
         // Reviews
-        Task<ServiceResponse> GetReviewsAsync();
+        Task<ServiceResponse> GetReviewsAsync(
+            string searchQuery = null,
+            int? minRating = null,
+            string sortBy = null,
+            int page = 1,
+            int pageSize = 50);
         Task<ServiceResponse> DeleteReviewAsync(int id);
 
         // Orders
-        Task<AdminOrdersDto> GetOrdersAsync();
+        Task<AdminOrdersDto> GetOrdersAsync(
+            string searchQuery = null,
+            string statusFilter = null,
+            string sortBy = null,
+            int page = 1,
+            int pageSize = 50);
         Task<AdminOrderDetailDto> GetOrderDetailAsync(int id);
         Task<ServiceResponse> UpdateOrderStatusAsync(UpdateOrderStatusDto dto);
+        Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersExcelAsync();
+        Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersCsvAsync();
 
         // Import / Export
         Task<(byte[] bytes, string contentType, string fileName)> ExportExcelAsync();

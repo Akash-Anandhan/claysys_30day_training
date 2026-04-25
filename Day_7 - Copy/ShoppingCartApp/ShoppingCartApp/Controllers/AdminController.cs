@@ -48,9 +48,17 @@ namespace ShoppingCartApp.Controllers
         // â”€â”€ Products â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         // GET: /Admin/Products
-        public async Task<IActionResult> Products()
+        public async Task<IActionResult> Products(
+            string searchQuery = null,
+            string category = null,
+            string stockFilter = null,
+            string sortBy = null,
+            decimal? minPrice = null,
+            decimal? maxPrice = null,
+            int page = 1)
         {
-            return Execute(await _adminService.GetProductsAsync());
+            return Execute(await _adminService.GetProductsAsync(
+                searchQuery, category, stockFilter, sortBy, minPrice, maxPrice, page));
         }
 
         // GET: /Admin/CreateProduct
@@ -148,9 +156,16 @@ namespace ShoppingCartApp.Controllers
         // â”€â”€ Reviews â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         // GET: /Admin/Reviews
-        public async Task<IActionResult> Reviews()
+        public async Task<IActionResult> Reviews(
+            string searchQuery = null,
+            int? minRating = null,
+            string sortBy = null,
+            int page = 1)
         {
-            return Execute(await _adminService.GetReviewsAsync());
+            ViewBag.SearchQuery = searchQuery;
+            ViewBag.MinRating = minRating;
+            ViewBag.SortBy = sortBy;
+            return Execute(await _adminService.GetReviewsAsync(searchQuery, minRating, sortBy, page));
         }
 
         // POST: /Admin/DeleteReview/5
@@ -164,10 +179,20 @@ namespace ShoppingCartApp.Controllers
         // â”€â”€ Orders â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         // GET: /Admin/Orders
-        public async Task<IActionResult> Orders()
+        public async Task<IActionResult> Orders(
+            string searchQuery = null,
+            string statusFilter = null,
+            string sortBy = null,
+            int page = 1)
         {
-            var dto = await _adminService.GetOrdersAsync();
+            var dto = await _adminService.GetOrdersAsync(searchQuery, statusFilter, sortBy, page);
             ViewBag.UserEmails = dto.UserEmails;
+            ViewBag.SearchQuery = searchQuery;
+            ViewBag.StatusFilter = statusFilter;
+            ViewBag.SortBy = sortBy;
+            ViewBag.CurrentPage = dto.CurrentPage;
+            ViewBag.TotalPages = dto.TotalPages;
+            ViewBag.TotalCount = dto.TotalCount;
             return View(dto.Orders);
         }
 
@@ -207,6 +232,59 @@ namespace ShoppingCartApp.Controllers
         {
             var (bytes, contentType, fileName) = await _adminService.ExportCsvAsync();
             return File(bytes, contentType, fileName);
+        }
+
+        // GET: /Admin/ExportOrdersExcel
+        public async Task<IActionResult> ExportOrdersExcel()
+        {
+            var (bytes, contentType, fileName) = await _adminService.ExportOrdersExcelAsync();
+            return File(bytes, contentType, fileName);
+        }
+
+        // GET: /Admin/ExportOrdersCsv
+        public async Task<IActionResult> ExportOrdersCsv()
+        {
+            var (bytes, contentType, fileName) = await _adminService.ExportOrdersCsvAsync();
+            return File(bytes, contentType, fileName);
+        }
+
+        // GET: /Admin/ExportRevenueExcel
+        public async Task<IActionResult> ExportRevenueExcel()
+        {
+            var stats = await _adminService.GetDashboardAsync(ViewBag.CurrentDateRange as string ?? "This Year");
+            
+            using var package = new OfficeOpenXml.ExcelPackage();
+            var ws = package.Workbook.Worksheets.Add("Revenue");
+            
+            ws.Cells[1, 1].Value = "Period";
+            ws.Cells[1, 2].Value = "Revenue";
+            ws.Cells[1, 3].Value = "Expense";
+            ws.Cells[1, 4].Value = "Profit";
+            
+            for (int i = 0; i < stats.Months.Count; i++)
+            {
+                ws.Cells[i + 2, 1].Value = stats.Months[i];
+                ws.Cells[i + 2, 2].Value = stats.RevenueTrend[i];
+                ws.Cells[i + 2, 3].Value = stats.CostTrend[i];
+                ws.Cells[i + 2, 4].Value = stats.ProfitTrend[i];
+            }
+            
+            return File(package.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Revenue.xlsx");
+        }
+
+        // GET: /Admin/ExportRevenueCsv
+        public async Task<IActionResult> ExportRevenueCsv()
+        {
+            var stats = await _adminService.GetDashboardAsync(ViewBag.CurrentDateRange as string ?? "This Year");
+            
+            using var stream = new MemoryStream();
+            await using var writer = new StreamWriter(stream, leaveOpen: true);
+            await using var csv = new CsvHelper.CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture);
+            
+            await csv.WriteRecordsAsync(stats.Months.Select((m, i) => new { Period = m, Revenue = stats.RevenueTrend[i], Expense = stats.CostTrend[i], Profit = stats.ProfitTrend[i] }));
+            await writer.FlushAsync();
+            
+            return File(stream.ToArray(), "text/csv", "Revenue.csv");
         }
 
         // POST: /Admin/ImportExcel

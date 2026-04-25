@@ -30,6 +30,8 @@ namespace ShoppingCartApp.DTOs.Admin
         public int TotalReviews { get; set; }
         public decimal TotalIncome { get; set; }
         public decimal TotalExpense { get; set; }
+        public decimal MonthlyProfitLoss { get; set; }
+        public int LowStockCount { get; set; }
         
         // Percentages
         public double IncomeGrowth { get; set; }
@@ -96,6 +98,9 @@ namespace ShoppingCartApp.DTOs.Admin
     {
         public IList<Models.Order> Orders { get; set; }
         public Dictionary<string, string> UserEmails { get; set; }
+        public int TotalCount { get; set; }
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
     }
 
     public class AdminOrderDetailDto
@@ -108,6 +113,16 @@ namespace ShoppingCartApp.DTOs.Admin
     {
         public int OrderId { get; set; }
         public string Status { get; set; }
+    }
+
+    // ── Reviews Result ──
+
+    public class AdminReviewsResultDto
+    {
+        public IList<Models.Review> Reviews { get; set; }
+        public int TotalCount { get; set; }
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
     }
 
     // ── Import / Export ──
