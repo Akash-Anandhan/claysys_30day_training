@@ -1,0 +1,45 @@
+@model IEnumerable<ShoppingCartClient.Models.UserProfileDto>
+@{
+    ViewData["Title"] = "Admin - Users";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Users Directory</h2>
+    </div>
+
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var user in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@user.FullName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@(string.IsNullOrEmpty(user.Address) ? "N/A" : user.Address)</td>
+                        <td>
+                            <span class="badge bg-@(user.Role == "Admin" ? "danger" : "primary")">
+                                @user.Role
+                            </span>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="5" class="text-center">No users found.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -285,6 +285,71 @@ namespace ShoppingCartAPI.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ShoppingCartAPI.Models.Offer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CouponCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DiscountPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Offers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DiscountPercentage = 10m,
+                            IsActive = true,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CouponCode = "SAVE20",
+                            DiscountPercentage = 20m,
+                            IsActive = true,
+                            ProductId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DiscountPercentage = 5m,
+                            IsActive = true,
+                            ProductId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CouponCode = "AUDIO15",
+                            DiscountPercentage = 15m,
+                            IsActive = true,
+                            ProductId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CouponCode = "EXPIRED50",
+                            DiscountPercentage = 50m,
+                            IsActive = false,
+                            ProductId = 3
+                        });
+                });
+
             modelBuilder.Entity("ShoppingCartAPI.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -312,6 +377,9 @@ namespace ShoppingCartAPI.Migrations
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -385,6 +453,59 @@ namespace ShoppingCartAPI.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ShoppingCartAPI.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Great phone!",
+                            ProductId = 1,
+                            Rating = 5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Battery life is okay.",
+                            ProductId = 1,
+                            Rating = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "Nice laptop for the price.",
+                            ProductId = 2,
+                            Rating = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Comment = "Sound quality is amazing.",
+                            ProductId = 3,
+                            Rating = 5
+                        });
                 });
 
             modelBuilder.Entity("ShoppingCartAPI.Models.WishlistItem", b =>

@@ -5,6 +5,7 @@ namespace ShoppingCartAPI.DTOs
         public string? ShippingAddress { get; set; }
         public string? PaymentType { get; set; }
         public string? PaymentId { get; set; }
+        public string? TransactionId { get; set; }
     }
 
     public class OrderResponseDto
@@ -16,6 +17,7 @@ namespace ShoppingCartAPI.DTOs
         public string ShippingAddress { get; set; }
         public string? PaymentType { get; set; }
         public string? PaymentId { get; set; }
+        public string? TransactionId { get; set; }
         public List<OrderItemResponseDto> Items { get; set; }
     }
 

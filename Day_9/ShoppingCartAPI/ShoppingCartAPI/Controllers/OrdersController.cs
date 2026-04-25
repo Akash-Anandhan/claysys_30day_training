@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCartAPI.DTOs;
 using ShoppingCartAPI.Services;
-using System.Security.Claims;
 
 namespace ShoppingCartAPI.Controllers
 {
@@ -18,37 +17,34 @@ namespace ShoppingCartAPI.Controllers
             _ordersService = ordersService;
         }
 
-        private string GetUserId()
-        {
-            return User.FindFirstValue(ClaimTypes.NameIdentifier);
-        }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderResponseDto>>> GetOrders()
         {
-            string userId = GetUserId();
-            var dtos = await _ordersService.GetOrdersAsync(userId);
+            var dtos = await _ordersService.GetOrdersAsync();
             return Ok(dtos);
         }
 
         [HttpPost("checkout")]
         public async Task<IActionResult> Checkout([FromBody] CheckoutDto dto)
         {
-            string userId = GetUserId();
+            var result = await _ordersService.CheckoutAsync(dto);
+            return Ok(result);
+        }
 
-            try
-            {
-                var result = await _ordersService.CheckoutAsync(userId, dto);
-                return Ok(result);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(new { Message = ex.Message });
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new { Message = ex.Message });
-            }
+        [HttpGet("export/excel")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ExportOrdersToExcel()
+        {
+            var fileBytes = await _ordersService.ExportOrdersToExcelAsync();
+            return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Orders.xlsx");
+        }
+
+        [HttpGet("export/csv")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ExportOrdersToCsv()
+        {
+            var fileBytes = await _ordersService.ExportOrdersToCsvAsync();
+            return File(fileBytes, "text/csv", "Orders.csv");
         }
     }
 }

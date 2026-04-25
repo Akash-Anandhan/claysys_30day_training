@@ -1,0 +1,44 @@
+@model ShoppingCartClient.Models.OrderResponseDto
+@{
+    ViewData["Title"] = "Order Confirmed";
+}
+
+<div class="row pt-5 pb-5 mt-4 mb-4 justify-content-center">
+    <div class="col-md-8 col-lg-6 text-center bg-light p-5" style="border-radius: 20px;">
+        <i class="bi bi-check-circle-fill text-success mb-3" style="font-size: 5rem;"></i>
+        <h1 class="fw-bold text-dark mt-2" style="font-family: 'Space Grotesk', sans-serif;">Order Verified!</h1>
+        <p class="text-muted fs-5 mt-3">We have successfully mapped your order to our local nodes. Your products will be securely packed and sent out shortly.</p>
+        
+        @if (Model != null)
+        {
+            <div class="card my-4 text-start shadow-sm border-0" style="border-radius: 12px;">
+                <div class="card-body p-4 bg-white" style="border-radius: 12px;">
+                    <div class="d-flex justify-content-between mb-2 border-bottom pb-2">
+                        <span class="text-muted fw-semibold">Order ID</span>
+                        <span class="fw-bold">@Model.Id</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2 border-bottom pb-2">
+                        <span class="text-muted fw-semibold">Order Time</span>
+                        <span>@Model.OrderDate</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted fw-semibold">Status</span>
+                        <span class="badge bg-warning text-dark px-3 py-1 rounded-pill">@Model.Status</span>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info my-4" style="border-radius: 12px;">
+                Unable to locate specific order details directly, but if checkout passed, it has successfully registered globally!
+            </div>
+        }
+
+        <p class="mb-4">Visit your mailbox associated with this account for tracking information.</p>
+        
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-controller="Product" asp-action="Index" class="btn btn-primary rounded-pill px-5 fw-bold" style="background:#111827; border:none;">Continue Shopping</a>
+        </div>
+    </div>
+</div>

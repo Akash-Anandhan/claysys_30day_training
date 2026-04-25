@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "ContainingType": "ShoppingCartApp.Controllers.ApiAuthController",
+    "Method": "Login",
+    "RelativePath": "api/ApiAuth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "ShoppingCartApp.DTOs.Auth.ApiLoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ShoppingCartApp.Controllers.ApiAuthController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/ApiAuth/refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "ShoppingCartApp.DTOs.Auth.RefreshTokenDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

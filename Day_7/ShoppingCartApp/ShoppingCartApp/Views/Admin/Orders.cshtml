@@ -1,0 +1,55 @@
+@model IEnumerable<ShoppingCartApp.Models.Order>
+@{
+    ViewData["Title"] = "Manage Orders";
+    var userEmails = ViewBag.UserEmails as Dictionary<string, string>;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+    <h2 class="fw-bold mb-0" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">
+        <i class="bi bi-bag-check" style="color: #10b981;"></i> Manage Orders
+    </h2>
+</div>
+
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px; overflow: hidden;">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="font-size: 0.95rem;">
+                <thead style="background: #f8fafc;">
+                    <tr>
+                        <th class="border-0 text-muted fw-semibold ps-4 py-3">Order #</th>
+                        <th class="border-0 text-muted fw-semibold py-3">User</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Date</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Total</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Status</th>
+                        <th class="border-0 text-muted fw-semibold pe-4 py-3 text-end">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 py-3 fw-bold" style="color: #111827;">#@order.Id</td>
+                            <td>@(userEmails != null && userEmails.ContainsKey(order.UserId) ? userEmails[order.UserId] : order.UserId)</td>
+                            <td>@order.OrderDate.ToString("MMM dd, yyyy HH:mm")</td>
+                            <td class="fw-bold" style="color: #10b981;">₹@order.TotalAmount.ToString("0.00")</td>
+                            <td>
+                                @{
+                                    var bg = order.Status == "Pending" ? "rgba(245,158,11,0.1)" : 
+                                             order.Status == "Delivered" ? "rgba(16,185,129,0.1)" : "rgba(59,130,246,0.1)";
+                                    var text = order.Status == "Pending" ? "#d97706" : 
+                                               order.Status == "Delivered" ? "#10b981" : "#3b82f6";
+                                }
+                                <span class="badge rounded-pill" style="background: @bg; color: @text; padding: 6px 12px;">@order.Status</span>
+                            </td>
+                            <td class="pe-4 py-3 text-end">
+                                <a asp-action="OrderDetails" asp-route-id="@order.Id" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                                    View details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

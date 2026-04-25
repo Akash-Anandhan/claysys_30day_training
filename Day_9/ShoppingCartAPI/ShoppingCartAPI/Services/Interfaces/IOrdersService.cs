@@ -4,7 +4,9 @@ namespace ShoppingCartAPI.Services
 {
     public interface IOrdersService
     {
-        Task<IEnumerable<OrderResponseDto>> GetOrdersAsync(string userId);
-        Task<object> CheckoutAsync(string userId, CheckoutDto dto);
+        Task<IEnumerable<OrderResponseDto>> GetOrdersAsync();
+        Task<object> CheckoutAsync(CheckoutDto dto);
+        Task<byte[]> ExportOrdersToExcelAsync();
+        Task<byte[]> ExportOrdersToCsvAsync();
     }
 }

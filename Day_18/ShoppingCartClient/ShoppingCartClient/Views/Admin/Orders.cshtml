@@ -1,0 +1,52 @@
+@model IEnumerable<ShoppingCartClient.Models.OrderResponseDto>
+@{
+    ViewData["Title"] = "Admin - Orders";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Orders Management</h2>
+        
+        <div>
+            <a asp-action="ExportOrders" asp-route-format="excel" class="btn btn-success me-2">Export Excel</a>
+            <a asp-action="ExportOrders" asp-route-format="csv" class="btn btn-info me-2 text-white">Export CSV</a>
+        </div>
+    </div>
+
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Items Count</th>
+                <th>Total Amount</th>
+                <th>Ship To</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var order in Model)
+                {
+                    <tr>
+                        <td>#@order.Id</td>
+                        <td>@order.OrderDate</td>
+                        <td>
+                            <span class="badge bg-@(order.Status == "Pending" ? "warning" : "success")">
+                                @order.Status
+                            </span>
+                        </td>
+                        <td>@order.Items?.Count</td>
+                        <td>@order.TotalAmount.ToString("C")</td>
+                        <td>@order.ShippingAddress</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="6" class="text-center">No orders found.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

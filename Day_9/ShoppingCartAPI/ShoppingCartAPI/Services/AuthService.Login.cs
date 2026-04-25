@@ -26,12 +26,16 @@ namespace ShoppingCartAPI.Services
 
             await _userManager.UpdateAsync(user);
 
+            var roles = await _userManager.GetRolesAsync(user);
+            var userRole = roles.FirstOrDefault() ?? "User";
+
             return new AuthResponseDto
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 RefreshToken = refreshToken,
                 Email = user.Email,
                 FullName = user.FullName,
+                Role = userRole,
                 Expiration = token.ValidTo.ToString("yyyy-MM-dd HH:mm:ss")
             };
         }

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Shopiee</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Modern Font: Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index" style="color: #111827;">
+                <i class="bi bi-shop" style="color: #e85d2a;"></i> Shopiee
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list fs-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto ps-lg-4 gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" asp-controller="Product" asp-action="Index">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" asp-controller="Product" asp-action="TopRated">
+                            <i class="bi bi-star me-1"></i> Top Rated
+                        </a>
+                    </li>
+                </ul>
+
+                <form asp-controller="Product" asp-action="Search" method="get" class="d-flex mx-lg-4 my-3 my-lg-0 position-relative" style="flex:1; max-width:400px;">
+                    <div class="search-wrapper w-100 d-flex align-items-center">
+                        <input type="text" name="query" id="search-input" class="form-control search-input-custom" placeholder="Search products..." autocomplete="off" />
+                        <button type="submit" class="btn btn-brand rounded-pill d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; padding: 0;">
+                            <i class="bi bi-search" style="font-size: 0.9rem;"></i>
+                        </button>
+                    </div>
+                    <div id="search-suggestions" class="position-absolute bg-white border-0 rounded-4 shadow-lg w-100" style="top:calc(100% + 10px); z-index:9999; display:none; overflow: hidden;">
+                    </div>
+                </form>
+
+                <ul class="navbar-nav align-items-center gap-3 gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom d-flex align-items-center" asp-controller="Cart" asp-action="Index">
+                            <i class="bi bi-cart3 fs-5 me-1"></i> Cart
+                            <span class="badge rounded-pill badge-count ms-2" id="cart-count">@await Component.InvokeAsync("CartBadge")</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom d-flex align-items-center" asp-controller="Wishlist" asp-action="Index">
+                            <i class="bi bi-heart fs-5 me-1"></i> Wishlist
+                            <span class="badge rounded-pill badge-count ms-2" id="wishlist-count">@await Component.InvokeAsync("WishlistBadge")</span>
+                        </a>
+                    </li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item ms-lg-2 d-none d-lg-block" style="border-left: 1px solid #e5e7eb; height: 24px;"></li>
+                            <li class="nav-item ms-lg-2">
+                                <a class="btn btn-sm text-white rounded-3 px-3 py-2" style="background:#4b5563; font-weight: 500;" asp-controller="Admin" asp-action="Index">
+                                    <i class="bi bi-shield-lock me-1"></i> Admin Panel
+                                </a>
+                            </li>
+                        }
+                        
+                        <li class="nav-item ms-lg-2 d-none d-lg-block" style="border-left: 1px solid #e5e7eb; height: 24px;"></li>
+                        <li class="nav-item ms-lg-2">
+                            <div class="dropdown">
+                                <a class="nav-link nav-link-custom dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span style="width:32px; height:32px; border-radius:50%; background:rgba(232,93,42,0.1); color:#e85d2a; display:inline-flex; align-items:center; justify-content:center; font-weight:600; margin-right:8px;">
+                                        @(User.Identity.Name?.Substring(0, 1).ToUpper() ?? "U")
+                                    </span>
+                                    <span class="fw-semibold" style="color: #111827;">@User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2" style="border-radius: 12px; min-width: 200px;">
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post" class="px-2 pb-1 pt-1">
+                                            <button type="submit" class="dropdown-item rounded-3 text-danger d-flex align-items-center gap-2" style="padding: 8px 16px; font-weight: 500;">
+                                                <i class="bi bi-box-arrow-right"></i> Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item ms-lg-2 d-none d-lg-block" style="border-left: 1px solid #e5e7eb; height: 24px;"></li>
+                        <li class="nav-item ms-lg-2">
+                            <a class="nav-link nav-link-custom fw-semibold" asp-controller="Account" asp-action="Login">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item ms-lg-1">
+                            <a class="btn btn-brand btn-sm rounded-pill px-4 py-2" asp-controller="Account" asp-action="Register">
+                                Register
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-4 py-2">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom py-5 mt-auto">
+        <div class="container text-center">
+            <h4 class="fw-bold mb-3" style="color: #111827; letter-spacing: -0.02em;">
+                <i class="bi bi-shop" style="color: #e85d2a;"></i> Shopiee
+            </h4>
+            <p class="mb-4" style="max-width: 400px; margin: 0 auto; line-height: 1.6;">
+                Find amazing products at great prices. Curated collections that make you smile.
+            </p>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <a href="#" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background: #f3f4f6; color: #4b5563; transition: all 0.2s ease;" onmouseover="this.style.background='#e85d2a';this.style.color='#fff';" onmouseout="this.style.background='#f3f4f6';this.style.color='#4b5563';"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background: #f3f4f6; color: #4b5563; transition: all 0.2s ease;" onmouseover="this.style.background='#e85d2a';this.style.color='#fff';" onmouseout="this.style.background='#f3f4f6';this.style.color='#4b5563';"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background: #f3f4f6; color: #4b5563; transition: all 0.2s ease;" onmouseover="this.style.background='#e85d2a';this.style.color='#fff';" onmouseout="this.style.background='#f3f4f6';this.style.color='#4b5563';"><i class="bi bi-instagram"></i></a>
+            </div>
+            <p class="mb-0 border-top pt-4" style="border-color: rgba(0,0,0,0.05) !important;">&copy; @DateTime.Now.Year Shopiee. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;"></div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+    <input type="hidden" id="af-token" value="@Antiforgery.GetAndStoreTokens(Context).RequestToken" />
+</body>
+</html>

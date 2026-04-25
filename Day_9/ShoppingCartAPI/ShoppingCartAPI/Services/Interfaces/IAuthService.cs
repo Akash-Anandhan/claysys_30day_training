@@ -7,6 +7,7 @@ namespace ShoppingCartAPI.Services
         Task<string> RegisterAsync(RegisterDto model);
         Task<AuthResponseDto> LoginAsync(LoginDto model);
         Task<AuthResponseDto> RefreshAsync(TokenApiDto tokenApiDto);
-        Task<UserProfileDto> ViewProfileAsync(string userId);
+        Task<UserProfileDto> ViewProfileAsync();
+        Task<IEnumerable<UserProfileDto>> GetUsersAsync();
     }
 }

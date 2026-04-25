@@ -16,7 +16,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "JWT__Key": "zK8@fP2#Lm9!Qx7$VrT5uYw3BnC6sD1hJ4eG8pR0tX"
+        "JWT__Key": ""
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7210;http://localhost:5210"

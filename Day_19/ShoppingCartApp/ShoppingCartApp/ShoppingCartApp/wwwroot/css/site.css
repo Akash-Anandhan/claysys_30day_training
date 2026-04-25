@@ -1,0 +1,291 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    padding: 12px 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.navbar .nav-link {
+    font-size: 0.95rem;
+    padding: 6px 14px !important;
+    transition: color 0.2s;
+}
+
+    .navbar .nav-link:hover {
+        color: #ffc107 !important;
+    }
+
+#cart-count {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    vertical-align: middle;
+}
+
+/* ===== Hero Section ===== */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 16px;
+    padding: 60px 40px;
+    margin-bottom: 40px;
+    color: white;
+}
+
+    .hero-section h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+    }
+
+/* ===== Product Cards ===== */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+}
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important;
+    }
+
+.card-img-top {
+    height: 100%;
+    object-fit: contain;    
+    transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.card-footer {
+    background: white;
+    border-top: 1px solid #f0f0f0;
+    padding: 12px;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+
+.btn-dark {
+    background-color: #1a1a2e;
+    border-color: #1a1a2e;
+}
+
+    .btn-dark:hover {
+        background-color: #16213e;
+        border-color: #16213e;
+    }
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* ===== Badge ===== */
+.badge {
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* ===== Cart Page ===== */
+.cart-item-row {
+    transition: background-color 0.2s;
+}
+
+    .cart-item-row:hover {
+        background-color: #f8f9fa;
+    }
+
+.cart-img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===== Order Summary Card ===== */
+.summary-card {
+    position: sticky;
+    top: 20px;
+}
+
+/* ===== Checkout Page ===== */
+.checkout-card {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    .form-control:focus {
+        border-color: #1a1a2e;
+        box-shadow: 0 0 0 3px rgba(26,26,46,0.1);
+    }
+
+/* ===== Confirmation Page ===== */
+.confirmation-icon {
+    animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== Toast Notification ===== */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #fcfcfc;
+    color: #111827;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navbar Styling */
+.navbar-custom {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.nav-link-custom {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #4b5563 !important;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+    .nav-link-custom:hover, .nav-link-custom.active {
+        color: #e85d2a !important;
+    }
+
+/* Search styling */
+.search-wrapper {
+    background: #f3f4f6;
+    border-radius: 50px;
+    padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+    .search-wrapper:focus-within {
+        background: #fff;
+        border-color: rgba(232, 93, 42, 0.3);
+        box-shadow: 0 0 0 4px rgba(232, 93, 42, 0.1);
+    }
+
+.search-input-custom {
+    background: transparent;
+    border: none;
+    box-shadow: none !important;
+    font-size: 0.9rem;
+}
+
+.btn-brand {
+    background-color: #e85d2a;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+    .btn-brand:hover {
+        background-color: #d65223;
+        color: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(232, 93, 42, 0.2);
+    }
+
+.btn-outline-brand {
+    border: 1.5px solid #e85d2a;
+    color: #e85d2a;
+    font-weight: 600;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+    .btn-outline-brand:hover {
+        background-color: #e85d2a;
+        color: #fff;
+    }
+
+/* Main Content */
+main {
+    flex: 1;
+}
+
+/* Footer */
+.footer-custom {
+    background-color: #ffffff;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* Pill Badge */
+.badge-count {
+    background: #e85d2a !important;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.4em 0.6em;
+}
+

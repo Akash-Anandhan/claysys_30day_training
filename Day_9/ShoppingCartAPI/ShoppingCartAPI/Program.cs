@@ -1,22 +1,61 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OfficeOpenXml;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.MSSqlServer;
 using ShoppingCartAPI.Data;
+using ShoppingCartAPI.Middlewares;
 using ShoppingCartAPI.Models;
-using System.Text;
-using Microsoft.AspNetCore.RateLimiting;
-using System.Threading.RateLimiting;
 using ShoppingCartAPI.Services;
+using System.ComponentModel;
+
+using System.Text;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// -------------------- DB --------------------
+// Set EPPlus License
+ExcelPackage.License.SetNonCommercialPersonal("Developer");
+
+// ==================== Serilog ====================
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .Enrich.WithThreadId()
+    .Enrich.WithEnvironmentName()
+    .Enrich.WithMachineName()
+    .WriteTo.Console(outputTemplate:
+        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} {CorrelationId}{NewLine}{Exception}")
+    .WriteTo.MSSqlServer(
+        connectionString: "Server=.\\SQLEXPRESS;Database=ShoppingCartApi;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False;TrustServerCertificate=True",
+        sinkOptions: new MSSqlServerSinkOptions
+        {
+            TableName = "Logs",
+            AutoCreateSqlTable = true
+        },
+        columnOptions: new ColumnOptions()
+    ));
+
+
+// ==================== Core Services ====================
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddMemoryCache();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+
+// ==================== Database ====================
 builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// -------------------- Identity --------------------
+
+// ==================== Identity ====================
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
@@ -24,7 +63,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ShopDbContext>()
 .AddDefaultTokenProviders();
 
-// -------------------- JWT Auth --------------------
+
+// ==================== JWT Authentication ====================
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
 
@@ -49,20 +89,27 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// -------------------- DI Services --------------------
+
+// ==================== Dependency Injection ====================
+builder.Services.AddScoped<ShoppingCartAPI.Services.Interfaces.IUserContextService, UserContextService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrdersService, OrdersService>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<IWishlistService, WishlistService>();
+builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddScoped<ShoppingCartAPI.Services.Interfaces.IReviewService, ReviewService>();
+builder.Services.AddScoped<ShoppingCartAPI.Services.Interfaces.IInventoryService, InventoryService>();
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
 
-// -------------------- Swagger --------------------
+// ==================== Swagger ====================
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShoppingCart API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "ShoppingCart API",
+        Version = "v1"
+    });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -85,12 +132,13 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] { }
+            Array.Empty<string>()
         }
     });
 });
 
-// -------------------- Rate Limiting --------------------
+
+// ==================== Rate Limiting ====================
 builder.Services.AddRateLimiter(options =>
 {
     options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
@@ -108,17 +156,23 @@ builder.Services.AddRateLimiter(options =>
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 });
 
+
+// ==================== Build App ====================
 var app = builder.Build();
 
-app.UseSwagger();
 
+// ==================== Middleware Pipeline ====================
+app.UseMiddleware<CorrelationIdMiddleware>();   // 1
+app.UseMiddleware<GlobalExceptionMiddleware>(); // 2
+
+app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "ShoppingCart API V1");
-    c.RoutePrefix = string.Empty;
+    c.RoutePrefix = "swagger";
 });
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseRateLimiter();
 

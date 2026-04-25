@@ -1,0 +1,53 @@
+@model IEnumerable<ShoppingCartApp.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+    <h2 class="fw-bold mb-0" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">
+        <i class="bi bi-people" style="color: #3b82f6;"></i> Manage Users
+    </h2>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" style="border-radius: 12px; border: none; border-left: 4px solid #10b981; font-size: 0.95rem;">
+        <i class="bi bi-check-circle-fill me-2" style="color: #10b981;"></i> @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px; overflow: hidden;">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="font-size: 0.95rem;">
+                <thead style="background: #f8fafc;">
+                    <tr>
+                        <th class="border-0 text-muted fw-semibold ps-4 py-3">Full Name</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Email</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Created At</th>
+                        <th class="border-0 text-muted fw-semibold pe-4 py-3 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 py-3 fw-bold" style="color: #111827;">@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@user.CreatedAt.ToString("MMM dd, yyyy")</td>
+                            <td class="pe-4 py-3 text-end">
+                                <form asp-action="DeleteUser" method="post" onsubmit="return confirm('Delete @user.Email? This cannot be undone.')">
+                                    <input type="hidden" name="id" value="@user.Id" />
+                                    <button type="submit" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center ms-auto" style="width: 34px; height: 34px; background: rgba(239,68,68,0.1); color: #ef4444; border: none; transition: all 0.2s ease;" onmouseover="this.style.background='#ef4444'; this.style.color='#fff';" onmouseout="this.style.background='rgba(239,68,68,0.1)'; this.style.color='#ef4444';">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

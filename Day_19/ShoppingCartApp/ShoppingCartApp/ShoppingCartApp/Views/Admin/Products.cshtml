@@ -1,0 +1,116 @@
+@model IEnumerable<ShoppingCartApp.Models.Product>
+@{
+    ViewData["Title"] = "Manage Products";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+    <h2 class="fw-bold mb-0" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">
+        <i class="bi bi-box-seam" style="color: #e85d2a;"></i> Manage Products
+    </h2>
+    <a asp-action="CreateProduct" class="btn text-white rounded-pill px-4" style="background: #e85d2a; font-weight: 600; box-shadow: 0 4px 12px rgba(232,93,42,0.2); border: none; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">
+        <i class="bi bi-plus-circle me-1"></i> Add New Product
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" style="border-radius: 12px; border: none; border-left: 4px solid #10b981; font-size: 0.95rem;">
+        <i class="bi bi-check-circle-fill me-2" style="color: #10b981;"></i> @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px;">
+    <div class="card-body">
+        <h6 class="fw-bold mb-3 text-muted">Bulk Data Management</h6>
+        <div class="d-flex flex-wrap gap-3 align-items-center">
+            <!-- Form for Excel Upload -->
+            <form asp-action="ImportExcel" method="post" enctype="multipart/form-data" class="d-flex align-items-center gap-2">
+                <input type="file" name="file" class="form-control form-control-sm" accept=".xlsx" required style="max-width: 220px;" />
+                <button type="submit" class="btn btn-sm btn-outline-success"><i class="bi bi-file-earmark-excel"></i> Import Excel</button>
+            </form>
+            
+            <!-- Form for CSV Upload -->
+            <form asp-action="ImportCsv" method="post" enctype="multipart/form-data" class="d-flex align-items-center gap-2">
+                <input type="file" name="file" class="form-control form-control-sm" accept=".csv" required style="max-width: 220px;" />
+                <button type="submit" class="btn btn-sm btn-outline-info"><i class="bi bi-filetype-csv"></i> Import CSV</button>
+            </form>
+            
+            <div class="mx-auto"></div>
+            
+            <a asp-action="ExportExcel" class="btn btn-sm btn-success"><i class="bi bi-download"></i> Export Excel</a>
+            <a asp-action="ExportCsv" class="btn btn-sm btn-info text-white"><i class="bi bi-download"></i> Export CSV</a>
+            
+            <form asp-action="DeleteAllProducts" method="post" onsubmit="return confirm('WARNING: Are you sure you want to delete ALL PRODUCTS, REVIEWS, and CART ITEMS? This action cannot be undone.')">
+                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i> Delete All</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px; overflow: hidden;">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="font-size: 0.95rem;">
+                <thead style="background: #f8fafc;">
+                    <tr>
+                        <th class="border-0 text-muted fw-semibold ps-4 py-3">Image</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Name</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Category</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Price</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Stock</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Reviews</th>
+                        <th class="border-0 text-muted fw-semibold pe-4 py-3 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 py-3">
+                                <div class="bg-light rounded-3 d-inline-block" style="padding: 2px;">
+                                    <img src="@product.ImageUrl" width="56" height="56" class="rounded-3 shadow-sm" style="object-fit:cover;" />
+                                </div>
+                            </td>
+                            <td class="fw-bold" style="color: #111827;">@product.Name</td>
+                            <td>
+                                <span class="badge rounded-pill bg-light text-dark border">@product.Category?.Name</span>
+                            </td>
+                            <td class="fw-bold" style="color: #10b981;">
+                                $@product.Price.ToString("0.00")
+                            </td>
+                            <td>
+                                @if (product.Stock < 5)
+                                {
+                                    <span class="badge rounded-pill" style="background: rgba(239,68,68,0.1); color: #ef4444; padding: 6px 12px;">@product.Stock</span>
+                                }
+                                else
+                                {
+                                    <span class="badge rounded-pill" style="background: rgba(16,185,129,0.1); color: #10b981; padding: 6px 12px;">@product.Stock</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge rounded-pill" style="background: rgba(245,158,11,0.1); color: #d97706; padding: 6px 12px;">
+                                    @(product.Reviews?.Count ?? 0)
+                                </span>
+                            </td>
+                            <td class="pe-4 py-3 text-end">
+                                <div class="d-flex gap-2 justify-content-end">
+                                    <a asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: rgba(59,130,246,0.1); color: #3b82f6; border: none; transition: all 0.2s ease;" onmouseover="this.style.background='#3b82f6'; this.style.color='#fff';" onmouseout="this.style.background='rgba(59,130,246,0.1)'; this.style.color='#3b82f6';">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form asp-action="DeleteProduct" method="post" onsubmit="return confirm('Delete @product.Name? This cannot be undone.')">
+                                        <input type="hidden" name="id" value="@product.Id" />
+                                        <button type="submit" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: rgba(239,68,68,0.1); color: #ef4444; border: none; transition: all 0.2s ease;" onmouseover="this.style.background='#ef4444'; this.style.color='#fff';" onmouseout="this.style.background='rgba(239,68,68,0.1)'; this.style.color='#ef4444';">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

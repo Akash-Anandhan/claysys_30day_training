@@ -1,0 +1,137 @@
+@model ShoppingCartClient.Models.ProductDto
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container py-5">
+    <div class="row g-5 align-items-center">
+        <!-- Product Image -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden" style="background-color: #f8fafc;">
+                <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "https://via.placeholder.com/600" : Model.ImageUrl)" 
+                     alt="@Model.Name" 
+                     class="img-fluid w-100" 
+                     style="object-fit: cover; max-height: 500px;" />
+            </div>
+        </div>
+        
+        <!-- Product Details -->
+        <div class="col-lg-6">
+            <div class="ps-lg-4">
+                <span class="badge bg-primary rounded-pill px-3 py-2 mb-3" style="font-weight: 600; letter-spacing: 0.5px;">@Model.CategoryName</span>
+                
+                <h1 class="display-5 fw-bold text-dark mb-4" style="font-family: 'Space Grotesk', sans-serif;">@Model.Name</h1>
+                
+                <h2 class="text-success fw-bold mb-4" style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem;">
+                    @Model.Price.ToString("C")
+                </h2>
+                
+                <p class="text-muted fs-5 mb-4" style="line-height: 1.6;">
+                    @Model.Description
+                </p>
+                
+                <div class="d-flex align-items-center mb-4">
+                    <span class="text-muted fw-semibold me-3">Availability:</span>
+                    @if (Model.Stock > 0)
+                    {
+                        <span class="badge bg-success rounded-pill px-3 py-2"><i class="bi bi-check-circle me-1"></i> In Stock (@Model.Stock)</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger rounded-pill px-3 py-2"><i class="bi bi-x-circle me-1"></i> Out of Stock</span>
+                    }
+                </div>
+                
+                <hr class="my-4" style="border-color: #e2e8f0;" />
+                
+                <!-- Action Buttons -->
+                <div class="d-flex gap-3 align-items-center">
+                    @if (Model.Stock > 0)
+                    {
+                        <div class="input-group" style="width: 140px; border-radius: 50px; background-color: #f1f5f9;">
+                            <button class="btn border-0 text-muted btn-sm" type="button" onclick="decrementQty()" style="border-radius: 50px 0 0 50px; width: 40px;">-</button>
+                            <input type="number" id="detailQty" value="1" min="1" max="@Model.Stock" class="form-control text-center bg-transparent border-0 fw-bold shadow-none" style="color: #1e293b; font-size: 1.1rem; padding: 0;" />
+                            <button class="btn border-0 text-muted btn-sm" type="button" onclick="incrementQty()" style="border-radius: 0 50px 50px 0; width: 40px;">+</button>
+                        </div>
+                        
+                        <button onclick="addToCartAjax(@Model.Id)" class="btn btn-primary rounded-pill px-5 py-3 fw-bold flex-grow-1" style="background-color: #1e293b; border: none; font-size: 1.1rem; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-secondary rounded-pill px-5 py-3 fw-bold flex-grow-1" disabled style="background-color: #cbd5e1; border: none; font-size: 1.1rem;">
+                            <i class="bi bi-cart-x me-2"></i> Out of Stock
+                        </button>
+                    }
+                    
+                    <form asp-controller="Wishlist" asp-action="Add" method="post" class="m-0">
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                        <button type="submit" class="btn btn-outline-danger rounded-circle p-0 d-flex align-items-center justify-content-center shadow-sm" style="width: 54px; height: 54px; transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='#fee2e2'" onmouseout="this.style.backgroundColor='transparent'">
+                            <i class="bi bi-heart fs-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Remove arrows from number input */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        function incrementQty() {
+            var input = document.getElementById('detailQty');
+            var max = parseInt(input.getAttribute('max'));
+            var current = parseInt(input.value);
+            if(current < max) {
+                input.value = current + 1;
+            }
+        }
+        function decrementQty() {
+            var input = document.getElementById('detailQty');
+            var current = parseInt(input.value);
+            if(current > 1) {
+                input.value = current - 1;
+            }
+        }
+        
+        function addToCartAjax(productId) {
+            var qty = parseInt(document.getElementById('detailQty').value) || 1;
+            
+            fetch('/Cart/AddToCartAjax', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value ?? ''
+                },
+                body: `productId=${productId}&quantity=${qty}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    var badge = document.getElementById('cart-count');
+                    if(badge) badge.innerText = data.cartCount;
+                } else {
+                    if(data.redirectUrl) {
+                        window.location.href = data.redirectUrl;
+                    } else {
+                        alert('Could not add to cart.');
+                    }
+                }
+            })
+            .catch(err => console.error(err));
+        }
+    </script>
+}

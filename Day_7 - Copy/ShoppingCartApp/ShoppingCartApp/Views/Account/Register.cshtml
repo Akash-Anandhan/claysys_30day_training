@@ -1,0 +1,79 @@
+@model ShoppingCartApp.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center" style="margin-top: 4rem; margin-bottom: 4rem;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card border-0 shadow-sm" style="border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.04) !important; border: 1px solid rgba(0,0,0,0.05) !important;">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 64px; height: 64px; background: rgba(124,88,204,0.1);">
+                        <i class="bi bi-person-plus" style="color: #7c58cc; font-size: 1.8rem;"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">Create Account</h3>
+                    <p class="mb-0" style="color: #6b7280; font-size: 0.95rem;">Join us and start shopping today.</p>
+                </div>
+
+                <form asp-action="Register" method="post">
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+                    {
+                        <div asp-validation-summary="All" class="alert alert-danger" style="border-radius: 12px; font-size: 0.9rem;"></div>
+                    }
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-12">
+                            <label asp-for="FullName" class="form-label fw-semibold" style="font-size: 0.9rem; color: #374151;"></label>
+                            <input asp-for="FullName" class="form-control" placeholder="John Doe" style="border-radius: 12px; padding: 0.75rem 1rem; border: 1px solid #e5e7eb;" />
+                            <span asp-validation-for="FullName" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                        
+                        <div class="col-12">
+                            <label asp-for="Email" class="form-label fw-semibold" style="font-size: 0.9rem; color: #374151;"></label>
+                            <input asp-for="Email" class="form-control" placeholder="john@example.com" style="border-radius: 12px; padding: 0.75rem 1rem; border: 1px solid #e5e7eb;" />
+                            <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Password" class="form-label fw-semibold" style="font-size: 0.9rem; color: #374151;"></label>
+                            <input asp-for="Password" class="form-control" placeholder="Min. 6 chars" style="border-radius: 12px; padding: 0.75rem 1rem; border: 1px solid #e5e7eb;" />
+                            <span asp-validation-for="Password" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label asp-for="ConfirmPassword" class="form-label fw-semibold" style="font-size: 0.9rem; color: #374151;"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Repeat password" style="border-radius: 12px; padding: 0.75rem 1rem; border: 1px solid #e5e7eb;" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small mt-1 d-block"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn w-100 text-white rounded-3 mb-4 custom-register-btn" style="background:#7c58cc; font-weight:600; padding:12px; box-shadow:0 8px 24px rgba(124,88,204,0.25); border:none; transition: all 0.2s ease;">
+                        Create Account <i class="bi bi-person-check ms-1"></i>
+                    </button>
+                </form>
+
+                <p class="text-center mb-0" style="font-size: 0.95rem; color: #6b7280;">
+                    Already have an account?
+                    <a asp-action="Login" class="fw-bold" style="color: #7c58cc; text-decoration: none;">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus {
+        border-color: #7c58cc !important;
+        box-shadow: 0 0 0 4px rgba(124,88,204,0.1) !important;
+    }
+    .custom-register-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(124,88,204,0.3) !important;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

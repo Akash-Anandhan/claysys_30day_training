@@ -1,0 +1,75 @@
+@model IEnumerable<ShoppingCartApp.Models.Review>
+@{
+    ViewData["Title"] = "Manage Reviews";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+    <h2 class="fw-bold mb-0" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">
+        <i class="bi bi-star" style="color: #f59e0b;"></i> Manage Reviews
+    </h2>
+    <a asp-action="Index" class="btn rounded-pill px-4 fw-semibold" style="background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; transition: background 0.2s ease;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">
+        <i class="bi bi-arrow-left me-1"></i> Dashboard
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show shadow-sm" style="border-radius: 12px; border: none; border-left: 4px solid #10b981; font-size: 0.95rem;">
+        <i class="bi bi-check-circle-fill me-2" style="color: #10b981;"></i> @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px; overflow: hidden;">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="font-size: 0.95rem;">
+                <thead style="background: #f8fafc;">
+                    <tr>
+                        <th class="border-0 text-muted fw-semibold ps-4 py-3">Product</th>
+                        <th class="border-0 text-muted fw-semibold py-3">User</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Rating</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Comment</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Date</th>
+                        <th class="border-0 text-muted fw-semibold pe-4 py-3 text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var review in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 fw-bold py-3" style="color: #111827;">
+                                @review.Product?.Name
+                            </td>
+                            <td class="py-3">
+                                <span class="fw-semibold" style="color: #374151;">@review.User?.FullName</span>
+                                <br />
+                                <small class="text-muted">@review.User?.Email</small>
+                            </td>
+                            <td class="py-3">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="bi @(i <= review.Rating ? "bi-star-fill text-warning" : "bi-star text-muted")" style="font-size:14px; opacity: @(i <= review.Rating ? "1" : "0.3");"></i>
+                                }
+                            </td>
+                            <td class="py-3" style="max-width:280px;">
+                                <span class="text-truncate d-block text-muted" title="@review.Comment">@review.Comment</span>
+                            </td>
+                            <td class="text-muted small fw-medium py-3">
+                                @review.CreatedAt.ToString("MMM dd, yyyy")
+                            </td>
+                            <td class="pe-4 py-3 text-end">
+                                <form asp-action="DeleteReview" method="post" onsubmit="return confirm('Delete this review?')">
+                                    <input type="hidden" name="id" value="@review.Id" />
+                                    <button type="submit" class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center ms-auto" style="width: 34px; height: 34px; background: rgba(239,68,68,0.1); color: #ef4444; border: none; transition: all 0.2s ease;" onmouseover="this.style.background='#ef4444'; this.style.color='#fff';" onmouseout="this.style.background='rgba(239,68,68,0.1)'; this.style.color='#ef4444';">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

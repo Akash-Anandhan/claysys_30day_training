@@ -27,4 +27,10 @@ namespace ShoppingCartAPI.DTOs
         [Range(1, 100, ErrorMessage = "Quantity must be between 1 and 100")]
         public int Quantity { get; set; }
     }
+
+    public class CartDto
+    {
+        public List<CartItemResponseDto> Items { get; set; } = new List<CartItemResponseDto>();
+        public List<string> Offers { get; set; } = new List<string>();
+    }
 }
