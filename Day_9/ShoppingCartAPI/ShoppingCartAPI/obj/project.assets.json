@@ -5273,11 +5273,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\ShoppingCartAPI.csproj",
+      "projectUniqueName": "C:\\Users\\akash\\Desktop\\claysys_training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\ShoppingCartAPI.csproj",
       "projectName": "ShoppingCartAPI",
-      "projectPath": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\ShoppingCartAPI.csproj",
+      "projectPath": "C:\\Users\\akash\\Desktop\\claysys_training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\ShoppingCartAPI.csproj",
       "packagesPath": "C:\\Users\\akash\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\akash\\Desktop\\claysys training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\obj\\",
+      "outputPath": "C:\\Users\\akash\\Desktop\\claysys_training\\Day_9\\ShoppingCartAPI\\ShoppingCartAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,0 +1,377 @@
+@model IEnumerable<ShoppingCartApp.Models.Order>
+@{
+    ViewData["Title"] = "Manage Orders";
+    var userEmails = ViewBag.UserEmails as Dictionary<string, string>;
+    var searchQuery = ViewBag.SearchQuery as string;
+    var statusFilter = ViewBag.StatusFilter as string;
+    var sortBy = ViewBag.SortBy as string;
+    var currentPage = (int)(ViewBag.CurrentPage ?? 1);
+    var totalPages = (int)(ViewBag.TotalPages ?? 1);
+    var totalCount = (int)(ViewBag.TotalCount ?? 0);
+    var hasFilters = !string.IsNullOrEmpty(searchQuery) || !string.IsNullOrEmpty(statusFilter) || !string.IsNullOrEmpty(sortBy);
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 mt-2">
+    <h2 class="fw-bold mb-2 mb-lg-0" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">
+        <i class="bi bi-bag-check" style="color: #10b981;"></i> Manage Orders
+    </h2>
+    <a asp-action="Index" class="btn rounded-pill px-4 fw-semibold" style="background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb;">
+        <i class="bi bi-arrow-left me-1"></i> Dashboard
+    </a>
+</div>
+
+<!-- Order Analytics Charts -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 16px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold text-gray-800 mb-3"><i class="bi bi-pie-chart text-warning me-2"></i>Order Status Distribution</h5>
+                <div style="height: 250px; position: relative;">
+                    <canvas id="orderStatusChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 16px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold text-gray-800 mb-3"><i class="bi bi-graph-up text-success me-2"></i>Average Order Value Trend</h5>
+                <div style="height: 250px; position: relative;">
+                    <canvas id="aovTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export Controls - Full Width Below Charts -->
+<div class="d-flex gap-3 align-items-center justify-content-between flex-wrap mb-4 p-3 bg-light rounded-3">
+    <span class="text-muted fw-medium"><i class="bi bi-download me-1"></i> Export Orders:</span>
+    <!-- Date Range Filter for Export -->
+    <form asp-action="ExportOrdersExcel" method="get" class="d-flex gap-2 align-items-center">
+        <input type="date" name="startDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="Start Date" />
+        <input type="date" name="endDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="End Date" />
+        <button type="submit" class="btn btn-sm btn-success rounded-pill">
+            <i class="bi bi-download me-1"></i> Excel
+        </button>
+    </form>
+    <form asp-action="ExportOrdersCsv" method="get" class="d-flex gap-2 align-items-center">
+        <input type="date" name="startDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="Start Date" />
+        <input type="date" name="endDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="End Date" />
+        <button type="submit" class="btn btn-sm btn-info text-white rounded-pill">
+            <i class="bi bi-download me-1"></i> CSV
+        </button>
+    </form>
+</div>
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px;">
+    <div class="card-body">
+        <form asp-action=Orders method=get id=search-filter-form>
+            <div class="row g-3 align-items-end">
+                <!-- Search Input -->
+                <div class="col-lg-5 col-md-6">
+                    <label class="form-label fw-semibold text-muted small" style="letter-spacing: 0.5px;">Search</label>
+                    <div class=input-group>
+                        <span class="input-group-text bg-light border-end-0" style="border-radius: 12px 0 0 12px;">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" name=searchQuery value="@searchQuery" class="form-control border-start-0 ps-0" style="border-radius: 0 12px 12px 0;" placeholder="Search by order ID or user email..." />
+                    </div>
+                </div>
+                
+                <!-- Status Filter -->
+                <div class="col-lg-3 col-md-4">
+                    <label class="form-label fw-semibold text-muted small" style="letter-spacing: 0.5px;">Status</label>
+                    <select name=statusFilter class=form-select style="border-radius: 12px;">
+                        <option value="" selected="@(string.IsNullOrEmpty(statusFilter) || statusFilter == "all")">All Statuses</option>
+                        <option value="Pending" selected="@(statusFilter == "Pending")">Pending</option>
+                        <option value="Processing" selected="@(statusFilter == "Processing")">Processing</option>
+                        <option value="Shipped" selected="@(statusFilter == "Shipped")">Shipped</option>
+                        <option value="Delivered" selected="@(statusFilter == "Delivered")">Delivered</option>
+                        <option value="Cancelled" selected="@(statusFilter == "Cancelled")">Cancelled</option>
+                    </select>
+                </div>
+                
+                <!-- Sort By -->
+                <div class="col-lg-2 col-md-4">
+                    <label class="form-label fw-semibold text-muted small" style="letter-spacing: 0.5px;">Sort By</label>
+                    <select name=sortBy class=form-select style="border-radius: 12px;">
+                        <option value="newest" selected="@(string.IsNullOrEmpty(sortBy) || sortBy == "newest")">Newest First</option>
+                        <option value="oldest" selected="@(sortBy == "oldest")">Oldest First</option>
+                        <option value="amount_high" selected="@(sortBy == "amount_high")">Amount: High to Low</option>
+                        <option value="amount_low" selected="@(sortBy == "amount_low")">Amount: Low to High</option>
+                    </select>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="col-lg-2">
+                    <div class="d-flex gap-2">
+                        <button type=submit class="btn text-white fw-semibold flex-fill" style="background: #e85d2a; border: none; border-radius: 12px;">
+                            <i class="bi bi-funnel-fill me-1"></i> Filter
+                        </button>
+                        @if (hasFilters)
+                        {
+                            <a asp-action=Orders class="btn btn-outline-secondary fw-semibold" style="border-radius: 12px;" title="Clear all filters">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Results Summary -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        @if (hasFilters)
+        {
+            <span class=text-muted>
+                Showing <strong class=text-dark>@Model.Count()</strong> of <strong class=text-dark>@totalCount</strong> orders
+                @if (!string.IsNullOrEmpty(searchQuery))
+                {
+                    <span>for "<strong>@searchQuery</strong>"</span>
+                }
+            </span>
+        }
+        else
+        {
+            <span class=text-muted>Total <strong class=text-dark>@totalCount</strong> orders</span>
+        }
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="text-center py-5 my-5 rounded-4 shadow-sm" style="background: rgba(248, 250, 252, 0.8); border: 1px dashed #cbd5e1;">
+        <div class="d-inline-flex justify-content-center align-items-center rounded-circle mb-3 bg-white shadow-sm text-muted" style="width: 100px; height: 100px; font-size: 3rem;">
+            <i class="bi bi-inbox"></i>
+        </div>
+        <h3 class="fw-bold text-dark mt-2" style="font-family: 'Space Grotesk', sans-serif;">No orders found</h3>
+        <p class="text-muted mb-4 fs-5">
+            @if (hasFilters)
+            {
+                <text>Try adjusting your search or filter criteria.</text>
+            }
+            else
+            {
+                <text>No orders have been placed yet.</text>
+            }
+        </p>
+        @if (hasFilters)
+        {
+            <a asp-action=Orders class="btn btn-dark btn-lg rounded-pill px-5 fw-bold shadow-sm">
+                Clear Filters
+            </a>
+        }
+    </div>
+}
+else
+{
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px; overflow: hidden;">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="font-size: 0.95rem;">
+                <thead style="background: #f8fafc;">
+                    <tr>
+                        <th class="border-0 text-muted fw-semibold ps-4 py-3">Order #</th>
+                        <th class="border-0 text-muted fw-semibold py-3">User</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Date</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Total</th>
+                        <th class="border-0 text-muted fw-semibold py-3">Status</th>
+                        <th class="border-0 text-muted fw-semibold pe-4 py-3 text-end">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 py-3 fw-bold" style="color: #111827;">#@order.Id</td>
+                            <td>
+                                <div>
+                                    <span class="fw-medium">@(userEmails != null && userEmails.ContainsKey(order.UserId) ? userEmails[order.UserId] : order.UserId)</span>
+                                </div>
+                            </td>
+                            <td class=text-muted>@order.OrderDate.ToString("MMM dd, yyyy HH:mm")</td>
+                            <td class="fw-bold" style="color: #10b981;">₹@order.TotalAmount.ToString("0.00")</td>
+                            <td>
+                                @{
+                                    var bg = order.Status == "Pending" ? "rgba(245,158,11,0.1)" : 
+                                             order.Status == "Delivered" ? "rgba(16,185,129,0.1)" : "rgba(59,130,246,0.1)";
+                                    var text = order.Status == "Pending" ? "#d97706" : 
+                                               order.Status == "Delivered" ? "#10b981" : "#3b82f6";
+                                }
+                                <span class="badge rounded-pill" style="background: @bg; color: @text; padding: 6px 12px;">@order.Status</span>
+                            </td>
+                            <td class="pe-4 py-3 text-end">
+                                <a asp-action=OrderDetails asp-route-id=@order.Id class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                                    View details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination -->
+@if (totalPages > 1)
+{
+    <nav aria-label="Orders pagination" class="d-flex justify-content-center">
+        <ul class="pagination pagination-rounded mb-0">
+            @{
+                var prevDisabled = currentPage == 1 ? "disabled" : "";
+                var nextDisabled = currentPage == totalPages ? "disabled" : "";
+                
+                // Build query string for pagination links
+                var queryParams = new Dictionary<string, string>();
+                if (!string.IsNullOrEmpty(searchQuery)) queryParams["searchQuery"] = searchQuery;
+                if (!string.IsNullOrEmpty(statusFilter)) queryParams["statusFilter"] = statusFilter;
+                if (!string.IsNullOrEmpty(sortBy)) queryParams["sortBy"] = sortBy;
+            }
+            
+            <li class="page-item @prevDisabled">
+                <a class="page-link" href="?page=@(currentPage - 1)@string.Join("", queryParams.Select(x => $"&{x.Key}={x.Value}"))" aria-label="Previous">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            
+            @{
+                int startPage = Math.Max(1, currentPage - 2);
+                int endPage = Math.Min(totalPages, currentPage + 2);
+            }
+            
+            @if (startPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=1@string.Join("", queryParams.Select(x => $"&{x.Key}={x.Value}"))">1</a>
+                </li>
+                @if (startPage > 2)
+                {
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                }
+            }
+            
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                var active = i == currentPage ? "active" : "";
+                <li class="page-item @active">
+                    <a class="page-link" href="?page=@i@string.Join("", queryParams.Select(x => $"&{x.Key}={x.Value}"))">@i</a>
+                </li>
+            }
+            
+            @if (endPage < totalPages)
+            {
+                @if (endPage < totalPages - 1)
+                {
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="?page=@totalPages@string.Join("", queryParams.Select(x => $"&{x.Key}={x.Value}"))">@totalPages</a>
+                </li>
+            }
+            
+            <li class="page-item @nextDisabled">
+                <a class="page-link" href="?page=@(currentPage + 1)@string.Join("", queryParams.Select(x => $"&{x.Key}={x.Value}"))" aria-label="Next">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+}
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Detect current theme for chart colors
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const chartColors = {
+            text: isDark ? '#9ca3af' : '#6b7280',
+            grid: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'
+        };
+        
+        // Apply theme-aware defaults
+        Chart.defaults.color = chartColors.text;
+        
+        // Order Status Distribution Doughnut Chart
+        const statusLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.StatusLabels ?? new List<string>()));
+        const statusCounts = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.StatusCounts ?? new List<int>()));
+        
+        const statusColors = {
+            'Pending': 'rgba(245, 158, 11, 0.8)',
+            'Processing': 'rgba(59, 130, 246, 0.8)',
+            'Shipped': 'rgba(139, 92, 246, 0.8)',
+            'Delivered': 'rgba(16, 185, 129, 0.8)',
+            'Cancelled': 'rgba(239, 68, 68, 0.8)'
+        };
+        const colors = statusLabels.map(s => statusColors[s] || 'rgba(107, 114, 128, 0.8)');
+        
+        new Chart(document.getElementById('orderStatusChart'), {
+            type: 'doughnut',
+            data: { labels: statusLabels, datasets: [{ data: statusCounts, backgroundColor: colors, borderWidth: 0 }] },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true, pointStyle: 'circle' } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((context.raw / total) * 100).toFixed(1);
+                                return context.label + ': ' + context.raw + ' (' + percentage + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Average Order Value Trend Line Chart
+        const aovLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.AOVLabels ?? new List<string>()));
+        const aovValues = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.AOVValues ?? new List<decimal>()));
+        
+        new Chart(document.getElementById('aovTrendChart'), {
+            type: 'line',
+            data: {
+                labels: aovLabels,
+                datasets: [{
+                    label: 'Avg Order Value',
+                    data: aovValues,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true, tension: 0.4,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(context) { return '₹' + context.raw.toLocaleString('en-IN'); } } } },
+                scales: { y: { beginAtZero: true, ticks: { callback: function(value) { return '₹' + value.toLocaleString('en-IN'); } } } }
+            }
+        });
+    });
+</script>
+
+<style>
+    .form-control:focus, .form-select:focus {
+        border-color: #e85d2a !important;
+        box-shadow: 0 0 0 4px rgba(232,93,42,0.1) !important;
+    }
+    .pagination-rounded .page-link {
+        border-radius: 50%;
+        margin: 0 3px;
+    }
+    .pagination-rounded .page-item.active .page-link {
+        background-color: #e85d2a;
+        border-color: #e85d2a;
+    }
+    .pagination-rounded .page-item.disabled .page-link {
+        opacity: 0.5;
+    }
+</style>

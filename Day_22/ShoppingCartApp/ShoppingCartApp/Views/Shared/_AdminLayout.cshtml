@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <!-- Core Bootstrap & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Theme Initialization Script (must run before body renders) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    
+    <style>
+        body { background-color: var(--bg-primary); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .admin-sidebar {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            top: 0; left: 0;
+            background: #111827; /* Always dark for admin contrast */
+            color: #fff;
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+        .admin-sidebar.collapsed { width: 80px; }
+        
+        /* Logo / Header */
+        .sidebar-header { height: 70px; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,0.1); white-space: nowrap; overflow: hidden; }
+        .sidebar-header span { transition: opacity 0.3s; margin-left: 10px; font-family: 'Space Grotesk', sans-serif; }
+        .admin-sidebar.collapsed .sidebar-header span { opacity: 0; width: 0; display: none; }
+        
+        /* Navigation Links */
+        .sidebar-nav { padding: 20px 0; }
+        .nav-link-sidebar {
+            display: flex; align-items: center; padding: 12px 20px;
+            color: #9ca3af; text-decoration: none; white-space: nowrap; overflow: hidden; transition: all 0.2s;
+        }
+        .nav-link-sidebar i { font-size: 1.25rem; min-width: 30px; text-align: center; }
+        .nav-link-sidebar span { margin-left: 12px; transition: opacity 0.3s; }
+        .nav-link-sidebar:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .nav-link-sidebar.active { background: rgba(232, 93, 42, 0.15); color: #e85d2a; border-left: 4px solid #e85d2a; padding-left: 16px; }
+        
+        .admin-sidebar.collapsed .nav-link-sidebar span { opacity: 0; width: 0; display: none; }
+
+        /* Main Content wrapper */
+        .admin-main-wrapper {
+            margin-left: 260px;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .admin-sidebar.collapsed ~ .admin-main-wrapper { margin-left: 80px; }
+        
+        /* Top navbar */
+        .admin-topbar {
+            height: 70px; background: var(--bg-card); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; padding: 0 24px; position: sticky; top: 0; z-index: 999; margin-left: -1px;
+        }
+        .sidebar-toggler { background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; transition: background 0.2s; }
+        .sidebar-toggler:hover { background: var(--bg-tertiary); }
+
+        /* Admin specific dark mode overrides */
+        [data-theme="dark"] .admin-topbar {
+            background: var(--bg-secondary);
+        }
+        [data-theme="dark"] .sidebar-toggler {
+            color: var(--text-primary);
+        }
+        [data-theme="dark"] .sidebar-toggler:hover {
+            background: var(--bg-tertiary);
+        }
+    </style>
+</head>
+<body>
+    @{ var currentAction = ViewContext.RouteData.Values["Action"]?.ToString(); }
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <i class="bi bi-shop fs-4" style="color: #e85d2a;"></i>
+            <span class="fs-5 fw-bold ms-2">Admin Panel</span>
+        </div>
+        <div class="sidebar-nav">
+            <a href="/Admin/Index" class="nav-link-sidebar @(currentAction == "Index" ? "active" : "")" title="Dashboard">
+                <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
+            </a>
+            <a href="/Admin/Products" class="nav-link-sidebar @(currentAction == "Products" || currentAction == "CreateProduct" || currentAction == "EditProduct" ? "active" : "")" title="Products">
+                <i class="bi bi-box-seam"></i> <span>Products</span>
+            </a>
+            <a href="/Admin/Orders" class="nav-link-sidebar @(currentAction == "Orders" || currentAction == "OrderDetails" ? "active" : "")" title="Orders">
+                <i class="bi bi-bag-check"></i> <span>Orders</span>
+            </a>
+            <a href="/Admin/Users" class="nav-link-sidebar @(currentAction == "Users" ? "active" : "")" title="Users">
+                <i class="bi bi-people"></i> <span>Users</span>
+            </a>
+            <a href="/Admin/Reviews" class="nav-link-sidebar @(currentAction == "Reviews" ? "active" : "")" title="Reviews">
+                <i class="bi bi-star"></i> <span>Reviews</span>
+            </a>
+            <a href="/Admin/Revenue" class="nav-link-sidebar @(currentAction == "Revenue" ? "active" : "")" title="Revenue">
+                <i class="bi bi-currency-dollar"></i> <span>Revenue</span>
+            </a>
+            <a href="/Admin/ProductPerformance" class="nav-link-sidebar @(currentAction == "ProductPerformance" ? "active" : "")" title="Product Performance">
+                <i class="bi bi-graph-up"></i> <span>Product Performance</span>
+            </a>
+            <a href="/" class="nav-link-sidebar mt-4" style="border-top: 1px solid rgba(255,255,255,0.1);" title="Back to Shop">
+                <i class="bi bi-house-door"></i> <span>Back to Shop</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main View -->
+    <div class="admin-main-wrapper" id="mainWrapper">
+        <nav class="admin-topbar d-flex justify-content-between">
+            <button class="sidebar-toggler" id="toggleSidebarBtn"><i class="bi bi-list"></i></button>
+            <div class="d-flex align-items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle-btn no-transition" onclick="toggleTheme()" title="Toggle Dark Mode" aria-label="Toggle dark mode">
+                    <i class="bi bi-sun-fill"></i>
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+                <span style="font-weight: 500; font-size: 0.9rem; color: var(--text-secondary);">Administrator</span>
+                <div style="width:36px; height:36px; border-radius:50%; background:rgba(232,93,42,0.1); color:#e85d2a; display:inline-flex; align-items:center; justify-content:center; font-weight:bold;">
+                    A
+                </div>
+            </div>
+        </nav>
+        
+        <main class="p-4 flex-grow-1" style="max-width: 100%;">
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show shadow-sm" style="border-radius: 12px; border: none; border-left: 4px solid #10b981; font-size: 0.95rem;">
+                    <i class="bi bi-check-circle-fill me-2" style="color: #10b981;"></i> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show shadow-sm" style="border-radius: 12px; border: none; border-left: 4px solid #ef4444; font-size: 0.95rem;">
+                    <i class="bi bi-exclamation-circle-fill me-2" style="color: #ef4444;"></i> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @RenderBody()
+        </main>
+        
+        <footer class="p-4 text-center text-muted" style="font-size: 0.85rem;">
+            &copy; @DateTime.Now.Year Admin Dashboard. All rights reserved.
+        </footer>
+    </div>
+    
+    <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.getElementById('toggleSidebarBtn').addEventListener('click', function() {
+            document.getElementById('adminSidebar').classList.toggle('collapsed');
+        });
+
+        // Force override all table cell inline styles in admin for dark mode
+        function fixAdminTableCells() {
+            const tableCells = document.querySelectorAll('#mainWrapper table td, #mainWrapper table th');
+            tableCells.forEach(function(cell) {
+                // Reset inline styles - let CSS handle it
+                cell.style.color = '';
+                cell.style.backgroundColor = '';
+            });
+        }
+
+        // Run on page load
+        document.addEventListener('DOMContentLoaded', fixAdminTableCells);
+
+        // Run when theme toggle is clicked
+        document.querySelector('.theme-toggle-btn').addEventListener('click', function() {
+            setTimeout(fixAdminTableCells, 50);
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

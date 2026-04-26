@@ -1,0 +1,1827 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    padding: 12px 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.navbar .nav-link {
+    font-size: 0.95rem;
+    padding: 6px 14px !important;
+    transition: color 0.2s;
+}
+
+    .navbar .nav-link:hover {
+        color: #ffc107 !important;
+    }
+
+#cart-count {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    vertical-align: middle;
+}
+
+/* ===== Hero Section ===== */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 16px;
+    padding: 60px 40px;
+    margin-bottom: 40px;
+    color: white;
+}
+
+    .hero-section h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+    }
+
+/* ===== Product Cards ===== */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+}
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important;
+    }
+
+.card-img-top {
+    height: 100%;
+    object-fit: contain;    
+    transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.card-footer {
+    background: white;
+    border-top: 1px solid #f0f0f0;
+    padding: 12px;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-1px);
+    }
+
+.btn-dark {
+    background-color: #1a1a2e;
+    border-color: #1a1a2e;
+}
+
+    .btn-dark:hover {
+        background-color: #16213e;
+        border-color: #16213e;
+    }
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* ===== Badge ===== */
+.badge {
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* ===== Cart Page ===== */
+.cart-item-row {
+    transition: background-color 0.2s;
+}
+
+    .cart-item-row:hover {
+        background-color: #f8f9fa;
+    }
+
+.cart-img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===== Order Summary Card ===== */
+.summary-card {
+    position: sticky;
+    top: 20px;
+}
+
+/* ===== Checkout Page ===== */
+.checkout-card {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    .form-control:focus {
+        border-color: #1a1a2e;
+        box-shadow: 0 0 0 3px rgba(26,26,46,0.1);
+    }
+
+/* ===== Confirmation Page ===== */
+.confirmation-icon {
+    animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== Toast Notification ===== */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+}
+
+/* ===== CSS Variables for Light/Dark Theme ===== */
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #fcfcfc;
+    --bg-tertiary: #f3f4f6;
+    --bg-card: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #6b7280;
+    --border-color: rgba(0, 0, 0, 0.05);
+    --border-color-strong: #e5e7eb;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --brand-color: #e85d2a;
+    --brand-hover: #d65223;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --input-bg: #f3f4f6;
+    --dropdown-bg: #ffffff;
+    --hover-bg: #f9fafb;
+    --table-stripe: #f9fafb;
+    --code-bg: #f3f4f6;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --bg-tertiary: #374151;
+    --bg-card: #1f2937;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --border-color: rgba(255, 255, 255, 0.05);
+    --border-color-strong: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --navbar-bg: rgba(31, 41, 55, 0.95);
+    --input-bg: #374151;
+    --dropdown-bg: #1f2937;
+    --hover-bg: #374151;
+    --table-stripe: #1f2937;
+    --code-bg: #374151;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth transitions for theme changes */
+*, *::before, *::after {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Override for elements that shouldn't transition */
+.no-transition, .spinner-border, .spinner-grow {
+    transition: none !important;
+}
+
+/* Navbar Styling */
+.navbar-custom {
+    background-color: var(--navbar-bg) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text-primary) !important;
+}
+
+.nav-link-custom {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary) !important;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+    .nav-link-custom:hover, .nav-link-custom.active {
+        color: var(--brand-color) !important;
+    }
+
+/* Search styling */
+.search-wrapper {
+    background: var(--input-bg);
+    border-radius: 50px;
+    padding: 0.2rem 0.2rem 0.2rem 1.2rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+    .search-wrapper:focus-within {
+        background: var(--bg-card);
+        border-color: rgba(232, 93, 42, 0.3);
+        box-shadow: 0 0 0 4px rgba(232, 93, 42, 0.1);
+    }
+
+.search-input-custom {
+    background: transparent;
+    border: none;
+    box-shadow: none !important;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+    .search-input-custom::placeholder {
+        color: var(--text-muted);
+    }
+
+.btn-brand {
+    background-color: #e85d2a;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+    .btn-brand:hover {
+        background-color: #d65223;
+        color: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(232, 93, 42, 0.2);
+    }
+
+.btn-outline-brand {
+    border: 1.5px solid #e85d2a;
+    color: #e85d2a;
+    font-weight: 600;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+    .btn-outline-brand:hover {
+        background-color: #e85d2a;
+        color: #fff;
+    }
+
+/* Main Content */
+main {
+    flex: 1;
+}
+
+/* Footer */
+.footer-custom {
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.card-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Form Controls */
+.form-control, .form-select {
+    background-color: var(--input-bg);
+    border-color: var(--border-color-strong);
+    color: var(--text-primary);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--input-bg);
+    border-color: var(--brand-color);
+    color: var(--text-primary);
+}
+
+.form-label {
+    color: var(--text-secondary);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: var(--dropdown-bg);
+    border: 1px solid var(--border-color);
+}
+
+.dropdown-item {
+    color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+    background-color: var(--hover-bg);
+}
+
+.dropdown-divider {
+    border-color: var(--border-color);
+}
+
+/* Table Styling */
+.table {
+    color: var(--text-primary);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--table-stripe);
+}
+
+/* Badge Styling */
+.badge {
+    color: #fff;
+}
+
+/* Alert Styling */
+.alert {
+    border: 1px solid var(--border-color);
+}
+
+/* Pagination */
+.page-link {
+    background-color: var(--bg-card);
+    border-color: var(--border-color-strong);
+    color: var(--text-primary);
+}
+
+.page-link:hover {
+    background-color: var(--hover-bg);
+}
+
+.page-item.active .page-link {
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
+}
+
+.page-item.disabled .page-link {
+    background-color: var(--bg-card);
+    color: var(--text-muted);
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+    color: var(--text-primary);
+}
+
+/* List Group */
+.list-group-item {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Custom Button for Theme Toggle */
+.theme-toggle-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color-strong);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.theme-toggle-btn:hover {
+    background: var(--brand-color);
+    border-color: var(--brand-color);
+    color: #fff;
+}
+
+.theme-toggle-btn .bi-moon-fill {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle-btn .bi-sun-fill {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle-btn .bi-moon-fill {
+    display: block;
+}
+
+/* ===== Comprehensive Dark Mode Text & Background Overrides ===== */
+/* Text Colors */
+.text-dark { color: var(--text-primary) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-primary { color: var(--brand-color) !important; }
+.text-success { color: var(--success-color) !important; }
+.text-danger { color: var(--danger-color) !important; }
+.text-warning { color: var(--warning-color) !important; }
+.text-info { color: var(--info-color) !important; }
+.text-body { color: var(--text-primary) !important; }
+.text-black { color: #000 !important; }
+.text-white { color: #fff !important; }
+
+/* Background Colors */
+.bg-light { background-color: var(--bg-tertiary) !important; }
+.bg-white { background-color: var(--bg-card) !important; }
+.bg-dark { background-color: var(--bg-secondary) !important; }
+.bg-body { background-color: var(--bg-primary) !important; }
+.bg-transparent { background-color: transparent !important; }
+
+/* Border Colors */
+.border { border-color: var(--border-color-strong) !important; }
+.border-dark { border-color: var(--border-color) !important; }
+.border-light { border-color: var(--border-color-strong) !important; }
+.border-secondary { border-color: var(--border-color) !important; }
+
+/* Admin Layout - ALWAYS DARK regardless of theme mode */
+.admin-sidebar,
+.admin-sidebar * {
+    background: #111827 !important; /* Always dark - ignore theme variables */
+    color: #fff !important;
+}
+
+.admin-topbar {
+    background: var(--bg-card) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+/* Override any CSS variable references for admin sidebar - always hardcoded colors */
+.admin-sidebar .nav-link-sidebar {
+    color: #9ca3af !important;
+}
+.admin-sidebar .nav-link-sidebar:hover {
+    color: #fff !important;
+    background: rgba(255,255,255,0.05) !important;
+}
+.admin-sidebar .nav-link-sidebar.active {
+    color: #e85d2a !important;
+    background: rgba(232, 93, 42, 0.15) !important;
+}
+.admin-sidebar .sidebar-header {
+    color: #fff !important;
+    background: #111827 !important;
+}
+
+/* Keep admin sidebar elements explicitly styled regardless of theme */
+[data-theme="light"] .admin-sidebar,
+[data-theme="dark"] .admin-sidebar {
+    background: #111827 !important;
+    color: #fff !important;
+}
+[data-theme="light"] .admin-sidebar .nav-link-sidebar,
+[data-theme="dark"] .admin-sidebar .nav-link-sidebar {
+    color: #9ca3af !important;
+}
+[data-theme="light"] .admin-sidebar .nav-link-sidebar:hover,
+[data-theme="dark"] .admin-sidebar .nav-link-sidebar:hover {
+    color: #fff !important;
+}
+[data-theme="light"] .admin-sidebar .nav-link-sidebar.active,
+[data-theme="dark"] .admin-sidebar .nav-link-sidebar.active {
+    color: #e85d2a !important;
+}
+
+/* Additional Bootstrap Component Overrides */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: var(--text-primary);
+}
+
+p, span, div, li, td, th, label {
+    color: var(--text-primary);
+}
+
+/* Ensure form placeholders work in dark mode */
+input::placeholder, textarea::placeholder, select::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 1;
+}
+
+/* Bootstrap cards and components */
+.card { color: var(--text-primary); }
+.list-group-item { color: var(--text-primary); }
+.table { color: var(--text-primary); }
+.modal-content { background-color: var(--bg-card); color: var(--text-primary); }
+.modal-header { border-bottom-color: var(--border-color); }
+.modal-footer { border-top-color: var(--border-color); }
+.modal-backdrop { background-color: rgba(0,0,0,0.5); }
+
+/* Fix btn-close in dark mode */
+[data-theme="dark"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Pagination in dark mode */
+[data-theme="dark"] .pagination .page-link {
+    background-color: var(--bg-card);
+    border-color: var(--border-color-strong);
+}
+[data-theme="dark"] .pagination .page-item.active .page-link {
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
+}
+[data-theme="dark"] .pagination .page-item.disabled .page-link {
+    background-color: var(--bg-card);
+}
+
+/* Fix offcanvas and dropdowns in dark mode */
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--dropdown-bg);
+    border-color: var(--border-color);
+}
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-primary);
+}
+[data-theme="dark"] .dropdown-item:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Fix toast in dark mode */
+[data-theme="dark"] .toast {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+/* Fix alerts in dark mode */
+[data-theme="dark"] .alert-success { background-color: rgba(16, 185, 129, 0.1); border-color: var(--success-color); }
+[data-theme="dark"] .alert-danger { background-color: rgba(239, 68, 68, 0.1); border-color: var(--danger-color); }
+[data-theme="dark"] .alert-warning { background-color: rgba(245, 158, 11, 0.1); border-color: var(--warning-color); }
+[data-theme="dark"] .alert-info { background-color: rgba(59, 130, 246, 0.1); border-color: var(--info-color); }
+
+/* Social media buttons in footer - properly styled for both themes */
+.social-btn {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-secondary) !important;
+    transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+    background: var(--brand-color) !important;
+    color: #fff !important;
+}
+
+/* Fix all elements with inline color styles to use CSS variables */
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4, 
+[data-theme="dark"] h5, [data-theme="dark"] h6,
+[data-theme="dark"] .fw-bold {
+    color: var(--text-primary) !important;
+}
+
+/* Fix all inline text colors that use #111827 or similar dark colors */
+[data-theme="dark"] [style*="color: #111827"],
+[data-theme="dark"] [style*="color:#111827"],
+[data-theme="dark"] [style*="color: #374151"],
+[data-theme="dark"] [style*="color:#374151"],
+[data-theme="dark"] [style*="color: #4b5563"],
+[data-theme="dark"] [style*="color:#4b5563"],
+[data-theme="dark"] [style*="color: #6b7280"],
+[data-theme="dark"] [style*="color:#6b7280"] {
+    color: var(--text-primary) !important;
+}
+
+/* Fix inline success color */
+[data-theme="dark"] [style*="color: #10b981"],
+[data-theme="dark"] [style*="color:#10b981"] {
+    color: var(--success-color) !important;
+}
+
+/* Fix inline danger color */
+[data-theme="dark"] [style*="color: #ef4444"],
+[data-theme="dark"] [style*="color:#ef4444"] {
+    color: var(--danger-color) !important;
+}
+
+/* Fix inline background colors */
+[data-theme="dark"] [style*="background: #f3f4f6"],
+[data-theme="dark"] [style*="background:#f3f4f6"],
+[data-theme="dark"] [style*="background: #fafafa"],
+[data-theme="dark"] [style*="background:#fafafa"],
+[data-theme="dark"] [style*="background-color: #fafafa"],
+[data-theme="dark"] [style*="background-color:#fafafa"],
+[data-theme="dark"] [style*="background-color: #f3f4f6"],
+[data-theme="dark"] [style*="background-color:#f3f4f6"] {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Product card View button dark mode fix - with !important to override inline styles */
+[data-theme="dark"] .product-card .btn[style*="background: #f3f4f6"],
+[data-theme="dark"] .product-card .btn[style*="background:#f3f4f6"] {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color-strong) !important;
+}
+
+[data-theme="dark"] .product-card .btn[style*="background: #f3f4f6"]:hover,
+[data-theme="dark"] .product-card .btn[style*="background:#f3f4f6"]:hover {
+    background-color: var(--hover-bg) !important;
+}
+
+/* Fix all product card buttons with light background in dark mode */
+[data-theme="dark"] .product-card .card-footer .btn {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .product-card .card-footer .btn:hover {
+    background-color: var(--hover-bg) !important;
+}
+
+/* Fix View button specifically - target by class and content */
+[data-theme="dark"] .btn.rounded-pill.flex-fill[style*="background"],
+[data-theme="dark"] a.btn.rounded-pill[style*="background: #f3f4f6"] {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color-strong) !important;
+}
+
+[data-theme="dark"] .btn.rounded-pill.flex-fill[style*="background"]:hover,
+[data-theme="dark"] a.btn.rounded-pill[style*="background: #f3f4f6"]:hover {
+    background-color: var(--hover-bg) !important;
+}
+
+/* Fix button text color #4b5563 in dark mode */
+[data-theme="dark"] [style*="color: #4b5563"] {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] [style*="color:#4b5563"] {
+    color: var(--text-primary) !important;
+}
+
+/* Fix inline border colors */
+[data-theme="dark"] [style*="border-color: #e5e7eb"],
+[data-theme="dark"] [style*="border-color:#e5e7eb"],
+[data-theme="dark"] [style*="border-color: #e2e8f0"],
+[data-theme="dark"] [style*="border-color:#e2e8f0"] {
+    border-color: var(--border-color-strong) !important;
+}
+
+/* Fix brand color inline styles */
+[data-theme="dark"] [style*="color: #e85d2a"],
+[data-theme="dark"] [style*="color:#e85d2a"] {
+    color: var(--brand-color) !important;
+}
+
+/* Fix warning/amber inline colors */
+[data-theme="dark"] [style*="color: #f59e0b"],
+[data-theme="dark"] [style*="color:#f59e0b"],
+[data-theme="dark"] [style*="color: #fbbf24"],
+[data-theme="dark"] [style*="color:#fbbf24"] {
+    color: var(--warning-color) !important;
+}
+
+/* Fix info/blue inline colors */
+[data-theme="dark"] [style*="color: #3b82f6"],
+[data-theme="dark"] [style*="color:#3b82f6"],
+[data-theme="dark"] [style*="color: #1e40af"],
+[data-theme="dark"] [style*="color:#1e40af"] {
+    color: var(--info-color) !important;
+}
+
+/* Fix purple inline colors */
+[data-theme="dark"] [style*="color: #7c58cc"],
+[data-theme="dark"] [style*="color:#7c58cc"],
+[data-theme="dark"] [style*="color: #6366f1"],
+[data-theme="dark"] [style*="color:#6366f1"] {
+    color: #8b5cf6 !important;
+}
+
+/* Fix light gray inline colors */
+[data-theme="dark"] [style*="color: #ccc"],
+[data-theme="dark"] [style*="color:#ccc"] {
+    color: var(--text-muted) !important;
+}
+
+/* Fix white background with blur badges */
+[data-theme="dark"] [style*="rgba(255,255,255,0.9)"],
+[data-theme="dark"] [style*="rgba(255, 255, 255, 0.9)"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* Pill Badge */
+.badge-count {
+    background: var(--brand-color) !important;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.4em 0.6em;
+}
+
+/* ===== DARK MODE INLINE STYLE OVERRIDES ===== */
+/* These target specific inline styles that override CSS variables */
+
+/* Fix white/light card backgrounds in dark mode */
+[data-theme="dark"] .card,
+[data-theme="dark"] [style*="background: #fff"],
+[data-theme="dark"] [style*="background:#fff"],
+[data-theme="dark"] [style*="background: #ffffff"],
+[data-theme="dark"] [style*="background:#ffffff"],
+[data-theme="dark"] [style*="background: white"],
+[data-theme="dark"] [style*="background:white"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix table headers with #f8fafc background */
+[data-theme="dark"] thead,
+[data-theme="dark"] [style*="background: #f8fafc"],
+[data-theme="dark"] [style*="background:#f8fafc"],
+[data-theme="dark"] [style*="background: #fafafa"],
+[data-theme="dark"] [style*="background:#fafafa"],
+[data-theme="dark"] [style*="background-color: #fafafa"],
+[data-theme="dark"] [style*="background-color:#fafafa"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix table thead rows specifically */
+[data-theme="dark"] table thead tr,
+[data-theme="dark"] .table thead th,
+[data-theme="dark"] [style*="background: #f8fafc"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix light gray card backgrounds (#fcfcfc, #fafafa, #fff) */
+[data-theme="dark"] [style*="background: linear-gradient(180deg, #fff"],
+[data-theme="dark"] [style*="background: linear-gradient(180deg, #fff,"],
+[data-theme="dark"] [style*="background: linear-gradient(180deg,#fff"],
+[data-theme="dark"] [style*="background: linear-gradient(180deg, rgba(248,250,252,0)"] {
+    background: linear-gradient(180deg, var(--bg-card), var(--bg-secondary)) !important;
+}
+
+/* Fix chart container backgrounds */
+[data-theme="dark"] .chart-container-lg,
+[data-theme="dark"] .chart-container-md,
+[data-theme="dark"] .chart-container-sm,
+[data-theme="dark"] .chart-container,
+[data-theme="dark"] [style*="min-height: 300px"],
+[data-theme="dark"] canvas {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix admin dashboard cards with hardcoded #ffffff backgrounds */
+[data-theme="dark"] .dash-card,
+[data-theme="dark"] [style*="background: #ffffff"],
+[data-theme="dark"] [style*="background: #ffffff;"] {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix text colors that become invisible on dark backgrounds */
+[data-theme="dark"] .dash-card .text-gray-800,
+[data-theme="dark"] .dash-card .text-gray-700,
+[data-theme="dark"] .dash-card .text-gray-500,
+[data-theme="dark"] .dash-card .text-gray-400,
+[data-theme="dark"] .dash-card h3,
+[data-theme="dark"] .dash-card h5,
+[data-theme="dark"] .dash-card h6 {
+    color: var(--text-primary) !important;
+}
+
+/* Fix admin stat cards */
+[data-theme="dark"] .dash-card p,
+[data-theme="dark"] .dash-card .fw-bold,
+[data-theme="dark"] .dash-card .text-sm {
+    color: var(--text-primary) !important;
+}
+
+/* Fix bg-white and bg-light classes more aggressively */
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] [class*="bg-white"] {
+    background-color: var(--bg-card) !important;
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Fix text-dark which becomes invisible on dark backgrounds */
+[data-theme="dark"] .text-dark,
+[data-theme="dark"] [style*="color: #111827"],
+[data-theme="dark"] [style*="color:#111827"] {
+    color: var(--text-primary) !important;
+}
+
+/* Fix text-muted in cards */
+[data-theme="dark"] .card .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Fix text-gray-* utility classes */
+[data-theme="dark"] .text-gray-800 { color: var(--text-primary) !important; }
+[data-theme="dark"] .text-gray-700 { color: var(--text-secondary) !important; }
+[data-theme="dark"] .text-gray-600 { color: var(--text-secondary) !important; }
+[data-theme="dark"] .text-gray-500 { color: var(--text-muted) !important; }
+[data-theme="dark"] .text-gray-400 { color: var(--text-muted) !important; }
+
+/* Fix border colors for cards and tables */
+[data-theme="dark"] .card .border-bottom,
+[data-theme="dark"] .border-gray-100,
+[data-theme="dark"] [style*="border-bottom: 1px solid #f1f5f9"] {
+    border-color: var(--border-color) !important;
+}
+
+/* Fix inline border styles */
+[data-theme="dark"] [style*="border-color: #e2e8f0"],
+[data-theme="dark"] [style*="border: 1px solid #e5e7eb"] {
+    border-color: var(--border-color-strong) !important;
+}
+
+/* Fix table rows and cells */
+[data-theme="dark"] table tbody tr {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] table tbody tr:hover {
+    background-color: var(--hover-bg);
+}
+
+[data-theme="dark"] table td,
+[data-theme="dark"] table th {
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Fix list group items in cards */
+[data-theme="dark"] .list-group-item {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Fix card headers */
+[data-theme="dark"] .card-header {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix card footers */
+[data-theme="dark"] .card-footer {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix form inputs with hardcoded white backgrounds */
+[data-theme="dark"] input.form-control,
+[data-theme="dark"] select.form-select,
+[data-theme="dark"] textarea.form-control,
+[data-theme="dark"] [style*="background: #fff"] input,
+[data-theme="dark"] [style*="background: #fff"] select {
+    background-color: var(--input-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color-strong) !important;
+}
+
+/* Fix input group prepend/append with hardcoded white */
+[data-theme="dark"] .input-group-text {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--border-color-strong) !important;
+}
+
+/* Fix specific admin info cards with bg-white */
+[data-theme="dark"] .p-3.rounded-3.text-center {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Fix top selling product cards hover state */
+[data-theme="dark"] [style*="hover:bg-gray-50"] {
+    background-color: var(--hover-bg) !important;
+}
+
+/* Fix timeline backgrounds */
+[data-theme="dark"] .timeline .position-absolute {
+    background-color: var(--border-color-strong);
+}
+
+/* Fix map/geo container backgrounds */
+[data-theme="dark"] #worldMap,
+[data-theme="dark"] [id*="Map"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix cart page specific elements */
+[data-theme="dark"] .cart-item-row:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Fix order summary card */
+[data-theme="dark"] .summary-card {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix checkout page cards */
+[data-theme="dark"] [style*="background: linear-gradient(180deg, rgba(248,250,252,0), #f8fafc)"] {
+    background: linear-gradient(180deg, transparent, var(--bg-secondary)) !important;
+}
+
+/* Fix search filter sidebar */
+[data-theme="dark"] .sticky-top[style*="background: #fff"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix wishlist cards */
+[data-theme="dark"] .wishlist-card,
+[data-theme="dark"] [style*="background: #ffffff"] .card {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix confirmation page specific elements */
+[data-theme="dark"] [style*="background: linear-gradient(135deg, #10b981, #059669)"] {
+    opacity: 0.9;
+}
+
+/* Fix alert with inline styles */
+[data-theme="dark"] [style*="background: rgba(59,130,246,0.05)"] {
+    background-color: rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Fix progress bar backgrounds */
+[data-theme="dark"] .progress {
+    background-color: var(--bg-tertiary);
+}
+
+/* Fix badge with inline background */
+[data-theme="dark"] [style*="background: rgba(255,255,255,0.9)"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix inline styles for category badges */
+[data-theme="dark"] .badge.bg-light.text-dark {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix product card backgrounds specifically */
+[data-theme="dark"] .product-card {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix filter card backgrounds */
+[data-theme="dark"] #filterPanel .card {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix rounded images with light backgrounds */
+[data-theme="dark"] [style*="background: #fafafa"] img,
+[data-theme="dark"] [style*="background:#fafafa"] img,
+[data-theme="dark"] .rounded-3[style*="background: #f8fafc"],
+[data-theme="dark"] [style*="background-color: #fafafa"] {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Fix empty state containers */
+[data-theme="dark"] [style*="background: rgba(248, 250, 252, 0.8)"],
+[data-theme="dark"] [style*="border: 1px dashed #cbd5e1"] {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color-strong) !important;
+}
+
+/* Fix order confirmation info */
+[data-theme="dark"] .text-dark.fw-bold {
+    color: var(--text-primary) !important;
+}
+
+/* Fix checkout payment form bg */
+[data-theme="dark"] .bg-light[style*="padding"] {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Ensure all cards in admin pages use dark backgrounds */
+[data-theme="dark"] .admin-main-wrapper .card {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix any remaining white text on dark backgrounds */
+[data-theme="dark"] .card-footer .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Fix image container backgrounds */
+[data-theme="dark"] .bg-light.rounded-3,
+[data-theme="dark"] [style*="bg-gray-100"] {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Fix chart legend and tooltip backgrounds */
+[data-theme="dark"] canvas {
+    background-color: transparent !important;
+}
+
+/* Fix table striped rows */
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--table-stripe) !important;
+}
+
+/* Fix form select with hardcoded style */
+[data-theme="dark"] select[style*="border-radius"] {
+    background-color: var(--input-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix input with hardcoded style */
+[data-theme="dark"] input[style*="border-radius"],
+[data-theme="dark"] textarea[style*="border-radius"] {
+    background-color: var(--input-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix all inline style backgrounds for cards */
+[data-theme="dark"] [style*="background: #f8fafc"],
+[data-theme="dark"] [style*="background:#f8fafc"],
+[data-theme="dark"] [style*="background-color: #f8fafc"],
+[data-theme="dark"] [style*="background-color:#f8fafc"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix info cards in admin products page */
+[data-theme="dark"] .p-3.rounded-3.text-center[style*="background"] {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* ===== ADMIN TABLE SPECIFIC OVERRIDES ===== */
+/* Tables in admin pages have hardcoded inline styles that need fixing */
+
+/* Fix table thead with hardcoded #f8fafc background */
+[data-theme="dark"] .admin-main-wrapper table thead,
+[data-theme="dark"] .admin-main-wrapper thead[style*="background"],
+[data-theme="dark"] [style*="background: #f8fafc"],
+[data-theme="dark"] [style*="background:#f8fafc"],
+[data-theme="dark"] table thead[style*="background"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix all table headers in admin pages */
+[data-theme="dark"] .admin-main-wrapper .table thead {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .admin-main-wrapper .table thead tr {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .admin-main-wrapper .table thead th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix table body rows and cells in admin */
+[data-theme="dark"] .admin-main-wrapper .table tbody tr {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .admin-main-wrapper .table tbody tr:hover {
+    background-color: var(--hover-bg) !important;
+}
+
+[data-theme="dark"] .admin-main-wrapper .table td {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix text colors in table cells - these are hardcoded inline styles */
+[data-theme="dark"] .admin-main-wrapper .table td[style*="color: #111827"],
+[data-theme="dark"] .admin-main-wrapper .table td[style*="color:#111827"],
+[data-theme="dark"] .admin-main-wrapper .table tr td[style*="color"],
+[data-theme="dark"] .admin-main-wrapper .table tbody tr td {
+    color: var(--text-primary) !important;
+}
+
+/* Fix table cell with #10b981 (success green) in dark mode - keep it as is for contrast */
+[data-theme="dark"] .admin-main-wrapper .table td[style*="color: #10b981"] {
+    color: var(--success-color) !important;
+}
+
+/* Fix text-dark class in table context */
+[data-theme="dark"] .admin-main-wrapper .table .text-dark,
+[data-theme="dark"] .admin-main-wrapper table .text-dark {
+    color: var(--text-primary) !important;
+}
+
+/* Fix bg-gray-50 and similar classes used in admin tables */
+[data-theme="dark"] .bg-gray-50,
+[data-theme="dark"] .admin-main-wrapper [style*="background: #f8fafc"],
+[data-theme="dark"] .admin-main-wrapper [style*="background:#f8fafc"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix thead for tables with bg-gray-50 */
+[data-theme="dark"] thead.bg-gray-50,
+[data-theme="dark"] .admin-main-wrapper thead.bg-gray-50 {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix tbody text colors in admin tables */
+[data-theme="dark"] .admin-main-wrapper table tbody td,
+[data-theme="dark"] .admin-main-wrapper table tbody th {
+    color: var(--text-primary) !important;
+}
+
+/* Fix text-gray-* in admin table context */
+[data-theme="dark"] .admin-main-wrapper .text-gray-800,
+[data-theme="dark"] .admin-main-wrapper .text-gray-700,
+[data-theme="dark"] .admin-main-wrapper .text-gray-600,
+[data-theme="dark"] .admin-main-wrapper .text-gray-500 {
+    color: var(--text-primary) !important;
+}
+
+/* Fix text-muted in admin tables */
+[data-theme="dark"] .admin-main-wrapper .table .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Fix empty state containers in admin pages */
+[data-theme="dark"] .admin-main-wrapper [style*="background: rgba(248, 250, 252"],
+[data-theme="dark"] .admin-main-wrapper [style*="border: 1px dashed #cbd5e1"] {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color-strong) !important;
+}
+
+/* Fix border-bottom in tables */
+[data-theme="dark"] .admin-main-wrapper .border-bottom,
+[data-theme="dark"] .admin-main-wrapper .border-bottom-0,
+[data-theme="dark"] .admin-main-wrapper [style*="border-bottom: 1px solid"] {
+    border-color: var(--border-color) !important;
+}
+
+/* Fix table responsive wrapper backgrounds */
+[data-theme="dark"] .admin-main-wrapper .table-responsive {
+    background-color: var(--bg-card);
+}
+
+/* Fix pagination in admin tables */
+[data-theme="dark"] .admin-main-wrapper .pagination .page-link {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color-strong) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .admin-main-wrapper .pagination .page-item.active .page-link {
+    background-color: var(--brand-color) !important;
+    border-color: var(--brand-color) !important;
+}
+
+/* Fix export section bg-light in admin */
+[data-theme="dark"] .admin-main-wrapper .bg-light[style*="padding"] {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Fix form controls in admin tables */
+[data-theme="dark"] .admin-main-wrapper input.form-control,
+[data-theme="dark"] .admin-main-wrapper select.form-select {
+    background-color: var(--input-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix input-group-text in admin */
+[data-theme="dark"] .admin-main-wrapper .input-group-text {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--border-color-strong) !important;
+}
+
+/* Fix revenue breakdown table specifically */
+[data-theme="dark"] .admin-main-wrapper table.border-top-0 thead,
+[data-theme="dark"] .admin-main-wrapper [style*="background: #f8fafc"].table thead {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix text-primary, text-success, text-danger in tables */
+[data-theme="dark"] .admin-main-wrapper .table .text-primary { color: var(--info-color) !important; }
+[data-theme="dark"] .admin-main-wrapper .table .text-success { color: var(--success-color) !important; }
+[data-theme="dark"] .admin-main-wrapper .table .text-danger { color: var(--danger-color) !important; }
+
+/* Fix fw-medium and fw-bold in admin table context */
+[data-theme="dark"] .admin-main-wrapper .table .fw-bold {
+    color: var(--text-primary) !important;
+}
+[data-theme="dark"] .admin-main-wrapper .table .fw-medium {
+    color: var(--text-secondary) !important;
+}
+
+/* Fix bg-white inline styles in admin main wrapper */
+[data-theme="dark"] .admin-main-wrapper [style*="background: #fff"],
+[data-theme="dark"] .admin-main-wrapper [style*="background:#fff"],
+[data-theme="dark"] .admin-main-wrapper [style*="background: white"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix bg-white class in admin */
+[data-theme="dark"] .admin-main-wrapper .bg-white {
+    background-color: var(--bg-card) !important;
+}
+
+/* ===== CRITICAL: FORCE ALL ADMIN TABLE CELLS TO DARK MODE ===== */
+/* These selectors target ALL table elements inside admin main wrapper */
+
+/* Target ALL td and th in admin tables - this is the key fix */
+[data-theme="dark"] #mainWrapper table td,
+[data-theme="dark"] #mainWrapper table th,
+[data-theme="dark"] .admin-main-wrapper table td,
+[data-theme="dark"] .admin-main-wrapper table th,
+[data-theme="dark"] .admin-main-wrapper .table td,
+[data-theme="dark"] .admin-main-wrapper .table th {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Target ALL tr in admin tables */
+[data-theme="dark"] #mainWrapper table tbody tr,
+[data-theme="dark"] .admin-main-wrapper table tbody tr,
+[data-theme="dark"] .admin-main-wrapper .table tbody tr {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Target ALL thead in admin tables */
+[data-theme="dark"] #mainWrapper table thead,
+[data-theme="dark"] .admin-main-wrapper table thead,
+[data-theme="dark"] .admin-main-wrapper .table thead {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] #mainWrapper table thead tr,
+[data-theme="dark"] .admin-main-wrapper table thead tr,
+[data-theme="dark"] .admin-main-wrapper .table thead tr {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* FORCE override all inline text colors in admin table cells */
+[data-theme="dark"] #mainWrapper table td[style],
+[data-theme="dark"] #mainWrapper table th[style],
+[data-theme="dark"] .admin-main-wrapper table td[style],
+[data-theme="dark"] .admin-main-wrapper table th[style] {
+    color: var(--text-primary) !important;
+}
+
+/* Specific fixes for common colors used in admin tables */
+[data-theme="dark"] #mainWrapper td[style*="color: #111827"],
+[data-theme="dark"] #mainWrapper td[style*="color:#111827"],
+[data-theme="dark"] #mainWrapper td[style*="color: #374151"],
+[data-theme="dark"] #mainWrapper td[style*="color:#374151"],
+[data-theme="dark"] #mainWrapper td[style*="color: #4b5563"],
+[data-theme="dark"] #mainWrapper td[style*="color:#4b5563"],
+[data-theme="dark"] .admin-main-wrapper td[style*="color: #111827"],
+[data-theme="dark"] .admin-main-wrapper td[style*="color:#111827"],
+[data-theme="dark"] .admin-main-wrapper td[style*="color: #374151"],
+[data-theme="dark"] .admin-main-wrapper td[style*="color:#374151"],
+[data-theme="dark"] .admin-main-wrapper td[style*="color: #4b5563"],
+[data-theme="dark"] .admin-main-wrapper td[style*="color:#4b5563"] {
+    color: var(--text-primary) !important;
+}
+
+/* Fix ps-4, py-3, fw-bold classes specifically in admin tables */
+[data-theme="dark"] #mainWrapper td.ps-4,
+[data-theme="dark"] #mainWrapper td.py-3,
+[data-theme="dark"] #mainWrapper td.fw-bold,
+[data-theme="dark"] .admin-main-wrapper td.ps-4,
+[data-theme="dark"] .admin-main-wrapper td.py-3,
+[data-theme="dark"] .admin-main-wrapper td.fw-bold {
+    color: var(--text-primary) !important;
+}
+
+/* Fix fw-semibold in admin table headers */
+[data-theme="dark"] #mainWrapper th.fw-semibold,
+[data-theme="dark"] .admin-main-wrapper th.fw-semibold {
+    color: var(--text-primary) !important;
+}
+
+/* Fix text-muted in admin tables */
+[data-theme="dark"] #mainWrapper .text-muted,
+[data-theme="dark"] .admin-main-wrapper .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Fix text-dark in admin tables */
+[data-theme="dark"] #mainWrapper .text-dark,
+[data-theme="dark"] .admin-main-wrapper .text-dark {
+    color: var(--text-primary) !important;
+}
+
+/* Fix text-warning, text-success, text-danger in admin tables */
+[data-theme="dark"] #mainWrapper .text-warning,
+[data-theme="dark"] #mainWrapper .text-success,
+[data-theme="dark"] #mainWrapper .text-danger,
+[data-theme="dark"] .admin-main-wrapper .text-warning,
+[data-theme="dark"] .admin-main-wrapper .text-success,
+[data-theme="dark"] .admin-main-wrapper .text-danger {
+    color: inherit !important;
+}
+
+/* Fix thead style background */
+[data-theme="dark"] #mainWrapper thead[style],
+[data-theme="dark"] .admin-main-wrapper thead[style],
+[data-theme="dark"] [style*="background: #f8fafc"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix dash-card shadows in dark mode */
+[data-theme="dark"] .dash-card {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+}
+
+/* Fix chart.js canvas text colors in dark mode */
+[data-theme="dark"] canvas {
+    background-color: transparent !important;
+}
+
+/* ===== SUPER AGGRESSIVE: FORCE ALL ADMIN TABLE CONTENT TO DARK MODE ===== */
+/* Use universal selector to override ALL inline styles in admin tables */
+
+/* Target EVERYTHING inside #mainWrapper tables and force dark mode */
+[data-theme="dark"] #mainWrapper table *,
+[data-theme="dark"] .admin-main-wrapper table * {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Specifically target the td and th elements with all their classes */
+[data-theme="dark"] #mainWrapper table td,
+[data-theme="dark"] #mainWrapper table th,
+[data-theme="dark"] .admin-main-wrapper table td,
+[data-theme="dark"] .admin-main-wrapper table th {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Target specific classes commonly used in table cells */
+[data-theme="dark"] #mainWrapper td.ps-4,
+[data-theme="dark"] #mainWrapper td.py-3,
+[data-theme="dark"] #mainWrapper td.fw-bold,
+[data-theme="dark"] #mainWrapper td.fw-semibold,
+[data-theme="dark"] #mainWrapper td.fw-medium,
+[data-theme="dark"] .admin-main-wrapper td.ps-4,
+[data-theme="dark"] .admin-main-wrapper td.py-3,
+[data-theme="dark"] .admin-main-wrapper td.fw-bold,
+[data-theme="dark"] .admin-main-wrapper td.fw-semibold,
+[data-theme="dark"] .admin-main-wrapper td.fw-medium {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+}
+
+/* Target exact class combination from user's selector: td.ps-4.py-3.fw-bold */
+[data-theme="dark"] #mainWrapper td.ps-4.py-3.fw-bold,
+[data-theme="dark"] .admin-main-wrapper td.ps-4.py-3.fw-bold {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+}
+
+/* Target all variations of fw-bold classes in tables */
+[data-theme="dark"] #mainWrapper table td.fw-bold,
+[data-theme="dark"] #mainWrapper table th.fw-bold,
+[data-theme="dark"] .admin-main-wrapper table td.fw-bold,
+[data-theme="dark"] .admin-main-wrapper table th.fw-bold {
+    color: var(--text-primary) !important;
+}
+
+/* Target table cells with both ps and py classes */
+[data-theme="dark"] #mainWrapper table td[class*="ps-"][class*="py-"],
+[data-theme="dark"] .admin-main-wrapper table td[class*="ps-"][class*="py-"] {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+}
+
+/* Target all text utility classes in admin tables */
+[data-theme="dark"] #mainWrapper .text-dark,
+[data-theme="dark"] #mainWrapper .text-muted,
+[data-theme="dark"] #mainWrapper .text-secondary,
+[data-theme="dark"] #mainWrapper .text-gray-800,
+[data-theme="dark"] #mainWrapper .text-gray-700,
+[data-theme="dark"] #mainWrapper .text-gray-600,
+[data-theme="dark"] #mainWrapper .text-gray-500,
+[data-theme="dark"] #mainWrapper .text-gray-400,
+[data-theme="dark"] .admin-main-wrapper .text-dark,
+[data-theme="dark"] .admin-main-wrapper .text-muted,
+[data-theme="dark"] .admin-main-wrapper .text-secondary,
+[data-theme="dark"] .admin-main-wrapper .text-gray-800,
+[data-theme="dark"] .admin-main-wrapper .text-gray-700,
+[data-theme="dark"] .admin-main-wrapper .text-gray-600,
+[data-theme="dark"] .admin-main-wrapper .text-gray-500,
+[data-theme="dark"] .admin-main-wrapper .text-gray-400 {
+    color: var(--text-primary) !important;
+}
+
+/* ULTIMATE OVERRIDE: Force any element with inline color style in admin tables */
+[data-theme="dark"] #mainWrapper td[style*="color"],
+[data-theme="dark"] #mainWrapper th[style*="color"],
+[data-theme="dark"] #mainWrapper tr[style*="color"],
+[data-theme="dark"] .admin-main-wrapper td[style*="color"],
+[data-theme="dark"] .admin-main-wrapper th[style*="color"],
+[data-theme="dark"] .admin-main-wrapper tr[style*="color"] {
+    color: var(--text-primary) !important;
+}
+
+/* ULTIMATE OVERRIDE: Force any element with inline background style in admin tables */
+[data-theme="dark"] #mainWrapper td[style*="background"],
+[data-theme="dark"] #mainWrapper th[style*="background"],
+[data-theme="dark"] #mainWrapper tr[style*="background"],
+[data-theme="dark"] .admin-main-wrapper td[style*="background"],
+[data-theme="dark"] .admin-main-wrapper th[style*="background"],
+[data-theme="dark"] .admin-main-wrapper tr[style*="background"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* ULTIMATE OVERRIDE: Force ALL inline colors in admin tables - target directly */
+[data-theme="dark"] #mainWrapper table td[style],
+[data-theme="dark"] #mainWrapper table th[style],
+[data-theme="dark"] .admin-main-wrapper table td[style],
+[data-theme="dark"] .admin-main-wrapper table th[style] {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+}
+
+/* Specific overrides for common hex colors in admin table inline styles */
+[data-theme="dark"] #mainWrapper table td[style*="#111827"],
+[data-theme="dark"] #mainWrapper table td[style*="#374151"],
+[data-theme="dark"] #mainWrapper table td[style*="#4b5563"],
+[data-theme="dark"] #mainWrapper table td[style*="#6b7280"],
+[data-theme="dark"] #mainWrapper table th[style*="#111827"],
+[data-theme="dark"] #mainWrapper table th[style*="#374151"],
+[data-theme="dark"] #mainWrapper table th[style*="#4b5563"],
+[data-theme="dark"] #mainWrapper table th[style*="#6b7280"],
+[data-theme="dark"] .admin-main-wrapper table td[style*="#111827"],
+[data-theme="dark"] .admin-main-wrapper table td[style*="#374151"],
+[data-theme="dark"] .admin-main-wrapper table td[style*="#4b5563"],
+[data-theme="dark"] .admin-main-wrapper table td[style*="#6b7280"],
+[data-theme="dark"] .admin-main-wrapper table th[style*="#111827"],
+[data-theme="dark"] .admin-main-wrapper table th[style*="#374151"],
+[data-theme="dark"] .admin-main-wrapper table th[style*="#4b5563"],
+[data-theme="dark"] .admin-main-wrapper table th[style*="#6b7280"] {
+    color: var(--text-primary) !important;
+}
+
+/* Specific overrides for background colors */
+[data-theme="dark"] #mainWrapper table td[style*="#f8fafc"],
+[data-theme="dark"] #mainWrapper table td[style*="#ffffff"],
+[data-theme="dark"] #mainWrapper table th[style*="#f8fafc"],
+[data-theme="dark"] #mainWrapper table th[style*="#ffffff"],
+[data-theme="dark"] .admin-main-wrapper table td[style*="#f8fafc"],
+[data-theme="dark"] .admin-main-wrapper table td[style*="#ffffff"],
+[data-theme="dark"] .admin-main-wrapper table th[style*="#f8fafc"],
+[data-theme="dark"] .admin-main-wrapper table th[style*="#ffffff"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* THE MOST AGGRESSIVE OVERRIDE - Target all td and th in admin with any style attribute */
+[data-theme="dark"] #mainWrapper table > tbody > tr > td[style],
+[data-theme="dark"] #mainWrapper table > thead > tr > th[style],
+[data-theme="dark"] .admin-main-wrapper table > tbody > tr > td[style],
+[data-theme="dark"] .admin-main-wrapper table > thead > tr > th[style] {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+}
+
+/* Target tbody and thead directly */
+[data-theme="dark"] #mainWrapper table > thead,
+[data-theme="dark"] .admin-main-wrapper table > thead {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] #mainWrapper table > thead > tr > td,
+[data-theme="dark"] #mainWrapper table > thead > tr > th,
+[data-theme="dark"] .admin-main-wrapper table > thead > tr > td,
+[data-theme="dark"] .admin-main-wrapper table > thead > tr > th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] #mainWrapper table > tbody > tr > td,
+[data-theme="dark"] .admin-main-wrapper table > tbody > tr > td {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Force the thead background specifically */
+[data-theme="dark"] #mainWrapper thead,
+[data-theme="dark"] .admin-main-wrapper thead {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] #mainWrapper thead td,
+[data-theme="dark"] #mainWrapper thead th,
+[data-theme="dark"] .admin-main-wrapper thead td,
+[data-theme="dark"] .admin-main-wrapper thead th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Force tbody rows */
+[data-theme="dark"] #mainWrapper tbody tr,
+[data-theme="dark"] .admin-main-wrapper tbody tr {
+    background-color: var(--bg-card) !important;
+}
+
+[data-theme="dark"] #mainWrapper tbody td,
+[data-theme="dark"] .admin-main-wrapper tbody td {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-card) !important;
+}
+
+/* Keep success, danger, warning colors for status indicators */
+[data-theme="dark"] #mainWrapper .text-success,
+[data-theme="dark"] #mainWrapper td[style*="#10b981"],
+[data-theme="dark"] .admin-main-wrapper .text-success,
+[data-theme="dark"] .admin-main-wrapper td[style*="#10b981"] {
+    color: var(--success-color) !important;
+}
+
+[data-theme="dark"] #mainWrapper .text-danger,
+[data-theme="dark"] #mainWrapper td[style*="#ef4444"],
+[data-theme="dark"] .admin-main-wrapper .text-danger,
+[data-theme="dark"] .admin-main-wrapper td[style*="#ef4444"] {
+    color: var(--danger-color) !important;
+}
+
+[data-theme="dark"] #mainWrapper .text-warning,
+[data-theme="dark"] #mainWrapper td[style*="#f59e0b"],
+[data-theme="dark"] .admin-main-wrapper .text-warning,
+[data-theme="dark"] .admin-main-wrapper td[style*="#f59e0b"] {
+    color: var(--warning-color) !important;
+}
+
+[data-theme="dark"] #mainWrapper .text-info,
+[data-theme="dark"] #mainWrapper td[style*="#3b82f6"],
+[data-theme="dark"] .admin-main-wrapper .text-info,
+[data-theme="dark"] .admin-main-wrapper td[style*="#3b82f6"] {
+    color: var(--info-color) !important;
+}
+
+/* Fix all rgba background patterns for dark mode */
+[data-theme="dark"] [style*="background: rgba(248,250,252"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] [style*="background-color: rgba(16, 185, 129, 0.1)"] {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+[data-theme="dark"] [style*="background-color: rgba(245, 158, 11, 0.1)"] {
+    background-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+[data-theme="dark"] [style*="background-color: rgba(239, 68, 68, 0.1)"] {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+[data-theme="dark"] [style*="background-color: rgba(139, 92, 246, 0.1)"] {
+    background-color: rgba(139, 92, 246, 0.2) !important;
+}
+
+[data-theme="dark"] [style*="background-color: rgba(59, 130, 246, 0.1)"] {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+/* ===== CART PAGE TABLE SPECIFIC OVERRIDES ===== */
+/* The cart page has hardcoded inline styles that need fixing */
+
+/* Fix cart table thead with hardcoded #f8fafc background */
+[data-theme="dark"] #cart-table thead,
+[data-theme="dark"] #cart-table thead tr,
+[data-theme="dark"] #cart-table thead th,
+[data-theme="dark"] #cart-table thead td,
+[data-theme="dark"] [id*="cart-table"] thead,
+[data-theme="dark"] table#cart-table thead {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix cart table header cells specifically */
+[data-theme="dark"] #cart-table thead .border-0,
+[data-theme="dark"] #cart-table thead th.border-0 {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix cart table body rows with hardcoded border-bottom */
+[data-theme="dark"] #cart-table tbody tr,
+[data-theme="dark"] #cart-table tbody tr[style*="border-bottom"] {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix cart table body cells */
+[data-theme="dark"] #cart-table tbody td,
+[data-theme="dark"] #cart-table tbody td[style] {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix product name with hardcoded color #111827 */
+[data-theme="dark"] #cart-table tbody td span[style*="color: #111827"],
+[data-theme="dark"] #cart-table .fw-bold[style*="color"] {
+    color: var(--text-primary) !important;
+}
+
+/* Fix cart table quantity input with hardcoded color */
+[data-theme="dark"] #cart-table input[style*="color: #111827"],
+[data-theme="dark"] #cart-table input[type="number"] {
+    color: var(--text-primary) !important;
+}
+
+/* Fix cart table bg-light class */
+[data-theme="dark"] #cart-table .bg-light,
+[data-theme="dark"] #cart-table .input-group.bg-light {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Fix cart table rounded-pill inputs */
+[data-theme="dark"] #cart-table .rounded-pill,
+[data-theme="dark"] #cart-table .input-group-sm.rounded-pill {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Fix cart card container with hardcoded background: #fff */
+[data-theme="dark"] main .card[style*="background: #fff"],
+[data-theme="dark"] .card[style*="background: linear-gradient(180deg, #fff"] {
+    background-color: var(--bg-card) !important;
+}
+
+/* Fix cart summary card */
+[data-theme="dark"] .summary-card,
+[data-theme="dark"] .summary-card[style*="background: linear-gradient"] {
+    background: linear-gradient(180deg, var(--bg-card), var(--bg-secondary)) !important;
+}
+
+/* Fix cart table header text-muted class */
+[data-theme="dark"] #cart-table thead .text-muted,
+[data-theme="dark"] #cart-table .text-muted {
+    color: var(--text-primary) !important;
+}
+
+/* Fix cart table text-success for subtotal */
+[data-theme="dark"] #cart-table .text-success {
+    color: var(--success-color) !important;
+}
+
+/* Fix all fw-bold and fw-semibold text in cart table */
+[data-theme="dark"] #cart-table .fw-bold,
+[data-theme="dark"] #cart-table .fw-semibold {
+    color: var(--text-primary) !important;
+}
+
+/* Fix quantity controls in cart */
+[data-theme="dark"] #cart-table .input-group .btn {
+    color: var(--text-primary) !important;
+}
+
+/* Target the entire cart-table container */
+[data-theme="dark"] #cart-table,
+[data-theme="dark"] table#cart-table {
+    color: var(--text-primary) !important;
+}
+
+/* Fix empty cart message */
+[data-theme="dark"] .rounded-4[style*="background: rgba(248, 250, 252"] {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Fix cart page specific elements */
+[data-theme="dark"] main .col-lg-8 .card,
+[data-theme="dark"] #cart-table + * {
+    background-color: var(--bg-card) !important;
+}
+
+/* ===== NEWSLETTER SECTION - ALWAYS LIGHT TEXT ===== */
+/* Ensure newsletter section is never affected by dark mode theme */
+.newsletter-section,
+.newsletter-section * {
+    color: #ffffff !important;
+    background-color: transparent !important;
+    border-color: rgba(255,255,255,0.2) !important;
+}
+
+.newsletter-section h1, .newsletter-section h2, .newsletter-section h3, 
+.newsletter-section h4, .newsletter-section h5, .newsletter-section h6 {
+    color: #ffffff !important;
+}
+
+.newsletter-section p, .newsletter-section span, .newsletter-section label {
+    color: rgba(255,255,255,0.85) !important;
+}
+
+.newsletter-section .form-control {
+    background-color: rgba(255,255,255,0.95) !important;
+    color: #111827 !important;
+    border: none !important;
+}
+
+.newsletter-section .form-control::placeholder {
+    color: #6b7280 !important;
+}
+
+.newsletter-section .btn-warning {
+    background-color: #fbbf24 !important;
+    color: #111827 !important;
+    border: none !important;
+}
+
+/* Dark mode - explicitly set newsletter section colors */
+[data-theme="dark"] .newsletter-section,
+[data-theme="dark"] .newsletter-section * {
+    color: #ffffff !important;
+    background-color: transparent !important;
+}
+
+[data-theme="dark"] .newsletter-section h3 {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .newsletter-section p {
+    color: rgba(255,255,255,0.85) !important;
+}
+
+[data-theme="dark"] .newsletter-section .form-control {
+    background-color: rgba(255,255,255,0.95) !important;
+    color: #111827 !important;
+}
+
+[data-theme="dark"] .newsletter-section .btn {
+    background-color: #fbbf24 !important;
+    color: #111827 !important;
+}
+
