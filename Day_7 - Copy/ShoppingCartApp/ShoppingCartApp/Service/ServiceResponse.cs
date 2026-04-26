@@ -68,5 +68,11 @@ namespace ShoppingCartApp.Services
                 ViewModel = model,
                 ModelErrors = new Dictionary<string, string> { { errorKey, errorMessage } }
             };
+
+        public static ServiceResponse ShowError(string errorMessage) => new()
+        {
+            Succeeded = false,
+            ModelErrors = new Dictionary<string, string> { { "Error", errorMessage } }
+        };
     }
 }

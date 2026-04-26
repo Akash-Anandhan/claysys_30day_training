@@ -15,13 +15,22 @@
     <h2 class="fw-bold mb-2 mb-lg-0" style="font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em;">
         <i class="bi bi-bag-check" style="color: #10b981;"></i> Manage Orders
     </h2>
-    <div class="d-flex gap-3 align-items-center ms-auto">
-        <a asp-action="ExportOrdersExcel" class="btn btn-sm btn-success rounded-pill">
-            <i class="bi bi-download me-1"></i> Export Excel
-        </a>
-        <a asp-action="ExportOrdersCsv" class="btn btn-sm btn-info text-white rounded-pill">
-            <i class="bi bi-download me-1"></i> Export CSV
-        </a>
+    <div class="d-flex gap-3 align-items-center ms-auto flex-wrap">
+        <!-- Date Range Filter for Export -->
+        <form asp-action="ExportOrdersExcel" method="get" class="d-flex gap-2 align-items-center">
+            <input type="date" name="startDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="Start Date" />
+            <input type="date" name="endDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="End Date" />
+            <button type="submit" class="btn btn-sm btn-success rounded-pill">
+                <i class="bi bi-download me-1"></i> Excel
+            </button>
+        </form>
+        <form asp-action="ExportOrdersCsv" method="get" class="d-flex gap-2 align-items-center">
+            <input type="date" name="startDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="Start Date" />
+            <input type="date" name="endDate" class="form-control form-control-sm" style="width: 140px; border-radius: 12px;" title="End Date" />
+            <button type="submit" class="btn btn-sm btn-info text-white rounded-pill">
+                <i class="bi bi-download me-1"></i> CSV
+            </button>
+        </form>
     </div>
 </div>
 

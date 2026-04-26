@@ -48,7 +48,7 @@
                             @foreach (var item in order.OrderItems)
                             {
                                 <li class="list-group-item d-flex align-items-center p-4">
-                                    <img src="@item.Product.ImageUrl" width="60" height="60" class="rounded-3 shadow-sm border me-3" style="object-fit: cover;" alt="@item.Product.Name" />
+                                    <img src="@item.Product.ImageUrl" width="60" height="60" class="rounded-3 shadow-sm border me-3" style="object-fit: cover;" alt="@item.Product.Name" loading="lazy" />
                                     <div class="flex-grow-1">
                                         <h6 class="fw-bold mb-1"><a asp-controller="Product" asp-action="Details" asp-route-id="@item.ProductId" class="text-dark text-decoration-none">@item.Product.Name</a></h6>
                                         <p class="mb-0 text-muted small">Qty: @item.Quantity &times; ₹@item.SellingPrice.ToString("N0")</p>

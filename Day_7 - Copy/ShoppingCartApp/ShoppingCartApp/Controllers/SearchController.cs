@@ -1,7 +1,7 @@
 // Controllers/SearchController.cs
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCartApp.Controllers.Base;
-using ShoppingCartApp.DTOs.Product;
+using ShoppingCartApp.Models;
 using ShoppingCartApp.Services;
 using ShoppingCartApp.ViewModels;
 
@@ -21,14 +21,12 @@ namespace ShoppingCartApp.Controllers
             string query, string category,
             decimal? minPrice, decimal? maxPrice, string sortBy)
         {
-            var result = (ProductSearchResultDto)(await _productService.SearchAsync(new ProductSearchDto
-            {
-                Query    = query,
-                Category = category,
-                MinPrice = minPrice,
-                MaxPrice = maxPrice,
-                SortBy   = sortBy
-            })).ViewModel;
+            var response = await _productService.SearchAsync(query, category, minPrice, maxPrice, sortBy);
+            
+            // Get products from ProductPaginationViewModel
+            var paginationVm = response.ViewModel as ProductPaginationViewModel;
+            var products = paginationVm?.Products ?? Enumerable.Empty<Product>();
+            var categories = paginationVm?.Categories ?? await _productService.GetCategoriesAsync();
 
             return View(new SearchViewModel
             {
@@ -37,9 +35,9 @@ namespace ShoppingCartApp.Controllers
                 MinPrice     = minPrice,
                 MaxPrice     = maxPrice,
                 SortBy       = sortBy,
-                Results      = result.Results,
-                Categories   = result.Categories,
-                TotalResults = result.TotalResults
+                Results      = products,
+                Categories   = categories,
+                TotalResults = products.Count()
             });
         }
 

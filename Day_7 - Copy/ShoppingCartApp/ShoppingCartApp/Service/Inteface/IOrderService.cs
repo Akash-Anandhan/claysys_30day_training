@@ -1,5 +1,6 @@
 // Services/IOrderService.cs
 using ShoppingCartApp.DTOs.Order;
+using ShoppingCartApp.Models;
 
 namespace ShoppingCartApp.Services
 {
@@ -10,5 +11,6 @@ namespace ShoppingCartApp.Services
         Task<ServiceResponse> GetConfirmationAsync(OrderConfirmationDto dto);
         Task<ServiceResponse> GetUserOrdersAsync(string userId);
         Task<ServiceResponse> CancelOrderAsync(int orderId, string userId);
+        Task<Order?> GetOrderByIdAsync(int orderId, string userId);
     }
 }

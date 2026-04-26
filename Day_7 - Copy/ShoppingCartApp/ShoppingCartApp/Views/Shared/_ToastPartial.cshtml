@@ -1,0 +1,62 @@
+@*
+    Toast Notifications Partial
+    Displays TempData messages as toast popups
+*@
+
+<div id=toast-container class=position-fixed top-0 end-0 p-3 style=z-index:9999></div>
+
+<script>
+    function showToast(message, type) {
+        type = type || 'success';
+        var container = document.getElementById('toast-container');
+        var toast = document.createElement('div');
+        toast.className = 'toast show';
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+        
+        var iconClass = type === 'success' ? 'bi-check-circle-fill' : 
+                        type === 'error' ? 'bi-exclamation-circle-fill' : 
+                        type === 'warning' ? 'bi-exclamation-triangle-fill' : 'bi-info-circle-fill';
+        
+        var iconColor = type === 'success' ? '#10b981' : 
+                        type === 'error' ? '#ef4444' : 
+                        type === 'warning' ? '#f59e0b' : '#3b82f6';
+        
+        var bgColor = type === 'success' ? 'rgba(16,185,129,0.1)' : 
+                      type === 'error' ? 'rgba(239,68,68,0.1)' : 
+                      type === 'warning' ? 'rgba(245,158,11,0.1)' : 'rgba(59,130,246,0.1)';
+        
+        toast.innerHTML = 
+            '<div class=\"toast-body d-flex align-items-center p-3\" style=\"border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,0.12);border-left:4px solid ' + iconColor + ';\">' +
+                '<i class=\"bi ' + iconClass + ' me-3\" style=\"font-size:1.5rem;color:' + iconColor + ';\"></i>' +
+                '<span class=\"fw-medium\" style=\"font-size:0.95rem;\">' + message + '</span>' +
+            '</div>';
+        
+        container.appendChild(toast);
+        
+        setTimeout(function() {
+            toast.classList.remove('show');
+            setTimeout(function() { toast.remove(); }, 300);
+        }, 4000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        @if (TempData["Success"] != null)
+        {
+            <text>showToast('@Html.Raw(TempData["Success"])', 'success');</text>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <text>showToast('@Html.Raw(TempData["Error"])', 'error');</text>
+        }
+        @if (TempData["Warning"] != null)
+        {
+            <text>showToast('@Html.Raw(TempData["Warning"])', 'warning');</text>
+        }
+        @if (TempData["Info"] != null)
+        {
+            <text>showToast('@Html.Raw(TempData["Info"])', 'info');</text>
+        }
+    });
+</script>

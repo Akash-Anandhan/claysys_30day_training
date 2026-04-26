@@ -163,8 +163,15 @@
             
             <div class="mx-auto"></div>
             
-            <a asp-action="ExportExcel" class="btn btn-sm btn-success"><i class="bi bi-download"></i> Export Excel</a>
-            <a asp-action="ExportCsv" class="btn btn-sm btn-info text-white"><i class="bi bi-download"></i> Export CSV</a>
+            <!-- Export with date filter -->
+            <form asp-action="ExportExcel" method="get" class="d-flex align-items-center gap-1">
+                <input type="date" name="startDate" class="form-control form-control-sm" style="width: 130px; border-radius: 8px;" title="From" />
+                <input type="date" name="endDate" class="form-control form-control-sm" style="width: 130px; border-radius: 8px;" title="To" />
+                <button type="submit" class="btn btn-sm btn-success"><i class="bi bi-download"></i> Export</button>
+            </form>
+            <form asp-action="ExportCsv" method="get" class="d-flex align-items-center gap-1">
+                <button type="submit" class="btn btn-sm btn-info text-white"><i class="bi bi-download"></i> Export CSV</button>
+            </form>
             
             <form asp-action="DeleteAllProducts" method="post" onsubmit="return confirm('WARNING: Are you sure you want to delete ALL PRODUCTS, REVIEWS, and CART ITEMS? This action cannot be undone.')">
                 <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i> Delete All</button>

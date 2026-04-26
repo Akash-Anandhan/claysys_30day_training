@@ -165,5 +165,21 @@ namespace ShoppingCartApp.Controllers
             var response = await _orderService.CancelOrderAsync(id, userId);
             return Execute(response);
         }
+
+        // GET: /Account/TrackOrder/5
+        [Authorize]
+        public async Task<IActionResult> TrackOrder(int id)
+        {
+            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var order = await _orderService.GetOrderByIdAsync(id, userId);
+            
+            if (order == null)
+            {
+                TempData["Error"] = "Order not found or you don't have permission to view it.";
+                return RedirectToAction("Orders");
+            }
+            
+            return View(order);
+        }
     }
 }

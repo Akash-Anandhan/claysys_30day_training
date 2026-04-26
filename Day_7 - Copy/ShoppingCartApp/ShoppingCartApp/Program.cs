@@ -9,6 +9,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ── Memory Cache ────────────────────────────────────────────────────────────
+builder.Services.AddMemoryCache();
+
 // ── Database ───────────────────────────────────────────────────────────────
 builder.Services.AddDbContext<ShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ShopDbContext")));

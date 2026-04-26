@@ -19,11 +19,42 @@
 <div class="row g-5 mb-5 align-items-center">
     <!-- Image Column -->
     <div class="col-md-6">
-        <div class="position-relative" style="border-radius: 24px; overflow: hidden; background: #f8fafc; padding: 2rem;">
-            <img src="@Model.ImageUrl" class="img-fluid w-100 shadow-sm p-4" alt="@Model.Name" style="border-radius: 16px; object-fit: contain; background-color: #ffffff; max-height: 500px;" />
+        <div class="position-relative product-image-container" style="border-radius: 24px; overflow: hidden; background: #f8fafc; padding: 2rem; cursor: zoom-in;" onclick="toggleZoom(this)">
+            <img src="@Model.ImageUrl" class="img-fluid w-100 shadow-sm p-4 product-main-image" alt="@Model.Name" style="border-radius: 16px; object-fit: contain; background-color: #ffffff; max-height: 500px; transition: transform 0.3s ease;" id="mainProductImage" />
             <div class="position-absolute top-0 start-0 m-4">
                 <span class="badge rounded-pill shadow-sm py-2 px-3 fw-bold" style="background: rgba(255,255,255,0.9); color: #e85d2a; font-family: 'Space Grotesk', sans-serif;">@Model.Category?.Name</span>
             </div>
+            <div class="position-absolute bottom-0 end-0 m-4">
+                <button type="button" class="btn btn-sm btn-light rounded-circle shadow-sm" onclick="event.stopPropagation(); toggleZoom(document.querySelector('.product-image-container'))" title="Zoom image">
+                    <i class="bi bi-zoom-in"></i>
+                </button>
+            </div>
+            <!-- Zoom Modal -->
+            <div class="zoom-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; cursor: zoom-out;" onclick="closeZoom()">
+                <img src="@Model.ImageUrl" class="img-fluid" style="max-width: 90%; max-height: 90%; object-fit: contain;" />
+                <button type="button" class="btn btn-light rounded-circle position-absolute top-0 end-0 m-4" onclick="event.stopPropagation(); closeZoom()" style="width: 50px; height: 50px;">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Compare Button -->
+        <div class="mt-3 d-flex justify-content-center">
+            @{
+                var compareIds = Context.Session.GetString("ProductCompareList") ?? "[]";
+                var isInCompare = compareIds.Contains(Model.Id.ToString());
+            }
+            @if (isInCompare)
+            {
+                <a asp-action="RemoveFromCompare" asp-route-id="@Model.Id" class="btn btn-outline-secondary rounded-pill">
+                    <i class="bi bi-dash-circle me-1"></i> Remove from Compare
+                </a>
+            }
+            else
+            {
+                <a asp-action="AddToCompare" asp-route-id="@Model.Id" class="btn btn-outline-primary rounded-pill">
+                    <i class="bi bi-arrow-left-right me-1"></i> Add to Compare
+                </a>
+            }
         </div>
     </div>
 
@@ -95,6 +126,20 @@
             <a asp-controller="Product" asp-action="Index" class="btn flex-fill rounded-pill fw-semibold py-2 d-flex justify-content-center align-items-center gap-2" style="background: #f3f4f6; color: #4b5563; border: none; transition: background 0.2s ease;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">
                 <i class="bi bi-arrow-left"></i> Back to Products
             </a>
+        </div>
+    </div>
+</div>
+
+<!-- Product Recommendations Section -->
+<div class="mb-5" id="recommendations-section">
+    <h4 class="fw-bold mb-4" style="font-family: 'Space Grotesk', sans-serif;">
+        <i class="bi bi-lightning text-warning me-2"></i> Recommended for You
+    </h4>
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="recommendations-container">
+        <div class="col-12 text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     </div>
 </div>
@@ -275,4 +320,66 @@
         border-color: #e85d2a !important;
         box-shadow: 0 0 0 4px rgba(232,93,42,0.1) !important;
     }
+    
+    /* Image zoom styles */
+    .product-image-container:hover .product-main-image {
+        transform: scale(1.05);
+    }
+    .zoom-modal {
+        display: flex !important;
+    }
 </style>
+
+@section Scripts {
+<script>
+    function toggleZoom(container) {
+        const modal = container.querySelector('.zoom-modal');
+        modal.style.display = modal.style.display === 'none' ? 'flex' : 'none';
+        document.body.style.overflow = modal.style.display === 'flex' ? 'hidden' : '';
+    }
+    
+    function closeZoom() {
+        document.querySelector('.zoom-modal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    
+    // ESC key to close zoom
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeZoom();
+    });
+    
+    // Load product recommendations
+    async function loadRecommendations(productId) {
+        try {
+            const response = await fetch(`/Product/GetRecommendations/${productId}`);
+            const products = await response.json();
+            
+            const container = document.getElementById('recommendations-container');
+            if (!products || products.length === 0) {
+                document.getElementById('recommendations-section').style.display = 'none';
+                return;
+            }
+            
+            container.innerHTML = products.map(product => `
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm" style="border-radius: 16px;">
+                        <div class="position-relative" style="border-radius: 16px 16px 0 0; overflow: hidden;">
+                            <img src="${product.imageUrl}" class="card-img-top p-3" alt="${product.name}" style="height: 150px; object-fit: contain; background: #fafafa;" loading="lazy" />
+                        </div>
+                        <div class="card-body text-center p-3">
+                            <h6 class="fw-bold mb-1 text-dark" style="font-size: 0.9rem;">${product.name}</h6>
+                            <p class="fw-bold text-success mb-2">₹${product.sellingPrice.toFixed(2)}</p>
+                            <a href="/Product/Details/${product.id}" class="btn btn-sm btn-outline-primary rounded-pill">View</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            document.getElementById('recommendations-section').style.display = 'none';
+        }
+    }
+    
+    // Load recommendations on page load
+    loadRecommendations(@Model.Id);
+</script>
+}

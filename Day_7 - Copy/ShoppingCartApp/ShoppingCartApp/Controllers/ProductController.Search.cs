@@ -13,14 +13,7 @@ namespace ShoppingCartApp.Controllers
             string query, string category,
             decimal? minPrice, decimal? maxPrice, string sortBy)
         {
-            return Execute(await _productService.SearchAsync(new ProductSearchDto
-            {
-                Query    = query,
-                Category = category,
-                MinPrice = minPrice,
-                MaxPrice = maxPrice,
-                SortBy   = sortBy
-            }));
+            return Execute(await _productService.SearchAsync(query, category, minPrice, maxPrice, sortBy));
         }
 
         // GET: /Product/ByCategory/Electronics
