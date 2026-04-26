@@ -1,0 +1,97 @@
+@model ShoppingCartApp.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <h2 class="fw-bold mb-4" style="font-family: 'Space Grotesk', sans-serif;">
+            <i class="bi bi-person-badge" style="color: #6366f1;"></i> My Profile
+        </h2>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius: 12px; border-left: 4px solid #10b981;">
+                <i class="bi bi-check-circle-fill me-2" style="color: #10b981;"></i> @TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <div class="card border-0 shadow-sm" style="border-radius: 20px;">
+            <div class="card-body p-4">
+                <form asp-action="Profile" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label text-muted small fw-semibold text-uppercase"></label>
+                        <input asp-for="Email" class="form-control" style="border-radius: 12px; background: #f3f4f6;" readonly />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="FullName" class="form-label text-muted small fw-semibold text-uppercase"></label>
+                        <input asp-for="FullName" class="form-control" style="border-radius: 12px;" />
+                        <span asp-validation-for="FullName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PhoneNumber" class="form-label text-muted small fw-semibold text-uppercase">Phone Number</label>
+                        <input asp-for="PhoneNumber" class="form-control" style="border-radius: 12px;" placeholder="+1 234 567 8900" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <label asp-for="StreetAddress" class="form-label text-muted small fw-semibold text-uppercase">Street Address</label>
+                            <input asp-for="StreetAddress" class="form-control" style="border-radius: 12px;" placeholder="123 Main Street, Apt 4B" />
+                            <span asp-validation-for="StreetAddress" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="City" class="form-label text-muted small fw-semibold text-uppercase">City</label>
+                            <input asp-for="City" class="form-control" style="border-radius: 12px;" placeholder="New York" />
+                            <span asp-validation-for="City" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="State" class="form-label text-muted small fw-semibold text-uppercase">State / Province</label>
+                            <input asp-for="State" class="form-control" style="border-radius: 12px;" placeholder="NY" />
+                            <span asp-validation-for="State" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PostalCode" class="form-label text-muted small fw-semibold text-uppercase">Postal / ZIP Code</label>
+                            <input asp-for="PostalCode" class="form-control" style="border-radius: 12px;" placeholder="10001" />
+                            <span asp-validation-for="PostalCode" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-muted small fw-semibold text-uppercase">Country</label>
+                            @{
+                                var selectedCountry = Model?.Country ?? "";
+                            }
+                            <select name="Country" class="form-select" style="border-radius: 12px;">
+                                <option value="">Select Country</option>
+                                <option value="United States" selected=@(selectedCountry == "United States")>United States</option>
+                                <option value="United Kingdom" selected=@(selectedCountry == "United Kingdom")>United Kingdom</option>
+                                <option value="Canada" selected=@(selectedCountry == "Canada")>Canada</option>
+                                <option value="Australia" selected=@(selectedCountry == "Australia")>Australia</option>
+                                <option value="India" selected=@(selectedCountry == "India")>India</option>
+                                <option value="Germany" selected=@(selectedCountry == "Germany")>Germany</option>
+                                <option value="France" selected=@(selectedCountry == "France")>France</option>
+                                <option value="Japan" selected=@(selectedCountry == "Japan")>Japan</option>
+                                <option value="China" selected=@(selectedCountry == "China")>China</option>
+                                <option value="Singapore" selected=@(selectedCountry == "Singapore")>Singapore</option>
+                                <option value="UAE" selected=@(selectedCountry == "United Arab Emirates" || selectedCountry == "UAE")>United Arab Emirates</option>
+                                <option value="Saudi Arabia" selected=@(selectedCountry == "Saudi Arabia")>Saudi Arabia</option>
+                                <option value="Brazil" selected=@(selectedCountry == "Brazil")>Brazil</option>
+                                <option value="Mexico" selected=@(selectedCountry == "Mexico")>Mexico</option>
+                                <option value="Other" selected=@(selectedCountry == "Other")>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn w-100 rounded-pill text-white fw-bold py-2 shadow-sm" style="background: #6366f1;">
+                        Save Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
