@@ -9,6 +9,38 @@
     </h2>
 </div>
 
+<!-- Search Form -->
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 16px;">
+    <div class="card-body">
+        <form asp-action="Users" method="get" id="search-filter-form">
+            <div class="row g-3 align-items-end">
+                <div class="col-lg-5 col-md-6">
+                    <label class="form-label fw-semibold text-muted small" style="letter-spacing: 0.5px;">Search</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0" style="border-radius: 12px 0 0 12px;">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" name="searchQuery" value="@ViewBag.SearchQuery" class="form-control border-start-0 ps-0" style="border-radius: 0 12px 12px 0;" placeholder="Search by name or email..." />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn text-white fw-semibold flex-fill" style="background: #3b82f6; border: none; border-radius: 12px;">
+                            <i class="bi bi-search me-1"></i> Search
+                        </button>
+                        @if (!string.IsNullOrEmpty(ViewBag.SearchQuery as string))
+                        {
+                            <a asp-action="Users" class="btn btn-outline-secondary fw-semibold" style="border-radius: 12px;" title="Clear search">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 @if (TempData["Success"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show shadow-sm" style="border-radius: 12px; border: none; border-left: 4px solid #10b981; font-size: 0.95rem;">

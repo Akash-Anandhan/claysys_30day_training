@@ -14,8 +14,7 @@ namespace ShoppingCartApp.Services
     {
         public async Task<ServiceResponse> GetCreateProductFormAsync()
         {
-            var categories = await _context.Categories.ToListAsync();
-            return ServiceResponse.ShowView("CreateProduct", new { Model = new ProductViewModel(), Categories = categories });
+            return ServiceResponse.ShowView("CreateProduct", new ProductViewModel());
         }
     }
 }

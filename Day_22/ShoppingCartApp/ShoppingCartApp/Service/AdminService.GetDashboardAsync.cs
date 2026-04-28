@@ -228,49 +228,80 @@ namespace ShoppingCartApp.Services
             var user = await _context.Users.FirstOrDefaultAsync();
             if (user == null) return; // Need at least one user
 
-            var products = await _context.Products.Include(p => p.Category).ToListAsync();
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .ToListAsync();
+
             if (products.Count == 0) return; // Need products
 
             var random = new Random();
+
             var countries = new[] { "US", "CA", "GB", "IN", "DE", "AU", "FR", "BR" };
-            var statuses = new[] { "Completed", "Pending", "Processing", "Completed", "Completed" };
-            var paymentMethods = new[] { "Credit Card", "Debit Card", "UPI", "Net Banking", "Cash on Delivery", "Wallet" };
+
+            var statuses = new[]
+            {
+        "Completed",
+        "Pending",
+        "Processing",
+        "Completed",
+        "Completed"
+    };
+
+            // ✅ Updated payment methods
+            var paymentMethods = new[]
+            {
+        "Credit Card",
+        "Debit Card",
+        "PayPal",
+        "Bank Transfer",
+        "Cash on Delivery"
+    };
 
             var newOrders = new List<Order>();
-            
+
             // Generate 150 historical orders over the last 365 days
             for (int i = 0; i < 150; i++)
             {
                 var daysAgo = random.Next(1, 365);
-                var isRecent = random.Next(1, 100) > 70; 
-                if (isRecent) daysAgo = random.Next(1, 30); // Spike recent data for "This Month"
+
+                var isRecent = random.Next(1, 100) > 70;
+                if (isRecent)
+                    daysAgo = random.Next(1, 30); // spike recent data
 
                 var orderDate = DateTime.Now.AddDays(-daysAgo);
                 var numItems = random.Next(1, 4);
-                
+
                 var order = new Order
                 {
                     UserId = user.Id,
                     OrderDate = orderDate,
                     Status = statuses[random.Next(statuses.Length)],
                     PaymentMethod = paymentMethods[random.Next(paymentMethods.Length)],
+
+                    // ✅ NEW FIELD (realistic Indian number)
+                    PhoneNumber = "+91 " + random.Next(600000000, 999999999).ToString(),
+
                     ShippingAddress = $"123 Random St, City, {countries[random.Next(countries.Length)]}",
                     OrderItems = new List<OrderItem>()
                 };
 
                 decimal total = 0;
+
                 for (int j = 0; j < numItems; j++)
                 {
                     var p = products[random.Next(products.Count)];
                     var qty = random.Next(1, 3);
+
                     order.OrderItems.Add(new OrderItem
                     {
                         ProductId = p.Id,
                         Quantity = qty,
                         SellingPrice = p.SellingPrice
                     });
+
                     total += (p.SellingPrice * qty);
                 }
+
                 order.TotalAmount = total;
                 newOrders.Add(order);
             }

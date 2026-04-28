@@ -400,7 +400,8 @@
 
 <!-- JAVASCRIPT LOGIC -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    (function() {
+        function initDashboard() {
         // Detect current theme for chart colors
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const chartColors = {
@@ -604,5 +605,12 @@
                 tooltip.text(tooltip.text() + ': ' + sales + ' Orders');
             }
         });
-    });
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDashboard);
+        } else {
+            initDashboard();
+        }
+    })();
 </script>

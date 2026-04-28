@@ -229,6 +229,8 @@
                 <button type="submit" class="btn btn-sm btn-success"><i class="bi bi-download"></i> Export</button>
             </form>
             <form asp-action="ExportCsv" method="get" class="d-flex align-items-center gap-1">
+                <input type="date" name="startDate" class="form-control form-control-sm" style="width: 130px; border-radius: 8px;" title="From" />
+                <input type="date" name="endDate" class="form-control form-control-sm" style="width: 130px; border-radius: 8px;" title="To" />
                 <button type="submit" class="btn btn-sm btn-info text-white"><i class="bi bi-download"></i> Export CSV</button>
             </form>
             
@@ -428,7 +430,8 @@ else
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    (function() {
+        function initProductCharts() {
         // Detect current theme for chart colors
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const chartColors = {
@@ -478,5 +481,63 @@ else
                 }
             }
         });
-    });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initProductCharts);
+        } else {
+            initProductCharts();
+        }
+    })();
+    
+    // Date filter validation
+    (function() {
+        function initProductValidation() {
+            const exportForms = document.querySelectorAll('form[action*="Export"]');
+            exportForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const startDateInput = form.querySelector('input[name="startDate"]');
+                    const endDateInput = form.querySelector('input[name="endDate"]');
+                    if (startDateInput && endDateInput) {
+                        const startVal = startDateInput.value;
+                        const endVal = endDateInput.value;
+                        const now = new Date();
+                        now.setHours(23, 59, 59, 999); // End of today
+
+                        if (startVal) {
+                            const start = new Date(startVal);
+                            if (start > now) {
+                                e.preventDefault();
+                                alert("Start date cannot be in the future.");
+                                return;
+                            }
+                        }
+
+                        if (endVal) {
+                            const end = new Date(endVal);
+                            if (end > now) {
+                                e.preventDefault();
+                                alert("End date cannot be in the future.");
+                                return;
+                            }
+                        }
+
+                        if (startVal && endVal) {
+                            const start = new Date(startVal);
+                            const end = new Date(endVal);
+                            if (start > end) {
+                                e.preventDefault();
+                                alert("Start date cannot be later than end date.");
+                                return;
+                            }
+                        }
+                    }
+                });
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initProductValidation);
+        } else {
+            initProductValidation();
+        }
+    })();
 </script>

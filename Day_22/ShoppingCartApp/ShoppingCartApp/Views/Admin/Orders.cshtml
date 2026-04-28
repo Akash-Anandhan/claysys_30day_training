@@ -285,7 +285,8 @@ else
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    (function() {
+        function initOrders() {
         // Detect current theme for chart colors
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const chartColors = {
@@ -355,7 +356,13 @@ else
                 scales: { y: { beginAtZero: true, ticks: { callback: function(value) { return '₹' + value.toLocaleString('en-IN'); } } } }
             }
         });
-    });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initOrders);
+        } else {
+            initOrders();
+        }
+    })();
 </script>
 
 <style>
@@ -374,4 +381,58 @@ else
     .pagination-rounded .page-item.disabled .page-link {
         opacity: 0.5;
     }
-</style>
+</style>
+
+<script>
+    // Date filter validation
+    (function() {
+        function initOrderValidation() {
+            const exportForms = document.querySelectorAll('form[action*="Export"]');
+            exportForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const startDateInput = form.querySelector('input[name="startDate"]');
+                    const endDateInput = form.querySelector('input[name="endDate"]');
+                    if (startDateInput && endDateInput) {
+                        const startVal = startDateInput.value;
+                        const endVal = endDateInput.value;
+                        const now = new Date();
+                        now.setHours(23, 59, 59, 999); // End of today
+
+                        if (startVal) {
+                            const start = new Date(startVal);
+                            if (start > now) {
+                                e.preventDefault();
+                                alert("Start date cannot be in the future.");
+                                return;
+                            }
+                        }
+
+                        if (endVal) {
+                            const end = new Date(endVal);
+                            if (end > now) {
+                                e.preventDefault();
+                                alert("End date cannot be in the future.");
+                                return;
+                            }
+                        }
+
+                        if (startVal && endVal) {
+                            const start = new Date(startVal);
+                            const end = new Date(endVal);
+                            if (start > end) {
+                                e.preventDefault();
+                                alert("Start date cannot be later than end date.");
+                                return;
+                            }
+                        }
+                    }
+                });
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initOrderValidation);
+        } else {
+            initOrderValidation();
+        }
+    })();
+</script>

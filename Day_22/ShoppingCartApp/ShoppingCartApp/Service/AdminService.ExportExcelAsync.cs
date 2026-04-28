@@ -13,9 +13,19 @@ namespace ShoppingCartApp.Services
     public partial class AdminService
     {
         // ── Import / Export ────────────────────────────────────────────────────
-        public async Task<(byte[] bytes, string contentType, string fileName)> ExportExcelAsync()
+        public async Task<(byte[] bytes, string contentType, string fileName)> ExportExcelAsync(DateTime? startDate = null, DateTime? endDate = null)
         {
-            var products = await _context.Products.Include(p => p.Category).ToListAsync();
+            var query = _context.Products.Include(p => p.Category).AsQueryable();
+
+            if (startDate.HasValue)
+                query = query.Where(p => p.CreatedAt >= startDate.Value);
+            if (endDate.HasValue)
+            {
+                var endOfDay = endDate.Value.Date.AddDays(1).AddTicks(-1);
+                query = query.Where(p => p.CreatedAt <= endOfDay);
+            }
+
+            var products = await query.ToListAsync();
             using var package = new ExcelPackage();
             var ws = package.Workbook.Worksheets.Add("Products");
             ws.Cells[1, 1].Value = "Id";

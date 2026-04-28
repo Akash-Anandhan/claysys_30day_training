@@ -162,12 +162,10 @@ namespace ShoppingCartApp.Controllers
             if (result.ViewModel is AdminReviewsResultDto dto)
             {
                 ViewBag.RatingDistribution = dto.RatingDistribution;
-            }
-            else
-            {
-                ViewBag.RatingDistribution = new List<int> { 0, 0, 0, 0, 0 };
+                return View(dto);
             }
             
+            ViewBag.RatingDistribution = new List<int> { 0, 0, 0, 0, 0 };
             return View(result.ViewModel);
         }
 
@@ -220,27 +218,71 @@ namespace ShoppingCartApp.Controllers
         }
 
         // Export
-        public async Task<IActionResult> ExportExcel()
+        public async Task<IActionResult> ExportExcel(DateTime? startDate, DateTime? endDate)
         {
-            var (bytes, contentType, fileName) = await _adminService.ExportExcelAsync();
+            if (startDate > DateTime.Now || endDate > DateTime.Now)
+            {
+                TempData["Error"] = "Cannot select future dates for export.";
+                return RedirectToAction("Products");
+            }
+            if (startDate > endDate)
+            {
+                TempData["Error"] = "Start date cannot be later than end date.";
+                return RedirectToAction("Products");
+            }
+
+            var (bytes, contentType, fileName) = await _adminService.ExportExcelAsync(startDate, endDate);
             return File(bytes, contentType, fileName);
         }
 
-        public async Task<IActionResult> ExportCsv()
+        public async Task<IActionResult> ExportCsv(DateTime? startDate, DateTime? endDate)
         {
-            var (bytes, contentType, fileName) = await _adminService.ExportCsvAsync();
+            if (startDate > DateTime.Now || endDate > DateTime.Now)
+            {
+                TempData["Error"] = "Cannot select future dates for export.";
+                return RedirectToAction("Products");
+            }
+            if (startDate > endDate)
+            {
+                TempData["Error"] = "Start date cannot be later than end date.";
+                return RedirectToAction("Products");
+            }
+
+            var (bytes, contentType, fileName) = await _adminService.ExportCsvAsync(startDate, endDate);
             return File(bytes, contentType, fileName);
         }
 
-        public async Task<IActionResult> ExportOrdersExcel()
+        public async Task<IActionResult> ExportOrdersExcel(DateTime? startDate, DateTime? endDate)
         {
-            var (bytes, contentType, fileName) = await _adminService.ExportOrdersExcelAsync();
+            if (startDate > DateTime.Now || endDate > DateTime.Now)
+            {
+                TempData["Error"] = "Cannot select future dates for export.";
+                return RedirectToAction("Orders");
+            }
+            if (startDate > endDate)
+            {
+                TempData["Error"] = "Start date cannot be later than end date.";
+                return RedirectToAction("Orders");
+            }
+
+            var (bytes, contentType, fileName) = await _adminService.ExportOrdersExcelAsync(startDate, endDate);
             return File(bytes, contentType, fileName);
         }
 
-        public async Task<IActionResult> ExportOrdersCsv()
+        public async Task<IActionResult> ExportOrdersCsv(DateTime? startDate, DateTime? endDate)
         {
-            var (bytes, contentType, fileName) = await _adminService.ExportOrdersCsvAsync();
+            if (startDate > DateTime.Now || endDate > DateTime.Now)
+            {
+                TempData["Error"] = "Cannot select future dates for export.";
+                return RedirectToAction("Orders");
+            }
+            if (startDate > endDate)
+            {
+                TempData["Error"] = "Start date cannot be later than end date.";
+                return RedirectToAction("Orders");
+            }
+
+            var (bytes, contentType, fileName) = await _adminService.ExportOrdersCsvAsync(startDate, endDate);
             return File(bytes, contentType, fileName);
         }
 
@@ -276,9 +318,10 @@ namespace ShoppingCartApp.Controllers
             return ExecuteServiceResponse(result);
         }
 
-        public async Task<IActionResult> Users()
+        public async Task<IActionResult> Users(string searchQuery = null)
         {
-            var result = await _adminService.GetUsersAsync();
+            var result = await _adminService.GetUsersAsync(searchQuery);
+            ViewBag.SearchQuery = searchQuery;
             return ExecuteServiceResponse(result);
         }
 

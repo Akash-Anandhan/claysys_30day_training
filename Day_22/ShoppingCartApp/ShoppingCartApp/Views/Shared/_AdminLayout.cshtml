@@ -51,6 +51,9 @@
         .nav-link-sidebar.active { background: rgba(232, 93, 42, 0.15); color: #e85d2a; border-left: 4px solid #e85d2a; padding-left: 16px; }
         
         .admin-sidebar.collapsed .nav-link-sidebar span { opacity: 0; width: 0; display: none; }
+        /* Hide accordion components when sidebar is mini */
+        .admin-sidebar.collapsed .collapse { display: none !important; }
+        .admin-sidebar.collapsed .nav-link-sidebar .ms-auto { display: none; }
 
         /* Main Content wrapper */
         .admin-main-wrapper {
@@ -79,38 +82,67 @@
         [data-theme="dark"] .sidebar-toggler:hover {
             background: var(--bg-tertiary);
         }
+
+        /* Fix for Tailwind conflict with Bootstrap collapse */
+        .collapse.show {
+            visibility: visible !important;
+        }
     </style>
 </head>
 <body>
     @{ var currentAction = ViewContext.RouteData.Values["Action"]?.ToString(); }
     <!-- Sidebar -->
-    <aside class="admin-sidebar" id="adminSidebar">
+    <aside class="admin-sidebar collapsed" id="adminSidebar">
         <div class="sidebar-header">
             <i class="bi bi-shop fs-4" style="color: #e85d2a;"></i>
             <span class="fs-5 fw-bold ms-2">Admin Panel</span>
         </div>
-        <div class="sidebar-nav">
-            <a href="/Admin/Index" class="nav-link-sidebar @(currentAction == "Index" ? "active" : "")" title="Dashboard">
-                <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
-            </a>
-            <a href="/Admin/Products" class="nav-link-sidebar @(currentAction == "Products" || currentAction == "CreateProduct" || currentAction == "EditProduct" ? "active" : "")" title="Products">
-                <i class="bi bi-box-seam"></i> <span>Products</span>
-            </a>
-            <a href="/Admin/Orders" class="nav-link-sidebar @(currentAction == "Orders" || currentAction == "OrderDetails" ? "active" : "")" title="Orders">
+        <div class="sidebar-nav" id="sidebarAccordion">
+            <!-- Dashboard Accordion -->
+            <div class="nav-item">
+                <a data-bs-target="#collapseDashboard" data-bs-toggle="collapse" class="nav-link-sidebar @(currentAction == "Index" ? "active" : "") d-flex justify-content-between align-items-center" style="cursor:pointer;" title="Dashboard">
+                    <div><i class="bi bi-speedometer2"></i> <span>Dashboard</span></div>
+                    <i class="bi bi-chevron-down opacity-50 ms-auto text-sm transition-transform" style="font-size: 0.8rem;"></i>
+                </a>
+                <div class="collapse @(currentAction == "Index" || currentAction == "ProductPerformance" || currentAction == "Users" || currentAction == "Orders" || currentAction == "Revenue" ? "show" : "")" id="collapseDashboard" data-bs-parent="#sidebarAccordion">
+                    <div class="py-2" style="background: rgba(0,0,0,0.2);">
+                        <a href="/Admin/Index" class="nav-link-sidebar ps-5 py-2 @(currentAction == "Index" ? "active text-white" : "")" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">All Info</a>
+                        <a href="/Admin/ProductPerformance" class="nav-link-sidebar ps-5 py-2 @(currentAction == "ProductPerformance" ? "active text-white" : "")" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">Product Info</a>
+                        <a href="/Admin/Users" class="nav-link-sidebar ps-5 py-2 @(currentAction == "Users" ? "active text-white" : "")" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">Users Info</a>
+                        <a href="/Admin/Orders" class="nav-link-sidebar ps-5 py-2 @(currentAction == "Orders" ? "active text-white" : "")" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">Orders Info</a>
+                        <a href="/Admin/Revenue" class="nav-link-sidebar ps-5 py-2 @(currentAction == "Revenue" ? "active text-white" : "")" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">Revenue Info</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Accordion -->
+            <div class="nav-item">
+                <a data-bs-target="#collapseProducts" data-bs-toggle="collapse" class="nav-link-sidebar @(currentAction == "Products" || currentAction == "CreateProduct" || currentAction == "EditProduct" ? "active" : "") d-flex justify-content-between align-items-center" style="cursor:pointer;" title="Products">
+                    <div><i class="bi bi-box-seam"></i> <span>Products</span></div>
+                    <i class="bi bi-chevron-down opacity-50 ms-auto text-sm transition-transform" style="font-size: 0.8rem;"></i>
+                </a>
+                <div class="collapse @(currentAction == "Products" || currentAction == "CreateProduct" || currentAction == "EditProduct" || currentAction == "ProductPerformance" ? "show" : "")" id="collapseProducts" data-bs-parent="#sidebarAccordion">
+                    <div class="py-2" style="background: rgba(0,0,0,0.2);">
+                        <a href="/Admin/ProductPerformance" class="nav-link-sidebar ps-5 py-2" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">Analyse</a>
+                        <a href="/Admin/Products" class="nav-link-sidebar ps-5 py-2 @(currentAction == "Products" ? "active text-white" : "")" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">Manage Products</a>
+                        <a href="/Admin/CreateProduct" class="nav-link-sidebar ps-5 py-2 @(currentAction == "CreateProduct" ? "active text-white" : "")" style="font-size: 0.9rem;" onclick="loadAdminContent(event, this)">Add Product</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/Admin/Orders" class="nav-link-sidebar @(currentAction == "Orders" || currentAction == "OrderDetails" ? "active" : "")" title="Orders" onclick="loadAdminContent(event, this)">
                 <i class="bi bi-bag-check"></i> <span>Orders</span>
             </a>
-            <a href="/Admin/Users" class="nav-link-sidebar @(currentAction == "Users" ? "active" : "")" title="Users">
+            <a href="/Admin/Users" class="nav-link-sidebar @(currentAction == "Users" ? "active" : "")" title="Users" onclick="loadAdminContent(event, this)">
                 <i class="bi bi-people"></i> <span>Users</span>
             </a>
-            <a href="/Admin/Reviews" class="nav-link-sidebar @(currentAction == "Reviews" ? "active" : "")" title="Reviews">
+            <a href="/Admin/Reviews" class="nav-link-sidebar @(currentAction == "Reviews" ? "active" : "")" title="Reviews" onclick="loadAdminContent(event, this)">
                 <i class="bi bi-star"></i> <span>Reviews</span>
             </a>
-            <a href="/Admin/Revenue" class="nav-link-sidebar @(currentAction == "Revenue" ? "active" : "")" title="Revenue">
+            <a href="/Admin/Revenue" class="nav-link-sidebar @(currentAction == "Revenue" ? "active" : "")" title="Revenue" onclick="loadAdminContent(event, this)">
                 <i class="bi bi-currency-dollar"></i> <span>Revenue</span>
             </a>
-            <a href="/Admin/ProductPerformance" class="nav-link-sidebar @(currentAction == "ProductPerformance" ? "active" : "")" title="Product Performance">
-                <i class="bi bi-graph-up"></i> <span>Product Performance</span>
-            </a>
+
             <a href="/" class="nav-link-sidebar mt-4" style="border-top: 1px solid rgba(255,255,255,0.1);" title="Back to Shop">
                 <i class="bi bi-house-door"></i> <span>Back to Shop</span>
             </a>
@@ -183,6 +215,57 @@
         // Run when theme toggle is clicked
         document.querySelector('.theme-toggle-btn').addEventListener('click', function() {
             setTimeout(fixAdminTableCells, 50);
+        });
+
+        // AJAX content loading functionality
+        let currentAdminPath = window.location.pathname;
+
+        function loadAdminContent(e, element) {
+            e.preventDefault();
+            const url = element.getAttribute('href');
+            
+            // Mark correct links as active locally
+            document.querySelectorAll('.nav-link-sidebar').forEach(el => el.classList.remove('active', 'text-white'));
+            element.classList.add('active', 'text-white');
+            // If it's a sub-menu under an accordion, keep the parent highlighted visually maybe
+            let parentAccordion = element.closest('.collapse');
+            if (parentAccordion) {
+                let parentLink = parentAccordion.previousElementSibling;
+                if (parentLink) parentLink.classList.add('active');
+            }
+            
+            // Show loading placeholder
+            $('#mainWrapper > main').html('<div class="d-flex justify-content-center align-items-center h-100 py-5"><div class="spinner-border" style="color: #e85d2a;" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+            
+            $.ajax({
+                url: url,
+                type: 'GET',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                success: function(data) {
+                    $('#mainWrapper > main').html(data);
+                    window.history.pushState({ path: url }, '', url);
+                    currentAdminPath = window.location.pathname;
+                    
+                    // Re-trigger visual fixes
+                    fixAdminTableCells();
+                    // Optional: You could execute inline scripts from the AJAX response here if jQuery's .html() doesn't
+                },
+                error: function(err) {
+                    if (err.status === 401 || err.status === 403) {
+                        window.location.reload(); // Re-authenticate
+                    } else {
+                        $('#mainWrapper > main').html('<div class="alert alert-danger m-4">Failed to load content. Please try again.</div>');
+                    }
+                }
+            });
+        }
+        
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            // Only reload if the actual pathway changed, not just the hash
+            if (window.location.pathname !== currentAdminPath && window.location.pathname.startsWith('/Admin')) {
+                location.reload();
+            }
         });
     </script>
     @await RenderSectionAsync("Scripts", required: false)

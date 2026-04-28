@@ -164,7 +164,8 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    (function() {
+        function initRevenue() {
         // Detect current theme for chart colors
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         const chartColors = {
@@ -242,5 +243,12 @@
                 }
             });
         }
-    });
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initRevenue);
+        } else {
+            initRevenue();
+        }
+    })();
 </script>

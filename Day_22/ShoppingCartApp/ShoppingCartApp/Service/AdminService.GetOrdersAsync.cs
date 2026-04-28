@@ -121,16 +121,25 @@ namespace ShoppingCartApp.Services
         }
 
         // ── Export Orders ──────────────────────────────────────────────────────
-        public async Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersExcelAsync()
+        public async Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersExcelAsync(DateTime? startDate = null, DateTime? endDate = null)
         {
-            var orders = await _context.Orders
-                .Include(o => o.OrderItems)
+            var query = _context.Orders.Include(o => o.OrderItems).AsQueryable();
+
+            if (startDate.HasValue)
+                query = query.Where(o => o.OrderDate >= startDate.Value);
+            if (endDate.HasValue)
+            {
+                var endOfDay = endDate.Value.Date.AddDays(1).AddTicks(-1);
+                query = query.Where(o => o.OrderDate <= endOfDay);
+            }
+
+            var orders = await query
                 .OrderByDescending(o => o.OrderDate)
                 .ToListAsync();
 
             using var package = new ExcelPackage();
             var ws = package.Workbook.Worksheets.Add("Orders");
-
+            // (rest of the code for headers and rows remains the same)
             // Headers
             ws.Cells[1, 1].Value = "Order ID";
             ws.Cells[1, 2].Value = "User ID";
@@ -154,10 +163,19 @@ namespace ShoppingCartApp.Services
             return (package.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Orders.xlsx");
         }
 
-        public async Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersCsvAsync()
+        public async Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersCsvAsync(DateTime? startDate = null, DateTime? endDate = null)
         {
-            var orders = await _context.Orders
-                .Include(o => o.OrderItems)
+            var query = _context.Orders.Include(o => o.OrderItems).AsQueryable();
+
+            if (startDate.HasValue)
+                query = query.Where(o => o.OrderDate >= startDate.Value);
+            if (endDate.HasValue)
+            {
+                var endOfDay = endDate.Value.Date.AddDays(1).AddTicks(-1);
+                query = query.Where(o => o.OrderDate <= endOfDay);
+            }
+
+            var orders = await query
                 .OrderByDescending(o => o.OrderDate)
                 .ToListAsync();
             

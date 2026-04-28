@@ -17,7 +17,6 @@ namespace ShoppingCartApp.Services
             var product = await _context.Products.FindAsync(id);
             if (product == null)
                 return ServiceResponse.ShowView("NotFound", null);
-            var categories = await _context.Categories.ToListAsync();
             var model = new ProductViewModel
             {
                 Id = product.Id,
@@ -29,7 +28,7 @@ namespace ShoppingCartApp.Services
                 CategoryId = product.CategoryId,
                 ImageUrl = product.ImageUrl
             };
-            return ServiceResponse.ShowView("EditProduct", new { Model = model, Categories = categories });
+            return ServiceResponse.ShowView("EditProduct", model);
         }
     }
 }

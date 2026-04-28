@@ -160,23 +160,41 @@ namespace ShoppingCartApp.Services
             if (string.IsNullOrEmpty(shippingAddress))
                 return "Unknown";
 
-            // Common countries to check
-            var countries = new[] { "USA", "United States", "UK", "United Kingdom", "India", "Canada", 
-                "Australia", "Germany", "France", "Japan", "China", "Brazil", "Mexico" };
+            // Try to get the last part after comma (e.g., "123 Random St, City, IN" -> "IN")
+            var parts = shippingAddress.Split(',', System.StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length > 0)
+            {
+                var lastPart = parts.Last().Trim().ToUpper();
+
+                // Common country codes or abbreviations
+                if (lastPart == "IN" || lastPart == "INDIA") return "India";
+                if (lastPart == "US" || lastPart == "USA" || lastPart == "UNITED STATES") return "USA";
+                if (lastPart == "UK" || lastPart == "UNITED KINGDOM") return "UK";
+                if (lastPart == "CA" || lastPart == "CANADA") return "Canada";
+                if (lastPart == "AU" || lastPart == "AUSTRALIA") return "Australia";
+
+                // If lastPart is a 2-letter code not handled, maybe it's a state, but we'll treat it as a region
+                if (lastPart.Length == 2)
+                {
+                    // For the purpose of this demo, if it's 2 letters and we don't know it, let's assume India if the address "feels" like it, or just return the code
+                    return lastPart;
+                }
+            }
+
+            // Fallback to keyword search
+            var countries = new[] { 
+                "USA", "United States", "UK", "United Kingdom", "India", "Canada", 
+                "Australia", "Germany", "France", "Japan", "China", "Brazil", "Mexico",
+                "Italy", "Spain", "Netherlands", "Switzerland", "Sweden", "Poland", "Turkey",
+                "Russia", "South Korea", "Indonesia", "Saudi Arabia", "UAE", "United Arab Emirates",
+                "South Africa", "Nigeria", "Egypt", "Argentina", "Colombia", "Chile", "Peru",
+                "New Zealand", "Singapore", "Malaysia", "Thailand", "Vietnam", "Philippines"
+            };
 
             foreach (var country in countries)
             {
-                if (shippingAddress.Contains(country, StringComparison.OrdinalIgnoreCase))
+                if (shippingAddress.Contains(country, System.StringComparison.OrdinalIgnoreCase))
                     return country;
-            }
-
-            // If no specific country found, try to extract from last line (common pattern)
-            var lines = shippingAddress.Split(new[] { '\n', ',' }, StringSplitOptions.RemoveEmptyEntries);
-            if (lines.Length > 0)
-            {
-                var lastPart = lines[lines.Length - 1].Trim();
-                if (lastPart.Length > 2 && lastPart.Length < 50)
-                    return lastPart;
             }
 
             return "Other";

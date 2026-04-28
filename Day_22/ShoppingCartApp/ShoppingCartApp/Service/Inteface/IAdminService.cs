@@ -56,19 +56,19 @@ namespace ShoppingCartApp.Services
             int pageSize = 50);
         Task<AdminOrderDetailDto> GetOrderDetailAsync(int id);
         Task<ServiceResponse> UpdateOrderStatusAsync(UpdateOrderStatusDto dto);
-        Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersExcelAsync();
-        Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersCsvAsync();
+        Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersExcelAsync(DateTime? startDate = null, DateTime? endDate = null);
+        Task<(byte[] bytes, string contentType, string fileName)> ExportOrdersCsvAsync(DateTime? startDate = null, DateTime? endDate = null);
 
         // Revenue Export
         Task<(byte[] bytes, string contentType, string fileName)> ExportRevenueExcelAsync(string dateRange);
         Task<(byte[] bytes, string contentType, string fileName)> ExportRevenueCsvAsync(string dateRange);
 
         // Import / Export
-        Task<(byte[] bytes, string contentType, string fileName)> ExportExcelAsync();
-        Task<(byte[] bytes, string contentType, string fileName)> ExportCsvAsync();
+        Task<(byte[] bytes, string contentType, string fileName)> ExportExcelAsync(DateTime? startDate = null, DateTime? endDate = null);
+        Task<(byte[] bytes, string contentType, string fileName)> ExportCsvAsync(DateTime? startDate = null, DateTime? endDate = null);
         Task<ServiceResponse> ImportExcelAsync(ImportFileDto dto);
         Task<ServiceResponse> ImportCsvAsync(ImportFileDto dto);
-        Task<ServiceResponse> GetUsersAsync();
+        Task<ServiceResponse> GetUsersAsync(string searchQuery = null);
         Task<ServiceResponse> DeleteUserAsync(string id);
     }
 }

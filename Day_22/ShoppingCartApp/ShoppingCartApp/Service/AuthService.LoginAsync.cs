@@ -16,11 +16,12 @@ namespace ShoppingCartApp.Services
             var user = await _userManager.FindByEmailAsync(dto.Email);
             if (!string.IsNullOrEmpty(dto.GuestId))
                 await _cartService.MergeGuestCartAsync(dto.GuestId, user.Id);
+            var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
             return new ServiceResponse
             {
                 Succeeded = true,
                 RedirectAction = "Index",
-                RedirectController = "Home",
+                RedirectController = isAdmin ? "Admin" : "Home",
                 SessionRemoveKey = "GuestId"
             };
         }

@@ -132,6 +132,64 @@
     </div>
 </div>
 
+<!-- Revenue Distribution Chart -->
+@if (Model.Products.Any())
+{
+    <div class='row g-4 mt-2'>
+        <div class=col-lg-8>
+            <div class='dash-card p-4'>
+                <div class='d-flex justify-content-between align-items-center mb-3'>
+                    <h5 class='fw-bold text-gray-800 mb-0'>Revenue Distribution</h5>
+                    <span class='badge bg-brand-light text-brand'>Top 10 Products</span>
+                </div>
+                <div style='height: 280px; position: relative;'>
+                    <canvas id=revenueChart></canvas>
+                </div>
+            </div>
+        </div>
+        <div class=col-lg-4>
+            <div class='dash-card p-4' style='max-height: 320px; overflow-y: auto;'>
+                <h5 class='fw-bold text-gray-800 mb-4'>Top Countries</h5>
+                <div id=countryList class='d-flex flex-column gap-3'>
+                    @{
+                        var topCountries = Model.Products
+                            .Where(p => p.CountryDistribution != null && p.CountryDistribution.Any())
+                            .SelectMany(p => p.CountryDistribution)
+                            .GroupBy(c => c.Key)
+                            .OrderByDescending(g => g.Sum(c => c.Value))
+                            .Take(5)
+                            .ToList();
+                    }
+                    @if (topCountries.Any())
+                    {
+                        @foreach (var country in topCountries)
+                        {
+                            var maxCount = topCountries.First().Sum(c => c.Value);
+                            var percentage = (country.Sum(c => c.Value) * 100.0 / maxCount).ToString("0");
+                            <div class='d-flex align-items-center justify-content-between'>
+                                <span class=fw-medium>@country.Key</span>
+                                <div class='d-flex align-items-center gap-2'>
+                                    <div class='progress rounded-pill' style='width: 80px; height: 6px;'>
+                                        <div class=progress-bar style='width: @percentage%; background-color: #e85d2a;'></div>
+                                    </div>
+                                    <span class='text-muted text-sm'>@country.Sum(c => c.Value)</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class='text-muted text-center py-4'>
+                            <i class='bi bi-globe fs-1 d-block mb-2 opacity-50'></i>
+                            <p class=mb-0>No country data available</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 <!-- Filters Row -->
 <div class='dash-card p-4 mb-4'>
     <form method=get class='row g-3 align-items-end'>
@@ -162,7 +220,7 @@
             </select>
         </div>
         <div class='col-12 col-md-2'>
-            <button type=submit class='btn btn-primary w-100 rounded-3' style='background-color: #e85d2a; border-color: #e85d2a;'>
+            <button type=submit class='btn w-100 rounded-3 text-white fw-medium' style='background-color: #e85d2a; border: none;'>
                 <i class='bi bi-funnel me-1'></i> Apply Filters
             </button>
         </div>
@@ -345,113 +403,62 @@
     }
 </div>
 
-<!-- Revenue Distribution Chart -->
-@if (Model.Products.Any())
-{
-    <div class='row g-4 mt-2'>
-        <div class=col-lg-8>
-            <div class='dash-card p-4'>
-                <div class='d-flex justify-content-between align-items-center mb-3'>
-                    <h5 class='fw-bold text-gray-800 mb-0'>Revenue Distribution</h5>
-                    <span class='badge bg-brand-light text-brand'>Top 10 Products</span>
-                </div>
-                <div style='height: 280px; position: relative;'>
-                    <canvas id=revenueChart></canvas>
-                </div>
-            </div>
-        </div>
-        <div class=col-lg-4>
-            <div class='dash-card p-4' style='max-height: 320px; overflow-y: auto;'>
-                <h5 class='fw-bold text-gray-800 mb-4'>Top Countries</h5>
-                <div id=countryList class='d-flex flex-column gap-3'>
-                    @{
-                        var topCountries = Model.Products
-                            .Where(p => p.CountryDistribution != null && p.CountryDistribution.Any())
-                            .SelectMany(p => p.CountryDistribution)
-                            .GroupBy(c => c.Key)
-                            .OrderByDescending(g => g.Sum(c => c.Value))
-                            .Take(5)
-                            .ToList();
-                    }
-                    @if (topCountries.Any())
-                    {
-                        @foreach (var country in topCountries)
-                        {
-                            var maxCount = topCountries.First().Sum(c => c.Value);
-                            var percentage = (country.Sum(c => c.Value) * 100.0 / maxCount).ToString("0");
-                            <div class='d-flex align-items-center justify-content-between'>
-                                <span class=fw-medium>@country.Key</span>
-                                <div class='d-flex align-items-center gap-2'>
-                                    <div class='progress rounded-pill' style='width: 80px; height: 6px;'>
-                                        <div class=progress-bar style='width: @percentage%; background-color: #e85d2a;'></div>
-                                    </div>
-                                    <span class='text-muted text-sm'>@country.Sum(c => c.Value)</span>
-                                </div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div class='text-muted text-center py-4'>
-                            <i class='bi bi-globe fs-1 d-block mb-2 opacity-50'></i>
-                            <p class=mb-0>No country data available</p>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-}
 
-@section Scripts {
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var productNames = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Products.Take(10).Select(p => p.ProductName.Length > 20 ? p.ProductName.Substring(0, 20) + "..." : p.ProductName).ToList()));
-    var revenues = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Products.Take(10).Select(p => p.TotalRevenue).ToList()));
+    (function() {
+        function initPerfCharts() {
+            var productNames = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Products.Take(10).Select(p => p.ProductName.Length > 20 ? p.ProductName.Substring(0, 20) + "..." : p.ProductName).ToList()));
+            var revenues = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Products.Take(10).Select(p => p.TotalRevenue).ToList()));
 
-    if (productNames.length > 0) {
-        new Chart(document.getElementById('revenueChart'), {
-            type: 'bar',
-            data: {
-                labels: productNames,
-                datasets: [{
-                    label: 'Revenue (Rs)',
-                    data: revenues,
-                    backgroundColor: 'rgba(232, 93, 42, 0.8)',
-                    borderColor: '#e85d2a',
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    barThickness: 40
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return 'Rs ' + context.raw.toLocaleString('en-IN');
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return 'Rs ' + value.toLocaleString('en-IN');
+            if (productNames.length > 0) {
+                new Chart(document.getElementById('revenueChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: productNames,
+                        datasets: [{
+                            label: 'Revenue (Rs)',
+                            data: revenues,
+                            backgroundColor: 'rgba(232, 93, 42, 0.8)',
+                            borderColor: '#e85d2a',
+                            borderWidth: 1,
+                            borderRadius: 8,
+                            barThickness: 40
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Rs ' + context.raw.toLocaleString('en-IN');
+                                    }
+                                }
                             }
                         },
-                        grid: { color: 'rgba(0,0,0,0.05)' }
-                    },
-                    x: { grid: { display: false } }
-                }
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'Rs ' + value.toLocaleString('en-IN');
+                                    }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.05)' }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
             }
-        });
-    }
-});
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPerfCharts);
+        } else {
+            initPerfCharts();
+        }
+    })();
 </script>
-}
